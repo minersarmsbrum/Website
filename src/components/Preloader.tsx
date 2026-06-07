@@ -1,7 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useState } from "react";
+import { site } from "@/data/site";
 
 export function Preloader() {
   const [done, setDone] = useState(false);
@@ -20,6 +22,20 @@ export function Preloader() {
           exit={{ opacity: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }}
         >
           <div className="flex flex-col items-center gap-6">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Image
+                src={site.logo}
+                alt="The Miners Arms crest"
+                width={88}
+                height={88}
+                priority
+                className="h-20 w-20 rounded-full sm:h-[5.5rem] sm:w-[5.5rem]"
+              />
+            </motion.div>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}

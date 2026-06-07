@@ -49,6 +49,10 @@ export const metadata: Metadata = {
     "B70 0TW",
   ],
   authors: [{ name: "The Miners Arms" }],
+  icons: {
+    icon: site.logo,
+    apple: site.logo,
+  },
   openGraph: {
     type: "website",
     locale: "en_GB",

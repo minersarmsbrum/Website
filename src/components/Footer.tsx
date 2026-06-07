@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/data/site";
 
@@ -7,6 +8,13 @@ export function Footer() {
       <div className="pointer-events-none absolute inset-0 bg-ember-grain opacity-60" />
       <div className="container-luxe relative grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr_1.1fr] md:py-20">
         <div>
+          <Image
+            src={site.logo}
+            alt="The Miners Arms crest"
+            width={72}
+            height={72}
+            className="mb-4 h-16 w-16 rounded-full sm:h-[4.5rem] sm:w-[4.5rem]"
+          />
           <p className="font-display text-2xl text-cream-50">The Miners Arms</p>
           <p className="mt-1 text-xs uppercase tracking-luxe text-saffron-500/80">
             Grill House · Est. 2015

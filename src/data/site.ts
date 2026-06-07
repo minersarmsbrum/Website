@@ -5,6 +5,7 @@ export const site = {
   name: "The Miners Arms",
   shortName: "Miners Arms",
   tagline: "British grill house & pub",
+  logo: "/logo.png",
   // Owner is of Indian-Chinese heritage — the menu spans English, Indian & Chinese.
   hero: {
     eyebrow: "West Bromwich · Est. 2015",

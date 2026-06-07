@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -42,12 +43,22 @@ export function Navbar() {
       }`}
     >
       <nav className="container-luxe flex h-20 items-center justify-between">
-        <Link href="/" className="group flex flex-col leading-none">
-          <span className="font-display text-xl text-cream-50 sm:text-2xl">
-            The Miners Arms
-          </span>
-          <span className="text-[0.6rem] uppercase tracking-luxe text-saffron-500/80">
-            Grill House · West Bromwich
+        <Link href="/" className="group flex items-center gap-3 leading-none">
+          <Image
+            src={site.logo}
+            alt="The Miners Arms crest"
+            width={56}
+            height={56}
+            priority
+            className="h-12 w-12 rounded-full sm:h-14 sm:w-14"
+          />
+          <span className="flex flex-col">
+            <span className="font-display text-xl text-cream-50 sm:text-2xl">
+              The Miners Arms
+            </span>
+            <span className="text-[0.6rem] uppercase tracking-luxe text-saffron-500/80">
+              Grill House · West Bromwich
+            </span>
           </span>
         </Link>
 
