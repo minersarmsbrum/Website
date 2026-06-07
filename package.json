@@ -1,0 +1,28 @@
+{
+  "name": "the-miners-arms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Miners Arms — premium demo website. British grill house · English breakfasts, Indian curries & Chinese small plates. West Bromwich.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "eslint-config-next": "^16.2.7",
+    "framer-motion": "^11.11.17",
+    "next": "^16.2.7",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.10",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
+  }
+}
