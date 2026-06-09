@@ -14,6 +14,7 @@ const times = [
 export function ReservationForm() {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Errors>({});
   const [values, setValues] = useState({
     name: "",
@@ -39,17 +40,26 @@ export function ReservationForm() {
     return err;
   };
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const err = validate();
     setErrors(err);
     if (Object.keys(err).length > 0) return;
     setSubmitting(true);
-    // Demo: simulate a request. Wire to a booking provider / email later.
-    setTimeout(() => {
-      setSubmitting(false);
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/bookings/public", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...values, guests: Number(values.guests) }),
+      });
+      if (!res.ok) throw new Error("Booking failed");
       setSent(true);
-    }, 900);
+    } catch {
+      setSubmitError("Something went wrong — please call us or try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const today = new Date().toISOString().split("T")[0];
@@ -87,9 +97,6 @@ export function ReservationForm() {
             >
               Make another booking
             </button>
-            <p className="mt-6 text-xs text-cream-200/40">
-              Demo form — no booking is actually stored.
-            </p>
           </motion.div>
         ) : (
           <motion.form
@@ -167,6 +174,12 @@ export function ReservationForm() {
                 className={`${inputCls()} resize-none`}
               />
             </Field>
+
+            {submitError && (
+              <p className="rounded-lg border border-ember-400/30 bg-ember-400/10 px-4 py-3 text-sm text-ember-400">
+                {submitError}
+              </p>
+            )}
 
             <button type="submit" disabled={submitting} className="btn-gold w-full !py-4">
               {submitting ? "Sending…" : "Request Booking"}

@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { GalleryGrid } from "@/components/GalleryGrid";
 import { images } from "@/data/images";
+import { store } from "@/lib/store";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Gallery",
@@ -10,6 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function GalleryPage() {
+  const galleryItems = store.gallery.list();
+
   return (
     <>
       <PageHeader
@@ -23,7 +28,7 @@ export default function GalleryPage() {
         image={images.aboutHero}
       />
       <section className="bg-ink-900">
-        <GalleryGrid />
+        <GalleryGrid items={galleryItems} />
       </section>
     </>
   );

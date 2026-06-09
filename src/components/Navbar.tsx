@@ -15,10 +15,25 @@ const links = [
   { href: "/contact", label: "Contact" },
 ];
 
+type SessionInfo = { role: "admin" | "staff" | null; username: string | null };
+
+async function logout() {
+  await fetch("/api/auth/logout", { method: "POST" });
+  window.location.href = "/";
+}
+
 export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [session, setSession] = useState<SessionInfo>({ role: null, username: null });
+
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then((r) => r.json())
+      .then((data: SessionInfo) => setSession(data))
+      .catch(() => {});
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -30,6 +45,9 @@ export function Navbar() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  const portalHref = session.role === "admin" ? "/admin" : "/staff";
+  const portalLabel = session.role === "admin" ? "Admin Portal" : "Staff Portal";
 
   return (
     <motion.header
@@ -86,6 +104,39 @@ export function Navbar() {
           <Link href="/reservations" className="btn-gold !px-6 !py-2.5">
             Book a Table
           </Link>
+
+          {/* Staff / Admin access */}
+          {session.role ? (
+            <div className="flex items-center gap-3 border-l border-cream-200/10 pl-6">
+              <Link
+                href={portalHref}
+                className="text-sm font-medium text-saffron-400/80 hover:text-saffron-400 transition-colors"
+              >
+                {portalLabel}
+              </Link>
+              <button
+                onClick={logout}
+                aria-label="Sign out"
+                title="Sign out"
+                className="flex h-7 w-7 items-center justify-center rounded-full border border-cream-200/15 text-cream-200/40 hover:border-cream-200/40 hover:text-cream-200/80 transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-3.5 w-3.5">
+                  <path fillRule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clipRule="evenodd" />
+                  <path fillRule="evenodd" d="M19 10a.75.75 0 0 0-.75-.75H8.704l1.048-1.05a.75.75 0 1 0-1.06-1.06l-2.25 2.25a.75.75 0 0 0 0 1.06l2.25 2.25a.75.75 0 1 0 1.06-1.06l-1.048-1.05H18.25A.75.75 0 0 0 19 10Z" clipRule="evenodd" />
+                </svg>
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="flex items-center gap-1.5 border-l border-cream-200/10 pl-6 text-xs font-medium uppercase tracking-wider text-cream-200/40 hover:text-cream-200/70 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-3 w-3">
+                <path fillRule="evenodd" d="M8 1a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7ZM4.5 8A3.5 3.5 0 0 0 1 11.5V13a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1.5A3.5 3.5 0 0 0 11.5 8h-7Z" clipRule="evenodd" />
+              </svg>
+              Staff Login
+            </Link>
+          )}
         </div>
 
         <button
@@ -143,6 +194,36 @@ export function Navbar() {
               <a href={site.phoneHref} className="btn-ghost mt-2">
                 Call {site.phone}
               </a>
+
+              {/* Staff / Admin access — mobile */}
+              <div className="mt-4 border-t border-cream-200/10 pt-4">
+                {session.role ? (
+                  <div className="flex items-center justify-between px-1">
+                    <Link
+                      href={portalHref}
+                      className="text-sm font-medium text-saffron-400/80"
+                    >
+                      {portalLabel}
+                    </Link>
+                    <button
+                      onClick={logout}
+                      className="text-xs text-cream-200/40 hover:text-cream-200/70 transition-colors"
+                    >
+                      Sign out
+                    </button>
+                  </div>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="flex items-center gap-2 px-1 text-xs font-medium uppercase tracking-wider text-cream-200/40"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-3 w-3">
+                      <path fillRule="evenodd" d="M8 1a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7ZM4.5 8A3.5 3.5 0 0 0 1 11.5V13a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1.5A3.5 3.5 0 0 0 11.5 8h-7Z" clipRule="evenodd" />
+                    </svg>
+                    Staff Login
+                  </Link>
+                )}
+              </div>
             </div>
           </motion.div>
         )}

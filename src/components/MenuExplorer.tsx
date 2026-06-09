@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
-import { menu, type Dish } from "@/data/menu";
+import { menu as staticMenu, type Dish, type MenuSection } from "@/data/menu";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -13,7 +13,8 @@ const tagLabel: Record<NonNullable<Dish["tags"]>[number], { label: string; cls: 
   new: { label: "New", cls: "border-cream-200/40 text-cream-100" },
 };
 
-export function MenuExplorer() {
+export function MenuExplorer({ menuData }: { menuData?: MenuSection[] }) {
+  const menu = menuData ?? staticMenu;
   const [sectionId, setSectionId] = useState(menu[0].id);
   const [activeCat, setActiveCat] = useState<string>("all");
 

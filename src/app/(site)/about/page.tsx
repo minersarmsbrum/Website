@@ -41,7 +41,6 @@ export default function AboutPage() {
         image={images.aboutHero}
       />
 
-      {/* Story + image */}
       <section className="bg-ink-900 py-24 md:py-32">
         <div className="container-luxe grid items-center gap-16 lg:grid-cols-2">
           <div className="relative">
@@ -100,7 +99,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
       <section className="bg-ink-800 py-24 md:py-28">
         <div className="container-luxe">
           <div className="mx-auto max-w-2xl text-center">
@@ -129,7 +127,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Timeline */}
       <section className="bg-ink-900 py-24 md:py-32">
         <div className="container-luxe">
           <div className="mx-auto max-w-2xl text-center">

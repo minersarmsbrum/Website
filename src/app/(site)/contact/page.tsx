@@ -27,7 +27,6 @@ export default function ContactPage() {
 
       <section className="bg-ink-900 py-20 md:py-28">
         <div className="container-luxe grid gap-14 lg:grid-cols-[1fr_1.1fr]">
-          {/* Details */}
           <div className="space-y-8">
             <Reveal>
               <InfoBlock label="Address">
@@ -95,14 +94,12 @@ export default function ContactPage() {
             </Reveal>
           </div>
 
-          {/* Form */}
           <div>
             <ContactForm />
           </div>
         </div>
       </section>
 
-      {/* Map */}
       <section className="bg-ink-800 pb-20">
         <div className="container-luxe">
           <Reveal>

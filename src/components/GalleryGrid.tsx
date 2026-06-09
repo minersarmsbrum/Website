@@ -3,19 +3,22 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import { SafeImage } from "./SafeImage";
-import { gallery } from "@/data/images";
+import { gallery as staticGallery } from "@/data/images";
 
-export function GalleryGrid() {
+type GalleryItem = { src: string; alt: string; tall?: boolean };
+
+export function GalleryGrid({ items }: { items?: GalleryItem[] }) {
+  const gallery = items ?? staticGallery;
   const [open, setOpen] = useState<number | null>(null);
 
   const close = useCallback(() => setOpen(null), []);
   const next = useCallback(
     () => setOpen((i) => (i === null ? null : (i + 1) % gallery.length)),
-    []
+    [gallery.length]
   );
   const prev = useCallback(
     () => setOpen((i) => (i === null ? null : (i - 1 + gallery.length) % gallery.length)),
-    []
+    [gallery.length]
   );
 
   useEffect(() => {
