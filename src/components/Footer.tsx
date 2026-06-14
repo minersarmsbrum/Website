@@ -109,7 +109,7 @@ export function Footer() {
             Facebook
           </a>
           <span className="hidden sm:inline">·</span>
-          <span>Demo by CROWNBOT</span>
+          <a href="https://crownbot.uk" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-saffron-400">Designed by CROWNBOT</a>
         </div>
       </div>
     </footer>

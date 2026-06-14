@@ -1,3 +1,6 @@
+# private scripts
+push-both.sh
+
 # dependencies
 /node_modules
 /.pnp
