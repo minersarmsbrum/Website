@@ -1,5 +1,7 @@
 import { serverClient } from "./supabase";
-import type { Booking, BookingStatus, GalleryItem } from "./store";
+import type { Booking, BookingStatus, GalleryItem, StoreSection, StoreCategory, StoreDish } from "./store";
+import { menu as seedMenu } from "@/data/menu";
+import type { MenuSection } from "@/data/menu";
 
 // ─── Raw Supabase row shapes ───────────────────────────────────────────────────
 
@@ -50,6 +52,21 @@ function toGalleryItem(row: GalleryRow): GalleryItem {
     tall: row.tall,
     storagePath: row.storage_path ?? undefined,
   };
+}
+
+// ─── Menu seed helpers ────────────────────────────────────────────────────────
+
+let _id = Date.now();
+const uid = () => String(_id++);
+
+function seedWithIds(sections: MenuSection[]): StoreSection[] {
+  return sections.map((s) => ({
+    ...s,
+    categories: s.categories.map((c) => ({
+      ...c,
+      items: c.items.map((item) => ({ ...item, id: uid() })),
+    })),
+  }));
 }
 
 // ─── Database layer ────────────────────────────────────────────────────────────
@@ -135,6 +152,96 @@ export const db = {
       if (deleteError) return null;
 
       return toGalleryItem(row as GalleryRow);
+    },
+  },
+
+  menu: {
+    async load(): Promise<StoreSection[]> {
+      const { data, error } = await serverClient()
+        .from("menu_data")
+        .select("sections")
+        .eq("id", 1)
+        .single();
+
+      if (error || !data) {
+        // Table empty on first run — seed from static file and persist
+        const seeded = seedWithIds(seedMenu);
+        await serverClient()
+          .from("menu_data")
+          .insert({ id: 1, sections: seeded });
+        return seeded;
+      }
+
+      return data.sections as StoreSection[];
+    },
+
+    async save(sections: StoreSection[]): Promise<void> {
+      await serverClient()
+        .from("menu_data")
+        .upsert({ id: 1, sections, updated_at: new Date().toISOString() });
+    },
+
+    async addCategory(sectionId: string, data: { title: string; blurb?: string }): Promise<StoreCategory | null> {
+      const sections = await db.menu.load();
+      const section = sections.find((s) => s.id === sectionId);
+      if (!section) return null;
+      const cat: StoreCategory = { id: uid(), title: data.title, blurb: data.blurb, items: [] };
+      section.categories.push(cat);
+      await db.menu.save(sections);
+      return cat;
+    },
+
+    async updateCategory(sectionId: string, catId: string, data: { title?: string; blurb?: string }): Promise<StoreCategory | null> {
+      const sections = await db.menu.load();
+      const cat = sections.find((s) => s.id === sectionId)?.categories.find((c) => c.id === catId);
+      if (!cat) return null;
+      if (data.title !== undefined) cat.title = data.title;
+      if (data.blurb !== undefined) cat.blurb = data.blurb;
+      await db.menu.save(sections);
+      return cat;
+    },
+
+    async deleteCategory(sectionId: string, catId: string): Promise<boolean> {
+      const sections = await db.menu.load();
+      const section = sections.find((s) => s.id === sectionId);
+      if (!section) return false;
+      const i = section.categories.findIndex((c) => c.id === catId);
+      if (i === -1) return false;
+      section.categories.splice(i, 1);
+      await db.menu.save(sections);
+      return true;
+    },
+
+    async addItem(sectionId: string, catId: string, data: Omit<StoreDish, "id">): Promise<StoreDish | null> {
+      const sections = await db.menu.load();
+      const cat = sections.find((s) => s.id === sectionId)?.categories.find((c) => c.id === catId);
+      if (!cat) return null;
+      const item: StoreDish = { ...data, id: uid() };
+      cat.items.push(item);
+      await db.menu.save(sections);
+      return item;
+    },
+
+    async updateItem(sectionId: string, catId: string, itemId: string, data: Partial<Omit<StoreDish, "id">>): Promise<StoreDish | null> {
+      const sections = await db.menu.load();
+      const cat = sections.find((s) => s.id === sectionId)?.categories.find((c) => c.id === catId);
+      if (!cat) return null;
+      const item = cat.items.find((i) => i.id === itemId);
+      if (!item) return null;
+      Object.assign(item, data);
+      await db.menu.save(sections);
+      return item;
+    },
+
+    async deleteItem(sectionId: string, catId: string, itemId: string): Promise<boolean> {
+      const sections = await db.menu.load();
+      const cat = sections.find((s) => s.id === sectionId)?.categories.find((c) => c.id === catId);
+      if (!cat) return false;
+      const i = cat.items.findIndex((x) => x.id === itemId);
+      if (i === -1) return false;
+      cat.items.splice(i, 1);
+      await db.menu.save(sections);
+      return true;
     },
   },
 };

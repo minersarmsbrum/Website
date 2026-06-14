@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { MenuExplorer } from "@/components/MenuExplorer";
 import { images } from "@/data/images";
-import { store } from "@/lib/store";
+import { db } from "@/lib/db";
 
 export const metadata: Metadata = {
   title: "Menu",
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic"; // always re-render so admin edits appear immediately
 
-export default function MenuPage() {
-  const menuData = store.menu.list();
+export default async function MenuPage() {
+  const menuData = await db.menu.load();
 
   return (
     <>
