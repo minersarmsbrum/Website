@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
-import { store } from "@/lib/store";
+import { db } from "@/lib/db";
 
 export async function GET() {
   const session = await getSession();
   if (!session.role) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  return NextResponse.json(store.bookings.list());
+  const bookings = await db.bookings.list();
+  return NextResponse.json(bookings);
 }
 
 export async function POST(req: NextRequest) {
@@ -16,6 +17,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
   const data = await req.json();
-  const booking = store.bookings.add(data);
+  const booking = await db.bookings.add(data);
   return NextResponse.json(booking, { status: 201 });
 }

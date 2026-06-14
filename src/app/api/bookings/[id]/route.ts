@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
-import { store } from "@/lib/store";
+import { db } from "@/lib/db";
 import type { BookingStatus } from "@/lib/store";
 import { notifyBookingStatusChange } from "@/lib/notifications";
 
@@ -15,10 +15,13 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   }
   const { id } = await params;
   const { status } = await req.json();
-  const updated = store.bookings.updateStatus(id, status as BookingStatus);
+  const VALID_STATUSES: BookingStatus[] = ["pending", "confirmed", "cancelled"];
+  if (!VALID_STATUSES.includes(status)) {
+    return NextResponse.json({ error: "Invalid status" }, { status: 400 });
+  }
+  const updated = await db.bookings.updateStatus(id, status as BookingStatus);
   if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-  // Notify guest on confirmed or cancelled — fire-and-forget
   if (status === "confirmed" || status === "cancelled") {
     notifyBookingStatusChange(updated).catch((err) =>
       console.error("[api/bookings/[id]] Notification failed:", err)
@@ -33,7 +36,7 @@ export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ 
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
   const { id } = await params;
-  const ok = store.bookings.delete(id);
+  const ok = await db.bookings.delete(id);
   if (!ok) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json({ ok: true });
 }

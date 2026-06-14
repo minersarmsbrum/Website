@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/PageHeader";
 import { GalleryGrid } from "@/components/GalleryGrid";
 import { images } from "@/data/images";
-import { store } from "@/lib/store";
+import { db } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     "A look inside The Miners Arms: food, interior and atmosphere. West Bromwich grill house.",
 };
 
-export default function GalleryPage() {
-  const galleryItems = store.gallery.list();
+export default async function GalleryPage() {
+  const galleryItems = await db.gallery.list();
 
   return (
     <>

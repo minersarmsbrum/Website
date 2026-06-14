@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { store } from "@/lib/store";
+import { db } from "@/lib/db";
 
-export default function StaffPortalPage() {
-  const bookings = store.bookings.list();
+export const dynamic = "force-dynamic";
+
+export default async function StaffPortalPage() {
+  const bookings = await db.bookings.list();
   const today = new Date().toISOString().split("T")[0];
   const todayBookings = bookings.filter((b) => b.date === today && b.status !== "cancelled");
   const pending = bookings.filter((b) => b.status === "pending").length;

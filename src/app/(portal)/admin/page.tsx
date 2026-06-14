@@ -1,9 +1,14 @@
+import { db } from "@/lib/db";
 import { store } from "@/lib/store";
 import Link from "next/link";
 
-export default function AdminDashboard() {
-  const bookings = store.bookings.list();
-  const gallery = store.gallery.list();
+export const dynamic = "force-dynamic";
+
+export default async function AdminDashboard() {
+  const [bookings, gallery] = await Promise.all([
+    db.bookings.list(),
+    db.gallery.list(),
+  ]);
   const menu = store.menu.list();
 
   const pending = bookings.filter((b) => b.status === "pending").length;
