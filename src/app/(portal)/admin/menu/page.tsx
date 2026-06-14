@@ -41,6 +41,7 @@ export default function AdminMenuPage() {
 
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [actionError, setActionError] = useState("");
 
   const load = useCallback(async () => {
     const res = await fetch("/api/menu");
@@ -56,35 +57,53 @@ export default function AdminMenuPage() {
 
   async function submitAddCat(sId: string) {
     if (!newCat.title.trim()) return;
+    setActionError("");
     setSaving(true);
-    await fetch(`/api/menu/sections/${sId}/categories`, {
+    const res = await fetch(`/api/menu/sections/${sId}/categories`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newCat),
     });
-    setAddingCat(null);
-    setNewCat({ title: "", blurb: "" });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      setActionError(data.error || "Failed to add category.");
+    } else {
+      setAddingCat(null);
+      setNewCat({ title: "", blurb: "" });
+    }
     await load();
     setSaving(false);
   }
 
   async function submitEditCat(sId: string, cId: string) {
+    setActionError("");
     setSaving(true);
-    await fetch(`/api/menu/sections/${sId}/categories/${cId}`, {
+    const res = await fetch(`/api/menu/sections/${sId}/categories/${cId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editCatData),
     });
-    setEditingCat(null);
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      setActionError(data.error || "Failed to update category.");
+    } else {
+      setEditingCat(null);
+    }
     await load();
     setSaving(false);
   }
 
   async function deleteCat(sId: string, cId: string) {
     if (!confirm("Delete this category and all its items?")) return;
+    setActionError("");
     setSaving(true);
-    await fetch(`/api/menu/sections/${sId}/categories/${cId}`, { method: "DELETE" });
-    if (expandedCat === cId) setExpandedCat(null);
+    const res = await fetch(`/api/menu/sections/${sId}/categories/${cId}`, { method: "DELETE" });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      setActionError(data.error || "Failed to delete category.");
+    } else {
+      if (expandedCat === cId) setExpandedCat(null);
+    }
     await load();
     setSaving(false);
   }
@@ -93,37 +112,54 @@ export default function AdminMenuPage() {
 
   async function submitAddItem(sId: string, cId: string) {
     setError("");
+    setActionError("");
     if (!newItem.name.trim() || !newItem.price.trim()) { setError("Name and price are required."); return; }
     setSaving(true);
-    await fetch(`/api/menu/sections/${sId}/categories/${cId}/items`, {
+    const res = await fetch(`/api/menu/sections/${sId}/categories/${cId}/items`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newItem),
     });
-    setAddingItem(null);
-    setNewItem({ name: "", price: "", desc: "", tags: [] });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      setError(data.error || "Failed to add item.");
+    } else {
+      setAddingItem(null);
+      setNewItem({ name: "", price: "", desc: "", tags: [] });
+    }
     await load();
     setSaving(false);
   }
 
   async function submitEditItem(sId: string, cId: string, iId: string) {
     setError("");
+    setActionError("");
     if (!editItemData.name.trim() || !editItemData.price.trim()) { setError("Name and price are required."); return; }
     setSaving(true);
-    await fetch(`/api/menu/sections/${sId}/categories/${cId}/items/${iId}`, {
+    const res = await fetch(`/api/menu/sections/${sId}/categories/${cId}/items/${iId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editItemData),
     });
-    setEditingItem(null);
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      setError(data.error || "Failed to update item.");
+    } else {
+      setEditingItem(null);
+    }
     await load();
     setSaving(false);
   }
 
   async function deleteItem(sId: string, cId: string, iId: string) {
     if (!confirm("Delete this item?")) return;
+    setActionError("");
     setSaving(true);
-    await fetch(`/api/menu/sections/${sId}/categories/${cId}/items/${iId}`, { method: "DELETE" });
+    const res = await fetch(`/api/menu/sections/${sId}/categories/${cId}/items/${iId}`, { method: "DELETE" });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      setActionError(data.error || "Failed to delete item.");
+    }
     await load();
     setSaving(false);
   }
@@ -140,6 +176,12 @@ export default function AdminMenuPage() {
         <h1 className="font-display text-3xl text-cream-50">Menu</h1>
         <p className="mt-1 text-sm text-cream-200/50">Manage categories, items and prices</p>
       </div>
+
+      {actionError && (
+        <div className="mb-4 rounded-xl border border-ember-500/30 bg-ember-500/10 px-4 py-3 text-sm text-ember-400">
+          {actionError}
+        </div>
+      )}
 
       {/* Section tabs */}
       <div className="mb-5 flex gap-2 border-b border-cream-200/10 pb-1">

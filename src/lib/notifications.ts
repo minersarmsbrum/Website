@@ -59,7 +59,7 @@ async function sendStaffTelegram(message: string) {
 // ─── Booking: new request ─────────────────────────────────────────────────────
 
 export async function notifyNewBooking(booking: Booking) {
-  const formattedDate = new Date(booking.date).toLocaleDateString("en-GB", {
+  const formattedDate = new Date(booking.date + "T00:00:00").toLocaleDateString("en-GB", {
     weekday: "long", day: "numeric", month: "long", year: "numeric",
   });
 
@@ -101,7 +101,7 @@ export async function notifyNewBooking(booking: Booking) {
 // ─── Booking: status change ───────────────────────────────────────────────────
 
 export async function notifyBookingStatusChange(booking: Booking) {
-  const formattedDate = new Date(booking.date).toLocaleDateString("en-GB", {
+  const formattedDate = new Date(booking.date + "T00:00:00").toLocaleDateString("en-GB", {
     weekday: "long", day: "numeric", month: "long", year: "numeric",
   });
 

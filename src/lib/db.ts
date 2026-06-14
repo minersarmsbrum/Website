@@ -82,10 +82,10 @@ export const db = {
       return (data as BookingRow[]).map(toBooking);
     },
 
-    async add(data: Omit<Booking, "id" | "createdAt" | "status">): Promise<Booking> {
+    async add(data: Omit<Booking, "id" | "createdAt" | "status"> & { status?: BookingStatus }): Promise<Booking> {
       const { data: row, error } = await serverClient()
         .from("bookings")
-        .insert({ ...data, status: "pending" })
+        .insert({ ...data, status: data.status ?? "pending" })
         .select()
         .single();
       if (error) throw error;
@@ -104,11 +104,13 @@ export const db = {
     },
 
     async delete(id: string): Promise<boolean> {
-      const { error } = await serverClient()
+      const { data, error } = await serverClient()
         .from("bookings")
         .delete()
-        .eq("id", id);
-      return !error;
+        .eq("id", id)
+        .select("id");
+      if (error) return false;
+      return Array.isArray(data) && data.length > 0;
     },
   },
 

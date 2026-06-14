@@ -81,7 +81,6 @@ export default function AdminGalleryPage() {
               ref={fileRef}
               type="file"
               accept="image/*"
-              capture="environment"
               className="w-full rounded-xl border border-cream-200/10 bg-ink-800 px-3 py-2.5 text-sm text-cream-100 file:mr-3 file:rounded-lg file:border-0 file:bg-saffron-500/20 file:px-3 file:py-1 file:text-xs file:text-saffron-400 outline-none focus:border-saffron-500/40"
             />
           </div>

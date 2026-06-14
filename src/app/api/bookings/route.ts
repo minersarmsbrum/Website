@@ -13,10 +13,18 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const session = await getSession();
-  if (session.role !== "admin") {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  if (!session.role) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const data = await req.json();
-  const booking = await db.bookings.add(data);
+  const { name, email, phone, date, time, guests, notes, status } = await req.json();
+  const guestsNum = Number(guests);
+  if (!name?.trim() || !email?.trim() || !phone?.trim() || !date || !time || !guestsNum || guestsNum < 1 || guestsNum > 20) {
+    return NextResponse.json({ error: "Missing or invalid required fields" }, { status: 400 });
+  }
+  const today = new Date().toISOString().split("T")[0];
+  if (date < today) {
+    return NextResponse.json({ error: "Booking date must be today or in the future" }, { status: 400 });
+  }
+  const booking = await db.bookings.add({ name, email, phone, date, time, guests: guestsNum, notes: notes ?? "", status });
   return NextResponse.json(booking, { status: 201 });
 }

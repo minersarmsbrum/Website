@@ -1,11 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { notifyNewBooking } from "@/lib/notifications";
+import { rateLimit } from "@/lib/ratelimit";
 
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "anonymous";
+  const { allowed } = rateLimit(`bookings:${ip}`, { limit: 5, windowMs: 10 * 60 * 1000 });
+  if (!allowed) {
+    return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+  }
+
   const { name, email, phone, date, time, guests, notes } = await req.json();
 
-  if (!name || !email || !phone || !date || !time || !guests || Number(guests) < 1) {
+  const guestsNum = Number(guests);
+  if (!name || !email || !phone || !date || !time || !guests || guestsNum < 1 || guestsNum > 20) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
@@ -20,7 +28,7 @@ export async function POST(req: NextRequest) {
     phone,
     date,
     time,
-    guests: Number(guests),
+    guests: guestsNum,
     notes: notes ?? "",
   });
 
