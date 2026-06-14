@@ -108,7 +108,7 @@ export function Hero() {
             <div key={h.label} className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-saffron-500" />
               <span className="text-cream-100">{h.label}</span>
-              <span className="hidden sm:inline">— {h.detail}</span>
+              <span className="hidden sm:inline">, {h.detail}</span>
             </div>
           ))}
         </motion.div>
@@ -152,7 +152,7 @@ function FloatingOrbs() {
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-10 left-1/3 h-64 w-64 rounded-full bg-jade-500/10 blur-3xl"
+        className="absolute bottom-10 left-1/3 h-64 w-64 rounded-full bg-ember-500/10 blur-3xl"
         animate={{ y: [0, -25, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />

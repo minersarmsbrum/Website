@@ -42,7 +42,7 @@ export function ReservationCTA() {
         </Reveal>
         <Reveal delay={0.2}>
           <p className="body-lg mx-auto mt-6 max-w-xl">
-            Book online in under a minute — for a quiet weekday curry or the full
+            Book online in under a minute. For a quiet weekday curry or the full
             family mixed grill on a Saturday night.
           </p>
         </Reveal>

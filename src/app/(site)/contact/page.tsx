@@ -8,7 +8,7 @@ import { site } from "@/data/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with The Miners Arms, West Bromwich — address, opening hours, phone and enquiry form. 58 Bagnall Street, B70 0TW.",
+    "Get in touch with The Miners Arms, West Bromwich. Address, opening hours, phone and enquiry form. 58 Bagnall Street, B70 0TW.",
 };
 
 export default function ContactPage() {
@@ -21,7 +21,7 @@ export default function ContactPage() {
             Get in <span className="gold-text">touch</span>
           </>
         }
-        intro="Questions, big-group bookings or feedback — we'd love to hear from you."
+        intro="Questions, big-group bookings or feedback. We'd love to hear from you."
         image={images.menuBackground}
       />
 

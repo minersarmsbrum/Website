@@ -50,7 +50,7 @@ export function ContactForm() {
             </div>
             <h3 className="mt-6 font-display text-2xl text-cream-50">Message sent</h3>
             <p className="mt-3 max-w-sm text-cream-200/70">
-              Thanks {values.name.split(" ")[0]} — we&apos;ll get back to you as soon
+              Thanks {values.name.split(" ")[0]}. We&apos;ll get back to you as soon
               as we can.
             </p>
             <button onClick={() => { setSent(false); setValues({ name: "", email: "", subject: "General enquiry", message: "" }); }} className="btn-ghost mt-8">

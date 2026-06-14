@@ -11,7 +11,7 @@ const kitchens = [
   {
     flag: "🇬🇧",
     title: "The British Table",
-    text: "A proper full English, pub classics and bakes — comfort that tastes like home.",
+    text: "A proper full English, pub classics and bakes. Comfort that tastes like home.",
   },
   {
     flag: "🇮🇳",
@@ -91,7 +91,7 @@ export function Intro() {
             <p className="body-lg mt-6">
               Since 2015, The Miners Arms has been West Bromwich&apos;s favourite
               all-rounder. Born from our owner&apos;s Indian and Chinese heritage and
-              raised in a classic British pub, every meal here is more than food —
+              raised in a classic British pub. Every meal here is more than food,
               it&apos;s a taste of comfort and community.
             </p>
           </Reveal>

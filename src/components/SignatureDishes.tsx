@@ -19,7 +19,7 @@ export function SignatureDishes() {
                 The plates people <span className="gold-text">come back for</span>
               </>
             }
-            intro="A taste across all three kitchens — grilled, simmered and steamed to order."
+            intro="A taste across all three kitchens, grilled, simmered and steamed to order."
           />
         </div>
 

@@ -29,11 +29,11 @@ const siteUrl = "https://miners-arms.vercel.app";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "The Miners Arms — British Grill House | West Bromwich",
+    default: "The Miners Arms | British Grill House | West Bromwich",
     template: "%s · The Miners Arms",
   },
   description:
-    "The Miners Arms, West Bromwich — a British grill house where the full English, slow-cooked Indian curries and hand-folded Chinese small plates share one table. Dine in, takeaway & bookings.",
+    "The Miners Arms, West Bromwich. A British grill house where the full English, slow-cooked Indian curries and hand-folded Chinese small plates share one table. Dine in, takeaway & bookings.",
   keywords: [
     "Miners Arms",
     "West Bromwich restaurant",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: siteUrl,
     siteName: site.name,
-    title: "The Miners Arms — British Grill House | West Bromwich",
+    title: "The Miners Arms | British Grill House | West Bromwich",
     description:
       "Three kitchens, one roof. English breakfasts, Indian curries & Chinese small plates in the heart of West Bromwich.",
     images: [
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Miners Arms — British Grill House | West Bromwich",
+    title: "The Miners Arms | British Grill House | West Bromwich",
     description:
       "English breakfasts, Indian curries & Chinese small plates under one roof.",
   },

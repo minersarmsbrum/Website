@@ -71,7 +71,7 @@ export async function notifyNewBooking(booking: Booking) {
     <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#1a1a1a">
       <h2 style="color:#c9921a">The Miners Arms</h2>
       <p>Hi ${booking.name.split(" ")[0]},</p>
-      <p>Thanks for your reservation request — we've got your details and will confirm your table by phone or email shortly.</p>
+      <p>Thanks for your reservation request. We've got your details and will confirm your table by phone or email shortly.</p>
       <table style="width:100%;border-collapse:collapse;margin:20px 0">
         <tr><td style="padding:8px 0;color:#555;width:120px">Date</td><td style="padding:8px 0"><strong>${formattedDate}</strong></td></tr>
         <tr><td style="padding:8px 0;color:#555">Time</td><td style="padding:8px 0"><strong>${booking.time}</strong></td></tr>
@@ -113,7 +113,7 @@ export async function notifyBookingStatusChange(booking: Booking) {
       <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#1a1a1a">
         <h2 style="color:#c9921a">The Miners Arms</h2>
         <p>Hi ${booking.name.split(" ")[0]},</p>
-        <p>Great news — your table is <strong>confirmed</strong>! We're looking forward to seeing you.</p>
+        <p>Great news! Your table is <strong>confirmed</strong>. We're looking forward to seeing you.</p>
         <table style="width:100%;border-collapse:collapse;margin:20px 0">
           <tr><td style="padding:8px 0;color:#555;width:120px">Date</td><td style="padding:8px 0"><strong>${formattedDate}</strong></td></tr>
           <tr><td style="padding:8px 0;color:#555">Time</td><td style="padding:8px 0"><strong>${booking.time}</strong></td></tr>
@@ -136,7 +136,7 @@ export async function notifyBookingStatusChange(booking: Booking) {
         <h2 style="color:#c9921a">The Miners Arms</h2>
         <p>Hi ${booking.name.split(" ")[0]},</p>
         <p>Unfortunately we've had to cancel your reservation for <strong>${formattedDate} at ${booking.time}</strong>.</p>
-        <p>We're sorry for any inconvenience. We'd love to welcome you another time — visit our website to make a new booking.</p>
+        <p>We're sorry for any inconvenience. We'd love to welcome you another time. Visit our website to make a new booking.</p>
         <hr style="border:none;border-top:1px solid #eee;margin:24px 0"/>
         <p style="color:#999;font-size:12px">The Miners Arms · West Bromwich</p>
       </div>
@@ -160,7 +160,7 @@ export async function notifyDailyBookingSummary(bookings: Booking[]) {
     weekday: "long", day: "numeric", month: "long", year: "numeric",
   });
 
-  let lines = `📅 <b>Bookings for Today — ${formattedDate}</b>\n\n`;
+  let lines = `📅 <b>Bookings for Today: ${formattedDate}</b>\n\n`;
 
   if (todayConfirmed.length === 0 && todayPending.length === 0) {
     lines += `No bookings today.`;
@@ -172,13 +172,13 @@ export async function notifyDailyBookingSummary(bookings: Booking[]) {
     if (todayConfirmed.length > 0) {
       lines += `\n`;
       for (const b of todayConfirmed) {
-        const notes = b.notes ? ` — <i>${b.notes}</i>` : "";
+        const notes = b.notes ? `, <i>${b.notes}</i>` : "";
         lines += `⏰ ${b.time} · <b>${b.name}</b> · ${b.guests} guest${b.guests > 1 ? "s" : ""}${notes}\n`;
       }
     }
 
     if (todayPending.length > 0) {
-      lines += `\n⚠️ ${todayPending.length} booking${todayPending.length > 1 ? "s" : ""} still need confirming — check the portal.`;
+      lines += `\n⚠️ ${todayPending.length} booking${todayPending.length > 1 ? "s" : ""} still need confirming. Check the portal.`;
     }
   }
 

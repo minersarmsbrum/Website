@@ -20,7 +20,7 @@ export function Footer() {
             Grill House · Est. 2015
           </p>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream-200/60">
-            A neighbourhood grill house in West Bromwich — English breakfasts,
+            A neighbourhood grill house in West Bromwich: English breakfasts,
             Indian curries and Chinese small plates, all under one roof.
           </p>
         </div>

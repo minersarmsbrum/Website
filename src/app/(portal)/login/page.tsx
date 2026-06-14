@@ -42,7 +42,7 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-ink-900 px-4">
       {/* Background glow */}
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(ellipse_at_center,rgba(227,161,61,0.06)_0%,transparent_70%)]" />
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,162,39,0.06)_0%,transparent_70%)]" />
 
       <div className="relative w-full max-w-md">
         {/* Logo */}

@@ -2,7 +2,7 @@
 export const testimonials = [
   {
     quote:
-      "Three cuisines under one roof and every single plate was spot on. The mixed grill is unreal — we'll be back every week.",
+      "Three cuisines under one roof and every single plate was spot on. The mixed grill is unreal. We'll be back every week.",
     name: "Amara K.",
     detail: "Family dinner",
   },

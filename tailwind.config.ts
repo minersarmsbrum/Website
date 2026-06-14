@@ -19,19 +19,19 @@ const config: Config = {
           200: "#e8dcc9",
           300: "#d9c8ad",
         },
-        // Saffron / gold — primary warm accent
+        // Antique gold — primary accent (matches logo circular border)
         saffron: {
-          400: "#f0b860",
-          500: "#e3a13d",
-          600: "#c9842a",
+          400: "#D4B450",
+          500: "#C9A227",
+          600: "#A8811A",
         },
-        // Ember / chilli — secondary accent
+        // Maroon red — secondary accent (matches logo MINERS ARMS text)
         ember: {
-          400: "#e0654a",
-          500: "#c1352b",
-          600: "#9e271f",
+          400: "#C93232",
+          500: "#9E1A1A",
+          600: "#7A1111",
         },
-        // Jade — subtle tertiary (the Chinese thread)
+        // Jade — semantic green (veg badges / confirmed bookings)
         jade: {
           400: "#5fae93",
           500: "#2f7d63",
@@ -73,9 +73,9 @@ const config: Config = {
       },
       backgroundImage: {
         "radial-warm":
-          "radial-gradient(circle at 50% 0%, rgba(227,161,61,0.12), transparent 60%)",
+          "radial-gradient(circle at 50% 0%, rgba(201,162,39,0.12), transparent 60%)",
         "ember-grain":
-          "radial-gradient(circle at 20% 30%, rgba(193,53,43,0.10), transparent 45%), radial-gradient(circle at 80% 70%, rgba(227,161,61,0.10), transparent 45%)",
+          "radial-gradient(circle at 20% 30%, rgba(158,26,26,0.10), transparent 45%), radial-gradient(circle at 80% 70%, rgba(201,162,39,0.10), transparent 45%)",
       },
     },
   },

@@ -19,7 +19,7 @@ export function GalleryPreview() {
                 A look <span className="gold-text">inside</span>
               </>
             }
-            intro="Sizzling grills, warm corners and full tables — a feel for the room before you arrive."
+            intro="Sizzling grills, warm corners and full tables. A feel for the room before you arrive."
           />
           <Link href="/gallery" className="btn-ghost shrink-0">
             View full gallery

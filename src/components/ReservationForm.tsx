@@ -56,7 +56,7 @@ export function ReservationForm() {
       if (!res.ok) throw new Error("Booking failed");
       setSent(true);
     } catch {
-      setSubmitError("Something went wrong — please call us or try again.");
+      setSubmitError("Something went wrong. Please call us or try again.");
     } finally {
       setSubmitting(false);
     }
@@ -84,7 +84,7 @@ export function ReservationForm() {
             </motion.div>
             <h3 className="mt-6 font-display text-2xl text-cream-50">Request received</h3>
             <p className="mt-3 max-w-sm text-cream-200/70">
-              Thank you, {values.name.split(" ")[0]} — we&apos;ve noted your table for{" "}
+              Thank you, {values.name.split(" ")[0]}. We&apos;ve noted your table for{" "}
               {values.guests} on {values.date} at {values.time}. We&apos;ll confirm by
               phone or email shortly.
             </p>

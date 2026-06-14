@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const perks = [
   { title: "Walk-ins welcome", text: "Booking guarantees your table, but you're always welcome to drop by." },
-  { title: "Groups & events", text: "Birthdays, work dinners, family gatherings — tell us and we'll set it up." },
+  { title: "Groups & events", text: "Birthdays, work dinners, family gatherings. Tell us and we'll set it up." },
   { title: "Flexible times", text: "From the lunch service to the late kitchen, find a slot that suits you." },
 ];
 

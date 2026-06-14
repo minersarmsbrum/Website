@@ -67,7 +67,7 @@ export const menu: MenuSection[] = [
       },
       {
         id: "chefs-specials",
-        title: "Chef's Specials — Curries",
+        title: "Chef's Specials: Curries",
         blurb: "Slow-cooked, spice-led, made fresh to order.",
         items: [
           { name: "Butter Chicken", price: "£8.95", desc: "Boneless chicken cooked in a creamy butter sauce", tags: ["signature"] },
@@ -101,20 +101,20 @@ export const menu: MenuSection[] = [
         title: "Chinese & Vietnamese",
         blurb: "Small plates, skewers and street-food classics.",
         items: [
-          { name: "Mango Papaya Salad", price: "£5.95", desc: "Vietnamese-infused salad — green papaya, mango, peanuts, cherry tomatoes, lime & a sweet-spicy dressing", tags: ["veg"] },
+          { name: "Mango Papaya Salad", price: "£5.95", desc: "Vietnamese-infused salad: green papaya, mango, peanuts, cherry tomatoes, lime & a sweet-spicy dressing", tags: ["veg"] },
           { name: "Chicken Skewers", price: "£6.95", desc: "Grilled, diced chicken in the chef's signature herb blend" },
           { name: "Salt & Pepper Wings", price: "£6.95", desc: "Crispy wings tossed with salt, pepper, garlic & fresh chillies", tags: ["signature"] },
-          { name: "Gyoza Dumplings", price: "from £6.95", desc: "Japanese-style dumplings — chicken, pork or veg" },
-          { name: "Chow Mein", price: "from £6.95", desc: "Stir-fried noodles, crisp veg & a savoury sauce — chicken, prawns or veg" },
+          { name: "Gyoza Dumplings", price: "from £6.95", desc: "Japanese-style dumplings: chicken, pork or veg" },
+          { name: "Chow Mein", price: "from £6.95", desc: "Stir-fried noodles, crisp veg & a savoury sauce. Choose chicken, prawns or veg" },
           { name: "Pork Belly Skewers", price: "£6.95", desc: "Succulent pork belly, marinated & grilled on skewers" },
           { name: "Salt & Pepper Fish", price: "£7.50", desc: "Crispy lightly-battered fish, tossed with garlic, chilli, salt & pepper" },
           { name: "Spring Rolls", price: "£7.95", desc: "Light, crunchy rolls filled with vegetables & pork" },
           { name: "Crispy Squid", price: "£7.95", desc: "Tender squid, flash-fried, tossed with garlic, chilli, salt & pepper" },
           { name: "Char Siu Ribs", price: "£7.95", desc: "Grilled pork ribs in a rich Cantonese char siu sauce", tags: ["signature"] },
           { name: "Summer Rolls", price: "from £7.95", desc: "Rice-paper rolls with herbs & your choice of shrimp, pork or both" },
-          { name: "Paratha Belly Buster", price: "£8.95", desc: "Fusion burger — crispy pork belly, lettuce & sriracha mayo", tags: ["signature", "new"] },
-          { name: "Grilled Pork Noodles (Bun Thit Nuong)", price: "£8.95", desc: "Vietnamese bowl — grilled pork over vermicelli, salad, pickled veg & vinaigrette" },
-          { name: "Bao Buns", price: "£9.95", desc: "Fluffy steamed buns — beef, chicken or veg", tags: ["signature"] },
+          { name: "Paratha Belly Buster", price: "£8.95", desc: "Fusion burger: crispy pork belly, lettuce & sriracha mayo", tags: ["signature", "new"] },
+          { name: "Grilled Pork Noodles (Bun Thit Nuong)", price: "£8.95", desc: "Vietnamese bowl: grilled pork over vermicelli, salad, pickled veg & vinaigrette" },
+          { name: "Bao Buns", price: "£9.95", desc: "Fluffy steamed buns with beef, chicken or veg", tags: ["signature"] },
           { name: "Chilli Pepper King Prawns", price: "£9.95", desc: "Crispy deep-fried prawns, salt, pepper, garlic & fresh chillies", tags: ["spicy"] },
           { name: "Crispy Aromatic Duck", price: "£10.95", desc: "Slow-roasted, shredded duck with pancakes, hoisin, spring onion & cucumber", tags: ["signature"] },
         ],
@@ -122,7 +122,7 @@ export const menu: MenuSection[] = [
       {
         id: "mixed-grills",
         title: "Mixed Grills",
-        blurb: "Built for sharing — the table centrepiece.",
+        blurb: "Built for sharing. The table centrepiece.",
         items: [
           { name: "Dragon Mix Grill (Regular)", price: "£9.95", desc: "Ribs, salt & pepper wings, pork belly" },
           { name: "Veggie Mixed Grill", price: "£12.95", desc: "Veg samosa, spring roll, paneer tikka, veg chicken tikka & onion bhaji", tags: ["veg"] },
@@ -131,7 +131,7 @@ export const menu: MenuSection[] = [
           { name: "Dragon Mixed Grill (Large)", price: "£17.95", desc: "Adds salt & pepper fish and king prawns" },
           { name: "Dragon Mixed Grill (Family)", price: "£18.95", desc: "Ribs, wings, pork belly, salt & pepper fish & king prawns" },
           { name: "Miners Arms Mixed Grill (Large)", price: "£19.95", desc: "Tikka, wings, sheesh, haryali, achari, fish pakora & lamb chops" },
-          { name: "Miners Arms Mixed Grill (Family)", price: "£23.95", desc: "The full spread — tikka, wings, sheesh, haryali, achari, fish pakora, lamb chops, chicken pakora & king prawns", tags: ["signature"] },
+          { name: "Miners Arms Mixed Grill (Family)", price: "£23.95", desc: "The full spread: tikka, wings, sheesh, haryali, achari, fish pakora, lamb chops, chicken pakora & king prawns", tags: ["signature"] },
         ],
       },
       {
@@ -339,7 +339,7 @@ export const signatures = [
     name: "Miners Arms Mixed Grill",
     price: "£23.95",
     origin: "House",
-    desc: "The full spread — tikka, wings, sheesh, lamb chops & king prawns, fresh off the grill.",
+    desc: "The full spread: tikka, wings, sheesh, lamb chops & king prawns, fresh off the grill.",
     image:
       "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=80",
   },
@@ -363,7 +363,7 @@ export const signatures = [
     name: "Lamb Chops",
     price: "£9.95",
     origin: "Indian",
-    desc: "Char-grilled, deeply spiced lamb chops — the table favourite.",
+    desc: "Char-grilled, deeply spiced lamb chops. The table favourite.",
     image:
       "https://images.unsplash.com/photo-1432139555190-58524dae6a55?auto=format&fit=crop&w=1200&q=80",
   },

@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "A look inside The Miners Arms — food, interior and atmosphere. West Bromwich grill house.",
+    "A look inside The Miners Arms: food, interior and atmosphere. West Bromwich grill house.",
 };
 
 export default function GalleryPage() {

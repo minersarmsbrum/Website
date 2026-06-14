@@ -10,7 +10,7 @@ export const site = {
   hero: {
     eyebrow: "West Bromwich · Est. 2015",
     headline: ["British comfort.", "Indian fire.", "Chinese soul."],
-    sub: "A neighbourhood grill house where the full English, slow-cooked curries and hand-folded bao share one table — every plate a taste of comfort and community.",
+    sub: "A neighbourhood grill house where the full English, slow-cooked curries and hand-folded bao share one table. Every plate a taste of comfort and community.",
   },
   address: {
     line1: "58 Bagnall Street",
