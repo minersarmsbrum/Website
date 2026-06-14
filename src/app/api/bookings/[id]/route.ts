@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/session";
 import { store } from "@/lib/store";
 import type { BookingStatus } from "@/lib/store";
+import { notifyBookingStatusChange } from "@/lib/notifications";
 
 async function requireAdmin() {
   const session = await getSession();
@@ -16,6 +17,14 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const { status } = await req.json();
   const updated = store.bookings.updateStatus(id, status as BookingStatus);
   if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
+
+  // Notify guest on confirmed or cancelled — fire-and-forget
+  if (status === "confirmed" || status === "cancelled") {
+    notifyBookingStatusChange(updated).catch((err) =>
+      console.error("[api/bookings/[id]] Notification failed:", err)
+    );
+  }
+
   return NextResponse.json(updated);
 }
 

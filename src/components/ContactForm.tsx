@@ -14,7 +14,7 @@ export function ContactForm() {
   const set = (k: keyof typeof values) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setValues((v) => ({ ...v, [k]: e.target.value }));
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const err: Errors = {};
     if (!values.name.trim()) err.name = "Please tell us your name";
@@ -23,10 +23,16 @@ export function ContactForm() {
     setErrors(err);
     if (Object.keys(err).length > 0) return;
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
       setSent(true);
-    }, 900);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -50,7 +56,6 @@ export function ContactForm() {
             <button onClick={() => { setSent(false); setValues({ name: "", email: "", subject: "General enquiry", message: "" }); }} className="btn-ghost mt-8">
               Send another
             </button>
-            <p className="mt-6 text-xs text-cream-200/40">Demo form — nothing is actually sent.</p>
           </motion.div>
         ) : (
           <motion.form
