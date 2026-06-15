@@ -23,6 +23,7 @@ export default function StaffBookingsPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<BookingStatus | "all">("all");
+  const [dateFilter, setDateFilter] = useState("");
 
   // Add booking modal state
   const [showAdd, setShowAdd] = useState(false);
@@ -70,9 +71,10 @@ export default function StaffBookingsPage() {
     setNewBooking((prev) => ({ ...prev, [k]: e.target.value }));
 
   const today = new Date().toISOString().split("T")[0];
-  const filtered = filter === "all" ? bookings : bookings.filter((b) => b.status === filter);
-  const counts = { all: bookings.length, confirmed: 0, cancelled: 0 };
-  for (const b of bookings) counts[b.status]++;
+  const byDate = dateFilter ? bookings.filter((b) => b.date === dateFilter) : bookings;
+  const filtered = filter === "all" ? byDate : byDate.filter((b) => b.status === filter);
+  const counts = { all: byDate.length, confirmed: 0, cancelled: 0 };
+  for (const b of byDate) counts[b.status]++;
 
   return (
     <div className="pt-14 lg:pt-0 max-w-4xl">
@@ -87,6 +89,23 @@ export default function StaffBookingsPage() {
         >
           + Add Booking
         </button>
+      </div>
+
+      <div className="mb-4 flex items-center gap-3">
+        <input
+          type="date"
+          value={dateFilter}
+          onChange={(e) => { setDateFilter(e.target.value); setFilter("all"); }}
+          className="rounded-lg border border-cream-200/10 bg-ink-800 px-3 py-2 text-sm text-cream-100 outline-none focus:border-saffron-500/40"
+        />
+        {dateFilter && (
+          <button
+            onClick={() => setDateFilter("")}
+            className="text-xs text-cream-200/50 underline hover:text-cream-100"
+          >
+            Clear
+          </button>
+        )}
       </div>
 
       <div className="mb-5 flex flex-wrap gap-2">
