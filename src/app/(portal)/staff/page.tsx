@@ -7,7 +7,7 @@ export default async function StaffPortalPage() {
   const bookings = await db.bookings.list();
   const today = new Date().toISOString().split("T")[0];
   const todayBookings = bookings.filter((b) => b.date === today && b.status !== "cancelled");
-  const pending = bookings.filter((b) => b.status === "pending").length;
+  const confirmed = bookings.filter((b) => b.status === "confirmed").length;
 
   return (
     <div className="pt-14 lg:pt-0 max-w-2xl">
@@ -22,8 +22,8 @@ export default async function StaffPortalPage() {
           <p className="mt-1 text-xs text-cream-200/50">Today&apos;s bookings</p>
         </div>
         <div className="card-surface p-5">
-          <p className="font-display text-3xl text-amber-400">{pending}</p>
-          <p className="mt-1 text-xs text-cream-200/50">Pending confirmation</p>
+          <p className="font-display text-3xl text-jade-400">{confirmed}</p>
+          <p className="mt-1 text-xs text-cream-200/50">Confirmed bookings</p>
         </div>
         <div className="card-surface p-5">
           <p className="font-display text-3xl text-cream-200/40">{bookings.length}</p>

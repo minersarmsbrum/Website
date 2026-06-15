@@ -14,20 +14,30 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
   const { id } = await params;
-  const { status } = await req.json();
-  const VALID_STATUSES: BookingStatus[] = ["pending", "confirmed", "cancelled"];
-  if (!VALID_STATUSES.includes(status)) {
-    return NextResponse.json({ error: "Invalid status" }, { status: 400 });
-  }
-  const updated = await db.bookings.updateStatus(id, status as BookingStatus);
-  if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
+  const body = await req.json();
 
-  if (status === "confirmed" || status === "cancelled") {
+  // Status update
+  if ("status" in body) {
+    const VALID_STATUSES: BookingStatus[] = ["confirmed", "cancelled"];
+    if (!VALID_STATUSES.includes(body.status)) {
+      return NextResponse.json({ error: "Invalid status" }, { status: 400 });
+    }
+    const updated = await db.bookings.updateStatus(id, body.status as BookingStatus);
+    if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
     notifyBookingStatusChange(updated).catch((err) =>
       console.error("[api/bookings/[id]] Notification failed:", err)
     );
+    return NextResponse.json(updated);
   }
 
+  // Detail update (date, time, guests)
+  const { date, time, guests } = body;
+  const updated = await db.bookings.updateDetails(id, {
+    ...(date !== undefined && { date }),
+    ...(time !== undefined && { time }),
+    ...(guests !== undefined && { guests: Number(guests) }),
+  });
+  if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(updated);
 }
 

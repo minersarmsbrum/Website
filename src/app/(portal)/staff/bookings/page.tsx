@@ -9,8 +9,7 @@ const EMPTY_FORM = { name: "", email: "", phone: "", date: "", time: "", guests:
 function StatusBadge({ status }: { status: BookingStatus }) {
   const cls =
     status === "confirmed" ? "bg-jade-500/15 text-jade-400 border-jade-500/20" :
-    status === "cancelled" ? "bg-ember-500/15 text-ember-400 border-ember-500/20" :
-    "bg-saffron-500/15 text-saffron-400 border-saffron-500/20";
+    "bg-ember-500/15 text-ember-400 border-ember-500/20";
   return (
     <span className={`rounded-full border px-2.5 py-0.5 text-xs font-medium capitalize ${cls}`}>
       {status}
@@ -53,7 +52,7 @@ export default function StaffBookingsPage() {
     const res = await fetch("/api/bookings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...newBooking, guests: Number(newBooking.guests), status: "pending" }),
+      body: JSON.stringify({ ...newBooking, guests: Number(newBooking.guests), status: "confirmed" }),
     });
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
@@ -72,7 +71,7 @@ export default function StaffBookingsPage() {
 
   const today = new Date().toISOString().split("T")[0];
   const filtered = filter === "all" ? bookings : bookings.filter((b) => b.status === filter);
-  const counts = { all: bookings.length, pending: 0, confirmed: 0, cancelled: 0 };
+  const counts = { all: bookings.length, confirmed: 0, cancelled: 0 };
   for (const b of bookings) counts[b.status]++;
 
   return (
@@ -91,7 +90,7 @@ export default function StaffBookingsPage() {
       </div>
 
       <div className="mb-5 flex flex-wrap gap-2">
-        {(["all", "pending", "confirmed", "cancelled"] as const).map((f) => (
+        {(["all", "confirmed", "cancelled"] as const).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}

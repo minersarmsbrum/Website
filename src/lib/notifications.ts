@@ -66,19 +66,19 @@ export async function notifyNewBooking(booking: Booking) {
   // Email → guest
   await sendEmail(
     booking.email,
-    "Booking request received – The Miners Arms",
+    "Your table is confirmed – The Miners Arms",
     `
     <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#1a1a1a">
       <h2 style="color:#c9921a">The Miners Arms</h2>
       <p>Hi ${booking.name.split(" ")[0]},</p>
-      <p>Thanks for your reservation request. We've got your details and will confirm your table by phone or email shortly.</p>
+      <p>Great news! Your table is <strong>confirmed</strong>. We're looking forward to welcoming you.</p>
       <table style="width:100%;border-collapse:collapse;margin:20px 0">
         <tr><td style="padding:8px 0;color:#555;width:120px">Date</td><td style="padding:8px 0"><strong>${formattedDate}</strong></td></tr>
         <tr><td style="padding:8px 0;color:#555">Time</td><td style="padding:8px 0"><strong>${booking.time}</strong></td></tr>
         <tr><td style="padding:8px 0;color:#555">Guests</td><td style="padding:8px 0"><strong>${booking.guests}</strong></td></tr>
         ${booking.notes ? `<tr><td style="padding:8px 0;color:#555">Notes</td><td style="padding:8px 0">${booking.notes}</td></tr>` : ""}
       </table>
-      <p style="color:#555;font-size:14px">If you need to make any changes, call us or reply to this email.</p>
+      <p style="color:#555;font-size:14px">If your plans change, please let us know as soon as possible.</p>
       <hr style="border:none;border-top:1px solid #eee;margin:24px 0"/>
       <p style="color:#999;font-size:12px">The Miners Arms · West Bromwich</p>
     </div>
@@ -88,7 +88,7 @@ export async function notifyNewBooking(booking: Booking) {
   // Telegram → admin
   const notes = booking.notes ? `\n📝 <i>${booking.notes}</i>` : "";
   await sendTelegram(
-    `🍽 <b>New Booking Request</b>\n\n` +
+    `✅ <b>New Booking Confirmed</b>\n\n` +
     `👤 ${booking.name}\n` +
     `📅 ${formattedDate} at ${booking.time}\n` +
     `👥 ${booking.guests} guest${booking.guests > 1 ? "s" : ""}\n` +
@@ -154,31 +154,19 @@ export async function notifyDailyBookingSummary(bookings: Booking[]) {
     .filter((b) => b.date === todayStr && b.status === "confirmed")
     .sort((a, b) => a.time.localeCompare(b.time));
 
-  const todayPending = bookings.filter((b) => b.date === todayStr && b.status === "pending");
-
   const formattedDate = new Date().toLocaleDateString("en-GB", {
     weekday: "long", day: "numeric", month: "long", year: "numeric",
   });
 
   let lines = `📅 <b>Bookings for Today: ${formattedDate}</b>\n\n`;
 
-  if (todayConfirmed.length === 0 && todayPending.length === 0) {
-    lines += `No bookings today.`;
+  if (todayConfirmed.length === 0) {
+    lines += `No confirmed bookings today.`;
   } else {
-    lines += `✅ <b>${todayConfirmed.length} confirmed</b>`;
-    if (todayPending.length > 0) lines += ` · ⏳ <b>${todayPending.length} pending</b>`;
-    lines += `\n`;
-
-    if (todayConfirmed.length > 0) {
-      lines += `\n`;
-      for (const b of todayConfirmed) {
-        const notes = b.notes ? `, <i>${b.notes}</i>` : "";
-        lines += `⏰ ${b.time} · <b>${b.name}</b> · ${b.guests} guest${b.guests > 1 ? "s" : ""}${notes}\n`;
-      }
-    }
-
-    if (todayPending.length > 0) {
-      lines += `\n⚠️ ${todayPending.length} booking${todayPending.length > 1 ? "s" : ""} still need confirming. Check the portal.`;
+    lines += `✅ <b>${todayConfirmed.length} confirmed</b>\n\n`;
+    for (const b of todayConfirmed) {
+      const notes = b.notes ? `, <i>${b.notes}</i>` : "";
+      lines += `⏰ ${b.time} · <b>${b.name}</b> · ${b.guests} guest${b.guests > 1 ? "s" : ""}${notes}\n`;
     }
   }
 

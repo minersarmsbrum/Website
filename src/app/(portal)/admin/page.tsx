@@ -10,14 +10,14 @@ export default async function AdminDashboard() {
     db.menu.load(),
   ]);
 
-  const pending = bookings.filter((b) => b.status === "pending").length;
   const confirmed = bookings.filter((b) => b.status === "confirmed").length;
+  const cancelled = bookings.filter((b) => b.status === "cancelled").length;
   const totalCategories = menu.reduce((n, s) => n + s.categories.length, 0);
 
   const stats = [
     { label: "Total Bookings", value: bookings.length, href: "/admin/bookings", color: "text-saffron-400" },
-    { label: "Pending Bookings", value: pending, href: "/admin/bookings", color: "text-amber-400" },
     { label: "Confirmed Bookings", value: confirmed, href: "/admin/bookings", color: "text-jade-400" },
+    { label: "Cancelled Bookings", value: cancelled, href: "/admin/bookings", color: "text-ember-400" },
     { label: "Gallery Photos", value: gallery.length, href: "/admin/gallery", color: "text-saffron-400" },
     { label: "Menu Categories", value: totalCategories, href: "/admin/menu", color: "text-saffron-400" },
   ];

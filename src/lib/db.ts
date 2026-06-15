@@ -85,7 +85,7 @@ export const db = {
     async add(data: Omit<Booking, "id" | "createdAt" | "status"> & { status?: BookingStatus }): Promise<Booking> {
       const { data: row, error } = await serverClient()
         .from("bookings")
-        .insert({ ...data, status: data.status ?? "pending" })
+        .insert({ ...data, status: data.status ?? "confirmed" })
         .select()
         .single();
       if (error) throw error;
@@ -96,6 +96,17 @@ export const db = {
       const { data: row, error } = await serverClient()
         .from("bookings")
         .update({ status })
+        .eq("id", id)
+        .select()
+        .single();
+      if (error) return null;
+      return toBooking(row as BookingRow);
+    },
+
+    async updateDetails(id: string, data: { date?: string; time?: string; guests?: number }): Promise<Booking | null> {
+      const { data: row, error } = await serverClient()
+        .from("bookings")
+        .update(data)
         .eq("id", id)
         .select()
         .single();

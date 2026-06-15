@@ -3,7 +3,7 @@ import type { MenuSection, MenuCategory, Dish } from "@/data/menu";
 
 // ─── Booking types (used by portal pages and db.ts) ───────────────────────────
 
-export type BookingStatus = "pending" | "confirmed" | "cancelled";
+export type BookingStatus = "confirmed" | "cancelled";
 
 export type Booking = {
   id: string;

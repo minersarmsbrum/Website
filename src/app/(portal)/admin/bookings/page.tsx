@@ -3,16 +3,15 @@
 import { useEffect, useState, useCallback } from "react";
 import type { Booking, BookingStatus } from "@/lib/store";
 
-const STATUS_OPTIONS: BookingStatus[] = ["pending", "confirmed", "cancelled"];
 const TIME_SLOTS = ["12:00","12:30","13:00","13:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00"];
 
-const EMPTY_FORM = { name: "", email: "", phone: "", date: "", time: "", guests: "2", notes: "", status: "pending" };
+const EMPTY_FORM = { name: "", email: "", phone: "", date: "", time: "", guests: "2", notes: "", status: "confirmed" };
+const EMPTY_EDIT = { date: "", time: "", guests: "2" };
 
 function StatusBadge({ status }: { status: BookingStatus }) {
   const cls =
     status === "confirmed" ? "bg-jade-500/15 text-jade-400 border-jade-500/20" :
-    status === "cancelled" ? "bg-ember-500/15 text-ember-400 border-ember-500/20" :
-    "bg-saffron-500/15 text-saffron-400 border-saffron-500/20";
+    "bg-ember-500/15 text-ember-400 border-ember-500/20";
   return (
     <span className={`rounded-full border px-2.5 py-0.5 text-xs font-medium capitalize ${cls}`}>
       {status}
@@ -29,11 +28,17 @@ export default function AdminBookingsPage() {
   const [filter, setFilter] = useState<BookingStatus | "all">("all");
   const [actionError, setActionError] = useState("");
 
-  // Add booking modal state
+  // Add booking modal
   const [showAdd, setShowAdd] = useState(false);
   const [newBooking, setNewBooking] = useState(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
   const [formError, setFormError] = useState("");
+
+  // Edit booking modal
+  const [editTarget, setEditTarget] = useState<Booking | null>(null);
+  const [editForm, setEditForm] = useState(EMPTY_EDIT);
+  const [editSaving, setEditSaving] = useState(false);
+  const [editError, setEditError] = useState("");
 
   const load = useCallback(async () => {
     const res = await fetch("/api/bookings");
@@ -46,17 +51,18 @@ export default function AdminBookingsPage() {
 
   useEffect(() => { load(); }, [load]);
 
-  async function updateStatus(id: string, status: BookingStatus) {
+  async function cancelBooking(id: string) {
+    if (!confirm("Cancel this booking?")) return;
     setActionError("");
     setUpdating(id);
     const res = await fetch(`/api/bookings/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status }),
+      body: JSON.stringify({ status: "cancelled" }),
     });
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      setActionError(data.error || "Failed to update booking status. Please try again.");
+      setActionError(data.error || "Failed to cancel booking. Please try again.");
     }
     await load();
     setUpdating(null);
@@ -100,12 +106,46 @@ export default function AdminBookingsPage() {
     setSaving(false);
   }
 
+  function openEdit(b: Booking) {
+    setEditTarget(b);
+    setEditForm({ date: b.date, time: b.time, guests: String(b.guests) });
+    setEditError("");
+  }
+
+  async function submitEdit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!editTarget) return;
+    setEditError("");
+    if (!editForm.date || !editForm.time) {
+      setEditError("Date and time are required.");
+      return;
+    }
+    setEditSaving(true);
+    const res = await fetch(`/api/bookings/${editTarget.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ date: editForm.date, time: editForm.time, guests: Number(editForm.guests) }),
+    });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      setEditError(data.error || "Failed to update booking. Please try again.");
+      setEditSaving(false);
+      return;
+    }
+    setEditTarget(null);
+    await load();
+    setEditSaving(false);
+  }
+
   const set = (k: keyof typeof EMPTY_FORM) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setNewBooking((prev) => ({ ...prev, [k]: e.target.value }));
 
+  const setEdit = (k: keyof typeof EMPTY_EDIT) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
+    setEditForm((prev) => ({ ...prev, [k]: e.target.value }));
+
   const today = new Date().toISOString().split("T")[0];
   const filtered = filter === "all" ? bookings : bookings.filter((b) => b.status === filter);
-  const counts = { all: bookings.length, pending: 0, confirmed: 0, cancelled: 0 };
+  const counts = { all: bookings.length, confirmed: 0, cancelled: 0 };
   for (const b of bookings) counts[b.status]++;
 
   return (
@@ -131,7 +171,7 @@ export default function AdminBookingsPage() {
 
       {/* Filter tabs */}
       <div className="mb-5 flex flex-wrap gap-2">
-        {(["all", "pending", "confirmed", "cancelled"] as const).map((f) => (
+        {(["all", "confirmed", "cancelled"] as const).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
@@ -173,20 +213,26 @@ export default function AdminBookingsPage() {
                   )}
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
-                  <select
-                    value={b.status}
-                    onChange={(e) => updateStatus(b.id, e.target.value as BookingStatus)}
+                  <button
+                    onClick={() => openEdit(b)}
                     disabled={updating === b.id}
-                    className="rounded-lg border border-cream-200/10 bg-ink-800 px-3 py-1.5 text-xs text-cream-100 outline-none focus:border-saffron-500/40"
+                    className="rounded-lg border border-saffron-500/30 bg-saffron-500/10 px-3 py-1.5 text-xs text-saffron-400 transition-colors hover:bg-saffron-500/20 disabled:opacity-50"
                   >
-                    {STATUS_OPTIONS.map((s) => (
-                      <option key={s} value={s}>{s}</option>
-                    ))}
-                  </select>
+                    Edit
+                  </button>
+                  {b.status !== "cancelled" && (
+                    <button
+                      onClick={() => cancelBooking(b.id)}
+                      disabled={updating === b.id}
+                      className="rounded-lg border border-ember-500/20 bg-ember-500/10 px-3 py-1.5 text-xs text-ember-400 transition-colors hover:bg-ember-500/20 disabled:opacity-50"
+                    >
+                      Cancel
+                    </button>
+                  )}
                   <button
                     onClick={() => deleteBooking(b.id)}
                     disabled={updating === b.id}
-                    className="rounded-lg border border-ember-500/20 bg-ember-500/10 px-3 py-1.5 text-xs text-ember-400 transition-colors hover:bg-ember-500/20 disabled:opacity-50"
+                    className="rounded-lg border border-cream-200/10 bg-ink-700/40 px-3 py-1.5 text-xs text-cream-200/50 transition-colors hover:border-ember-500/20 hover:bg-ember-500/10 hover:text-ember-400 disabled:opacity-50"
                   >
                     Delete
                   </button>
@@ -194,6 +240,64 @@ export default function AdminBookingsPage() {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Edit Booking Modal */}
+      {editTarget && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/80 p-4 backdrop-blur-sm">
+          <div className="card-surface w-full max-w-sm p-6">
+            <h2 className="mb-1 font-display text-xl text-cream-50">Edit Booking</h2>
+            <p className="mb-5 text-xs text-cream-200/50">{editTarget.name}</p>
+
+            {editError && (
+              <div className="mb-4 rounded-xl border border-ember-500/30 bg-ember-500/10 px-4 py-3 text-sm text-ember-400">
+                {editError}
+              </div>
+            )}
+
+            <form onSubmit={submitEdit} className="space-y-4">
+              <div className="grid grid-cols-2 gap-3">
+                <div className="col-span-2">
+                  <label className="mb-1 block text-xs text-cream-200/60">Date *</label>
+                  <input type="date" value={editForm.date} onChange={setEdit("date")} min={today} disabled={editSaving} className={inputCls} />
+                </div>
+                <div>
+                  <label className="mb-1 block text-xs text-cream-200/60">Time *</label>
+                  <select value={editForm.time} onChange={setEdit("time")} disabled={editSaving} className={inputCls}>
+                    <option value="">Select time</option>
+                    {TIME_SLOTS.map((t) => <option key={t} value={t}>{t}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-1 block text-xs text-cream-200/60">Guests</label>
+                  <select value={editForm.guests} onChange={setEdit("guests")} disabled={editSaving} className={inputCls}>
+                    {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
+                      <option key={n} value={n}>{n} {n === 1 ? "guest" : "guests"}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-3 pt-1">
+                <button
+                  type="button"
+                  onClick={() => setEditTarget(null)}
+                  disabled={editSaving}
+                  className="rounded-xl border border-cream-200/10 px-4 py-2 text-sm text-cream-200/60 transition-colors hover:border-cream-200/30 hover:text-cream-100 disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={editSaving}
+                  className="rounded-xl bg-saffron-500 px-5 py-2 text-sm font-medium text-ink-900 transition-colors hover:bg-saffron-400 disabled:opacity-50"
+                >
+                  {editSaving ? "Saving…" : "Save Changes"}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
 
@@ -240,12 +344,6 @@ export default function AdminBookingsPage() {
                     {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
                       <option key={n} value={n}>{n} {n === 1 ? "guest" : "guests"}</option>
                     ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="mb-1 block text-xs text-cream-200/60">Status</label>
-                  <select value={newBooking.status} onChange={set("status")} disabled={saving} className={inputCls}>
-                    {STATUS_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </div>
                 <div className="col-span-2">
