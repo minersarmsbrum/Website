@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import type { Booking, BookingStatus } from "@/lib/store";
+import DatePicker from "@/components/DatePicker";
 
 const TIME_SLOTS = ["12:00","12:30","13:00","13:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00"];
 
@@ -173,11 +174,10 @@ export default function AdminBookingsPage() {
 
       {/* Date filter */}
       <div className="mb-4 flex items-center gap-3">
-        <input
-          type="date"
+        <DatePicker
           value={dateFilter}
-          onChange={(e) => { setDateFilter(e.target.value); setFilter("all"); }}
-          className="rounded-lg border border-cream-200/10 bg-ink-800 px-3 py-2 text-sm text-cream-100 outline-none focus:border-saffron-500/40"
+          onChange={(d) => { setDateFilter(d); setFilter("all"); }}
+          placeholder="Filter by date"
         />
         {dateFilter && (
           <button
@@ -280,7 +280,12 @@ export default function AdminBookingsPage() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="col-span-2">
                   <label className="mb-1 block text-xs text-cream-200/60">Date *</label>
-                  <input type="date" value={editForm.date} onChange={setEdit("date")} min={today} disabled={editSaving} className={inputCls} />
+                  <DatePicker
+                    value={editForm.date}
+                    onChange={(d) => setEditForm((p) => ({ ...p, date: d }))}
+                    min={today}
+                    disabled={editSaving}
+                  />
                 </div>
                 <div>
                   <label className="mb-1 block text-xs text-cream-200/60">Time *</label>
@@ -349,7 +354,12 @@ export default function AdminBookingsPage() {
                 </div>
                 <div>
                   <label className="mb-1 block text-xs text-cream-200/60">Date *</label>
-                  <input type="date" value={newBooking.date} onChange={set("date")} min={today} disabled={saving} className={inputCls} />
+                  <DatePicker
+                    value={newBooking.date}
+                    onChange={(d) => setNewBooking((p) => ({ ...p, date: d }))}
+                    min={today}
+                    disabled={saving}
+                  />
                 </div>
                 <div>
                   <label className="mb-1 block text-xs text-cream-200/60">Time *</label>

@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, type FormEvent } from "react";
 import { site } from "@/data/site";
+import DatePicker from "@/components/DatePicker";
 
 type Errors = Partial<Record<"name" | "email" | "phone" | "date" | "time" | "guests", string>>;
 
@@ -140,12 +141,17 @@ export function ReservationForm() {
 
             <div className="grid gap-5 sm:grid-cols-3">
               <Field label="Date" error={errors.date}>
-                <input
-                  type="date"
-                  min={today}
+                <DatePicker
                   value={values.date}
-                  onChange={set("date")}
-                  className={inputCls(errors.date)}
+                  onChange={(d) => setValues((v) => ({ ...v, date: d }))}
+                  min={today}
+                  error={!!errors.date}
+                  placeholder="Select date"
+                  triggerClassName={`w-full rounded-xl border px-4 py-3 text-left transition-colors outline-none disabled:opacity-50 ${
+                    errors.date
+                      ? "border-ember-400 bg-ink-900/60 text-cream-50"
+                      : "border-cream-200/15 bg-ink-900/60 text-cream-50 focus:border-saffron-500"
+                  }`}
                 />
               </Field>
               <Field label="Time" error={errors.time}>
