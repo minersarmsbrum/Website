@@ -83,11 +83,10 @@ export function ReservationForm() {
             >
               ✓
             </motion.div>
-            <h3 className="mt-6 font-display text-2xl text-cream-50">Request received</h3>
+            <h3 className="mt-6 font-display text-2xl text-cream-50">Reservation confirmed</h3>
             <p className="mt-3 max-w-sm text-cream-200/70">
               Thank you, {values.name.split(" ")[0]}. We&apos;ve noted your table for{" "}
-              {values.guests} on {values.date} at {values.time}. We&apos;ll confirm by
-              phone or email shortly.
+              {values.guests} on {values.date} at {values.time}.
             </p>
             <button
               onClick={() => {
