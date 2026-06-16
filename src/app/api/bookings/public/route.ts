@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     notes: notes ?? "",
   });
 
-  notifyNewBooking(booking).catch((err) =>
+  await notifyNewBooking(booking).catch((err) =>
     console.error("[api/bookings/public] Notification failed:", err)
   );
 
