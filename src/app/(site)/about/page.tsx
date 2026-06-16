@@ -8,7 +8,7 @@ import { site } from "@/data/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "The story of The Miners Arms. A West Bromwich grill house since 2015, born from Indian and Chinese heritage and a love of the classic British pub.",
+    "The story of The Miners Arms. A West Bromwich grill house since 2026, born from Indian and Chinese heritage and a love of the classic British pub.",
 };
 
 const values = [
@@ -19,7 +19,7 @@ const values = [
 ];
 
 const timeline = [
-  { year: "2015", title: "The doors open", text: "The Miners Arms begins serving the Hilltop community. A proper local with a kitchen that refused to pick just one cuisine." },
+  { year: "2026", title: "The doors open", text: "The Miners Arms begins serving the Hilltop community. A proper local with a kitchen that refused to pick just one cuisine." },
   { year: "2018", title: "The café finds its rhythm", text: "Morning breakfasts and light bites become a daily ritual for West Brom regulars." },
   { year: "2021", title: "The wok arrives", text: "Bao, dumplings, crispy duck and Vietnamese street food join the grill. The menu becomes truly three-in-one." },
   { year: "Today", title: "A neighbourhood institution", text: "From the full English at 7:30am to the family mixed grill at midnight, every plate is a taste of comfort and community." },
@@ -36,7 +36,7 @@ export default function AboutPage() {
             <span className="gold-text">comfort & community</span>
           </>
         }
-        intro="Since 2015, a West Bromwich grill house bringing three culinary worlds to one warm table."
+        intro="Since 2026, a West Bromwich grill house bringing three culinary worlds to one warm table."
         image={images.aboutHero}
       />
 

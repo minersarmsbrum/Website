@@ -17,7 +17,7 @@ export function Footer() {
           />
           <p className="font-display text-2xl text-cream-50">The Miners Arms</p>
           <p className="mt-1 text-xs uppercase tracking-luxe text-saffron-500/80">
-            Grill House · Est. 2015
+            Grill House · Est. 2026
           </p>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream-200/60">
             A neighbourhood grill house in West Bromwich: English breakfasts,

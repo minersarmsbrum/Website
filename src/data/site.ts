@@ -8,7 +8,7 @@ export const site = {
   logo: "/logo.png",
   // Owner is of Indian-Chinese heritage — the menu spans English, Indian & Chinese.
   hero: {
-    eyebrow: "West Bromwich · Est. 2015",
+    eyebrow: "West Bromwich · Est. 2026",
     headline: ["British comfort.", "Indian fire.", "Chinese soul."],
     sub: "A neighbourhood grill house where the full English, slow-cooked curries and hand-folded bao share one table. Every plate a taste of comfort and community.",
   },

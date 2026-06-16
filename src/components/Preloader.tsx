@@ -46,7 +46,7 @@ export function Preloader() {
                 The Miners Arms
               </p>
               <p className="mt-2 text-xs uppercase tracking-luxe text-saffron-500">
-                Est. 2015 · West Bromwich
+                Est. 2026 · West Bromwich
               </p>
             </motion.div>
             <div className="relative h-px w-48 overflow-hidden bg-cream-200/10">
