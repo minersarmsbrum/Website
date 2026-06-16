@@ -10,6 +10,16 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  const ukHour = new Date().toLocaleString("en-GB", {
+    timeZone: "Europe/London",
+    hour: "numeric",
+    hour12: false,
+  });
+
+  if (ukHour !== "8") {
+    return NextResponse.json({ ok: true, skipped: "Not 8am UK time" });
+  }
+
   const bookings = await db.bookings.list();
   await notifyDailyBookingSummary(bookings);
 

@@ -5,10 +5,8 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
 
 const EMAIL_FROM = process.env.EMAIL_FROM ?? "bookings@theminersarms.co.uk";
 const EMAIL_TO_ADMIN = process.env.EMAIL_TO_ADMIN ?? "";
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_ADMIN_BOT_TOKEN ?? "";
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_ADMIN_CHAT_ID ?? "";
-const TELEGRAM_STAFF_BOT_TOKEN = process.env.TELEGRAM_STAFF_BOT_TOKEN ?? "";
-const TELEGRAM_STAFF_CHAT_ID = process.env.TELEGRAM_STAFF_CHAT_ID ?? "";
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN ?? "";
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID ?? "";
 
 // ─── Primitives ───────────────────────────────────────────────────────────────
 
@@ -26,7 +24,7 @@ async function sendEmail(to: string, subject: string, html: string) {
 
 async function sendTelegram(message: string) {
   if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-    console.warn("[notifications] Admin Telegram env vars not set — Telegram skipped");
+    console.warn("[notifications] Telegram env vars not set — Telegram skipped");
     return;
   }
   try {
@@ -36,23 +34,7 @@ async function sendTelegram(message: string) {
       body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, parse_mode: "HTML" }),
     });
   } catch (err) {
-    console.error("[notifications] Admin Telegram send failed:", err);
-  }
-}
-
-async function sendStaffTelegram(message: string) {
-  if (!TELEGRAM_STAFF_BOT_TOKEN || !TELEGRAM_STAFF_CHAT_ID) {
-    console.warn("[notifications] Staff Telegram env vars not set — Telegram skipped");
-    return;
-  }
-  try {
-    await fetch(`https://api.telegram.org/bot${TELEGRAM_STAFF_BOT_TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: TELEGRAM_STAFF_CHAT_ID, text: message, parse_mode: "HTML" }),
-    });
-  } catch (err) {
-    console.error("[notifications] Staff Telegram send failed:", err);
+    console.error("[notifications] Telegram send failed:", err);
   }
 }
 
@@ -85,16 +67,12 @@ export async function notifyNewBooking(booking: Booking) {
     `
   );
 
-  // Telegram → admin
-  const notes = booking.notes ? `\n📝 <i>${booking.notes}</i>` : "";
+  // Telegram → bot
   await sendTelegram(
-    `✅ <b>New Booking Confirmed</b>\n\n` +
+    `🆕 <b>New Booking</b>\n\n` +
     `👤 ${booking.name}\n` +
-    `📅 ${formattedDate} at ${booking.time}\n` +
-    `👥 ${booking.guests} guest${booking.guests > 1 ? "s" : ""}\n` +
-    `📞 ${booking.phone}\n` +
-    `📧 ${booking.email}` +
-    notes
+    `⏰ ${booking.time}\n` +
+    `👥 ${booking.guests} guest${booking.guests > 1 ? "s" : ""}`
   );
 }
 
@@ -158,19 +136,18 @@ export async function notifyDailyBookingSummary(bookings: Booking[]) {
     weekday: "long", day: "numeric", month: "long", year: "numeric",
   });
 
-  let lines = `📅 <b>Bookings for Today: ${formattedDate}</b>\n\n`;
+  let lines = `📅 <b>Bookings for Today — ${formattedDate}</b>\n\n`;
 
   if (todayConfirmed.length === 0) {
     lines += `No confirmed bookings today.`;
   } else {
-    lines += `✅ <b>${todayConfirmed.length} confirmed</b>\n\n`;
-    for (const b of todayConfirmed) {
-      const notes = b.notes ? `, <i>${b.notes}</i>` : "";
-      lines += `⏰ ${b.time} · <b>${b.name}</b> · ${b.guests} guest${b.guests > 1 ? "s" : ""}${notes}\n`;
-    }
+    todayConfirmed.forEach((b, i) => {
+      lines += `${i + 1}. ${b.name} · ${b.time} · ${b.guests} guest${b.guests > 1 ? "s" : ""}\n`;
+    });
+    lines += `\nTotal: ${todayConfirmed.length} booking${todayConfirmed.length > 1 ? "s" : ""}`;
   }
 
-  await sendStaffTelegram(lines);
+  await sendTelegram(lines);
 }
 
 // ─── Contact form ─────────────────────────────────────────────────────────────
