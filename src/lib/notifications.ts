@@ -75,6 +75,7 @@ export async function notifyNewBooking(booking: Booking) {
   await sendTelegram(
     `🆕 <b>New Booking</b>\n\n` +
     `👤 ${booking.name}\n` +
+    `📅 ${formattedDate}\n` +
     `⏰ ${booking.time}\n` +
     `👥 ${booking.guests} guest${booking.guests > 1 ? "s" : ""}`
   );
