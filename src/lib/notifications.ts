@@ -77,7 +77,8 @@ export async function notifyNewBooking(booking: Booking) {
     `👤 ${booking.name}\n` +
     `📅 ${formattedDate}\n` +
     `⏰ ${booking.time}\n` +
-    `👥 ${booking.guests} guest${booking.guests > 1 ? "s" : ""}`
+    `👥 ${booking.guests} guest${booking.guests > 1 ? "s" : ""}` +
+    (booking.notes ? `\n📝 ${booking.notes}` : "")
   );
 }
 
