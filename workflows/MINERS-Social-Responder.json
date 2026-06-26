@@ -1,0 +1,5489 @@
+{
+  "id": "MLsWZFRXpBisluWN",
+  "name": "MINERS-Social-Responder",
+  "active": true,
+  "isArchived": false,
+  "versionId": "f15ade31-606d-41cf-9bbb-418bdcd99b18",
+  "activeVersionId": "f15ade31-606d-41cf-9bbb-418bdcd99b18",
+  "triggerCount": 1,
+  "createdAt": "2026-06-19T16:51:41.958Z",
+  "updatedAt": "2026-06-26T07:08:21.279Z",
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true,
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "rM9WXu9HOcYlJ80s",
+    "callerPolicy": "workflowsFromSameOwner",
+    "saveManualExecutions": true
+  },
+  "connections": {
+    "On Telegram Reply": {
+      "main": [
+        [
+          {
+            "node": "Parse Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Reply": {
+      "main": [
+        [
+          {
+            "node": "Is Callback Query?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Answer Callback Query": {
+      "main": [
+        [
+          {
+            "node": "Build Ack Text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Ack Text": {
+      "main": [
+        [
+          {
+            "node": "Route Step",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route Step": {
+      "main": [
+        [
+          {
+            "node": "Ask Picture or Video",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Skip",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ask Upload or Generate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Video Stub",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch Approved Row",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch Post Row",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Cancelled",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Send-Me-Photo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch Post Row",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch Upload Row",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch Upload Row",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Check Theme Override (Manual)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ask Picture or Video": {
+      "main": [
+        [
+          {
+            "node": "State: awaiting_media_type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Skip": {
+      "main": [
+        [
+          {
+            "node": "State: cancelled",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ask Upload or Generate": {
+      "main": [
+        [
+          {
+            "node": "State: awaiting_picture_choice",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Video Stub": {
+      "main": [
+        [
+          {
+            "node": "State: awaiting_food_photo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Approved Row": {
+      "main": [
+        [
+          {
+            "node": "Send Approved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Approved": {
+      "main": [
+        [
+          {
+            "node": "State: approved",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Post Row": {
+      "main": [
+        [
+          {
+            "node": "Fetch Gallery Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Cancelled": {
+      "main": [
+        [
+          {
+            "node": "State: cancelled (preview)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Send-Me-Photo": {
+      "main": [
+        [
+          {
+            "node": "State: awaiting_uploaded_photo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Upload Row": {
+      "main": [
+        [
+          {
+            "node": "Pick Latest Session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Gallery Images": {
+      "main": [
+        [
+          {
+            "node": "Pick Random Gallery Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pick Random Gallery Image": {
+      "main": [
+        [
+          {
+            "node": "Build Image Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Image Prompt": {
+      "main": [
+        [
+          {
+            "node": "Generate Caption (Gen)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Caption (Gen)": {
+      "main": [
+        [
+          {
+            "node": "Extract Caption (Gen)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Image for Approval": {
+      "main": [
+        [
+          {
+            "node": "State: awaiting_approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pick Latest Session": {
+      "main": [
+        [
+          {
+            "node": "Session Guard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Session Guard": {
+      "main": [
+        [
+          {
+            "node": "Send Session Not Found",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Image or Video?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image or Video?": {
+      "main": [
+        [
+          {
+            "node": "Download Photo (Video)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Download Photo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Photo": {
+      "main": [
+        [
+          {
+            "node": "Analyze Photo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Photo (Video)": {
+      "main": [
+        [
+          {
+            "node": "Build Video Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Video Prompt": {
+      "main": [
+        [
+          {
+            "node": "Generate Video Caption",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Video Caption": {
+      "main": [
+        [
+          {
+            "node": "Extract Caption (Video)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Video for Approval": {
+      "main": [
+        [
+          {
+            "node": "State: awaiting_approval (video)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Photo": {
+      "main": [
+        [
+          {
+            "node": "Build Image Prompt (Upload)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Caption (Upload)": {
+      "main": [
+        [
+          {
+            "node": "Extract Caption (Upload)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Polish Approval": {
+      "main": [
+        [
+          {
+            "node": "State: awaiting_approval (upload)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Image (Edit)": {
+      "main": [
+        [
+          {
+            "node": "Send Image for Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Gallery Images (Upload)": {
+      "main": [
+        [
+          {
+            "node": "Pick Random Gallery Image (Upload)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Image (Edit) (Upload)": {
+      "main": [
+        [
+          {
+            "node": "Send Polish Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Callback Query?": {
+      "main": [
+        [
+          {
+            "node": "Answer Callback Query",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Route Step",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Theme Override (Manual)": {
+      "main": [
+        [
+          {
+            "node": "Build Context (Manual)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Context (Manual)": {
+      "main": [
+        [
+          {
+            "node": "Create Session Row (Manual)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Session Row (Manual)": {
+      "main": [
+        [
+          {
+            "node": "Ask Post Today (Manual)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Caption (Gen)": {
+      "main": [
+        [
+          {
+            "node": "Generate Image (Edit)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Image Prompt (Upload)": {
+      "main": [
+        [
+          {
+            "node": "Generate Caption (Upload)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Caption (Upload)": {
+      "main": [
+        [
+          {
+            "node": "Generate Image (Edit) (Upload)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Image for Veo": {
+      "main": [
+        [
+          {
+            "node": "Submit Video Job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Submit Video Job": {
+      "main": [
+        [
+          {
+            "node": "Extract Operation ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Operation ID": {
+      "main": [
+        [
+          {
+            "node": "Wait for Veo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for Veo": {
+      "main": [
+        [
+          {
+            "node": "Check Video Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Video Status": {
+      "main": [
+        [
+          {
+            "node": "Video Ready?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Video Ready?": {
+      "main": [
+        [
+          {
+            "node": "Extract Video Binary",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait for Veo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Photo (Video)": {
+      "main": [
+        [
+          {
+            "node": "Analyze Photo (Video)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Caption (Video)": {
+      "main": [
+        [
+          {
+            "node": "Get Photo Base64",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Photo Base64": {
+      "main": [
+        [
+          {
+            "node": "Prepare Image for Veo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Video Binary": {
+      "main": [
+        [
+          {
+            "node": "Download Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Video": {
+      "main": [
+        [
+          {
+            "node": "Send Video for Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message",
+          "callback_query"
+        ],
+        "additionalFields": {}
+      },
+      "id": "1beecacb-3886-4abd-ab1f-5f7a1cd3cc00",
+      "name": "On Telegram Reply",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        768
+      ],
+      "webhookId": "77eff69f-b0d8-4bb5-b084-35f18f114fe2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst ALLOWED = ['1342891001', '5765665250', '5930338959'];\nconst cb = item.callback_query;\nconst msg = item.message;\nconst incomingChatId = String(cb?.message?.chat?.id ?? msg?.chat?.id ?? '');\nif (!ALLOWED.includes(incomingChatId)) {\n  return [{ json: { route: 'unknown', sessionId: '', chatId: incomingChatId, callbackQueryId: '', messageId: 0, fileId: '' } }];\n}\nif (cb) {\n  const parts = (cb.data || '').split(':');\n  const route = (parts[0] || '') + ':' + (parts[1] || '');\n  const sessionId = parts[2] || '';\n  return [{ json: { route, sessionId, chatId: String(cb.message?.chat?.id ?? ''), callbackQueryId: cb.id, messageId: cb.message?.message_id ?? 0, fileId: '' } }];\n}\nif (msg && Array.isArray(msg.photo) && msg.photo.length) {\n  const largest = msg.photo[msg.photo.length - 1];\n  return [{ json: { route: 'msg:photo', sessionId: '', chatId: String(msg.chat?.id ?? ''), callbackQueryId: '', messageId: 0, fileId: largest.file_id } }];\n}\nif (msg && msg.text && msg.text.toLowerCase().trim() === 'post') {\n  return [{ json: { route: 'msg:post', sessionId: '', chatId: String(msg.chat?.id ?? ''), callbackQueryId: '', messageId: 0, fileId: '' } }];\n}\nreturn [{ json: { route: 'unknown', sessionId: '', chatId: String(msg?.chat?.id ?? ''), callbackQueryId: '', messageId: 0, fileId: '' } }];"
+      },
+      "id": "4908b750-33bf-41bb-9dd1-2e340dc917ec",
+      "name": "Parse Reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -16,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "callback",
+        "queryId": "={{ $('Parse Reply').item.json.callbackQueryId }}",
+        "additionalFields": {}
+      },
+      "id": "dbf73143-8ee3-4bd3-9413-40b76c57a124",
+      "name": "Answer Callback Query",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        432,
+        672
+      ],
+      "webhookId": "bd2e123c-2eef-4b3a-8c86-2ef715e8a56b"
+    },
+    {
+      "parameters": {
+        "jsCode": "const pr = $('Parse Reply').item.json;\nconst ackMap = {'q1:y':'\u2705 Posting today!','q1:n':'\u274c Skipping today.','q2:pic':'\ud83d\uddbc Picture post selected.','q2:vid':'\ud83c\udfac Video post selected.','q2b:own':'\ud83d\udcf7 Upload your own photo.','q2b:gen':'\u2728 Generating an image.','q3:ok':'\u2705 Approved!','q3:rg':'\ud83d\udd01 Regenerating...','q3:cx':'\u274c Cancelled.','q3:rv':'\ud83d\udd01 Regenerating video...'};\nreturn [{ json: { ...pr, ackText: ackMap[pr.route] || '\u2713' } }];"
+      },
+      "id": "1721dcae-beda-4fb2-9068-d858406fcbe9",
+      "name": "Build Ack Text",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        672
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                    "rightValue": "q1:y",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "yes"
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                    "rightValue": "q1:n",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "no"
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                    "rightValue": "q2:pic",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "picture"
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                    "rightValue": "q2:vid",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "video"
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                    "rightValue": "q3:ok",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "approve"
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                    "rightValue": "q3:rg",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "regenerate"
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                    "rightValue": "q3:cx",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "cancel"
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                    "rightValue": "q2b:own",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "own_photo"
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                    "rightValue": "q2b:gen",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "generate"
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                    "rightValue": "msg:photo",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "uploaded_photo"
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                    "rightValue": "q3:rv",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "retry_video"
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                    "rightValue": "msg:post",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "manual_post"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "764c6cc6-9312-438f-aa18-2fe9c064e8f9",
+      "name": "Route Step",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "text": "Great! \ud83c\udf89 What type of post?",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "\ud83d\uddbc Picture",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q2:pic:\" + $('Parse Reply').item.json.sessionId }}"
+                    }
+                  },
+                  {
+                    "text": "\ud83c\udfac Video",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q2:vid:\" + $('Parse Reply').item.json.sessionId }}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "9d53259b-1277-43f7-acec-6c31d7a922b5",
+      "name": "Ask Picture or Video",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1344,
+        0
+      ],
+      "webhookId": "33f936c9-a43d-4fcc-ba49-4b525e3500eb"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "social_posts",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "awaiting_media_type"
+            }
+          ]
+        }
+      },
+      "id": "44e84433-764f-4b88-9197-18a9c4792ae1",
+      "name": "State: awaiting_media_type",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1568,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "text": "No worries \u2014 skipping today's post. See you next time! \ud83d\udc4b",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "63715554-f35b-4c4d-88e2-902986afaa46",
+      "name": "Send Skip",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1344,
+        192
+      ],
+      "webhookId": "fea5e9f9-ae01-428a-81c2-fb0e0708463f"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "social_posts",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "cancelled"
+            }
+          ]
+        }
+      },
+      "id": "08145ca5-e719-4109-82d8-2e3784124b72",
+      "name": "State: cancelled",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1568,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "text": "\ud83d\uddbc Picture it is! How would you like the image?",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "\ud83d\udcf7 I'll send my own photo",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q2b:own:\" + $('Parse Reply').item.json.sessionId }}"
+                    }
+                  },
+                  {
+                    "text": "\u2728 Generate one for me",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q2b:gen:\" + $('Parse Reply').item.json.sessionId }}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "2f39a6a2-e90e-4b17-aa0a-c99fccb4afd0",
+      "name": "Ask Upload or Generate",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1344,
+        384
+      ],
+      "webhookId": "9156e65e-7579-46ed-8d81-e0397372b981"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "social_posts",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "awaiting_picture_choice"
+            },
+            {
+              "fieldId": "media_type",
+              "fieldValue": "image"
+            }
+          ]
+        }
+      },
+      "id": "09a40726-5f70-4bb4-9a74-d565c1d9ed61",
+      "name": "State: awaiting_picture_choice",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1568,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "text": "\ud83c\udfac Got it \u2014 a video post!\n\n\ud83d\udcf7 Send me one photo of the dish or scene and I'll animate it into a short social video.\n\n<i>\u23f1 Generation takes about 60\u201390 seconds \u2014 I'll send it as soon as it's ready.</i>",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "16680c69-abe3-4835-9945-e57615b0507b",
+      "name": "Send Video Stub",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1344,
+        576
+      ],
+      "webhookId": "6c9715d8-60f1-4d1f-916a-15aa4af27d42"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "social_posts",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "awaiting_uploaded_photo"
+            },
+            {
+              "fieldId": "media_type",
+              "fieldValue": "video"
+            }
+          ]
+        }
+      },
+      "id": "7327376e-4789-44a3-ab5d-27ac2ff6b267",
+      "name": "State: awaiting_food_photo",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1568,
+        576
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "social_posts",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+            }
+          ]
+        }
+      },
+      "id": "b564f240-c7a2-452e-86c0-b3fa9e4c66a9",
+      "name": "Fetch Approved Row",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        768
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "text": "=\u2705 Post approved and saved!\n\n\ud83d\udcdd Your caption \u2014 copy this:\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n{{ $('Fetch Approved Row').item.json.caption }}\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\nPost the content above with this caption wherever you like. You're all set! \ud83d\ude80",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "7cb972fd-800b-4f3c-b81a-a92ee0184e26",
+      "name": "Send Approved",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1568,
+        768
+      ],
+      "webhookId": "0534eea5-a48c-49ab-88dc-fbf9c83d4b43"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "social_posts",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "approved"
+            },
+            {
+              "fieldId": "caption_ig",
+              "fieldValue": "={{ $('Fetch Approved Row').item.json.caption }}"
+            },
+            {
+              "fieldId": "caption_fb",
+              "fieldValue": "={{ $('Fetch Approved Row').item.json.caption }}"
+            },
+            {
+              "fieldId": "caption_tt",
+              "fieldValue": "={{ $('Fetch Approved Row').item.json.caption }}"
+            }
+          ]
+        }
+      },
+      "id": "b64d58a6-d1fd-4656-bc3d-102409080e10",
+      "name": "State: approved",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1792,
+        768
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "social_posts",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+            }
+          ]
+        }
+      },
+      "id": "1e06c019-9665-44c5-bc14-755b931c49b6",
+      "name": "Fetch Post Row",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "text": "No problem \u2014 cancelled this post. Catch you next time! \ud83d\udc4b",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "4a3c8bff-d519-4dd4-ac4e-a8207973f09b",
+      "name": "Send Cancelled",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1344,
+        1152
+      ],
+      "webhookId": "164333b8-e808-4af7-9a53-af194fb9a37e"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "social_posts",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "cancelled"
+            }
+          ]
+        }
+      },
+      "id": "cb1190f8-8ccd-472c-8ef9-e891f25ba3a2",
+      "name": "State: cancelled (preview)",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1568,
+        1152
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "text": "\ud83d\udcf7 Great \u2014 send me the photo you'd like to post and I'll enhance it for you.",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "3d2c20c0-2e22-4dc0-aa4b-7c60a9603e7c",
+      "name": "Send Send-Me-Photo",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1344,
+        1344
+      ],
+      "webhookId": "0c9245c1-59e7-47da-a26c-7d4cbdfea57f"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "social_posts",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "awaiting_uploaded_photo"
+            },
+            {
+              "fieldId": "media_type",
+              "fieldValue": "image"
+            }
+          ]
+        }
+      },
+      "id": "b1d6699f-4080-42f3-b4e3-63d01becc0e1",
+      "name": "State: awaiting_uploaded_photo",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1568,
+        1344
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "social_posts",
+        "returnAll": true,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "status",
+              "condition": "eq",
+              "keyValue": "awaiting_uploaded_photo"
+            },
+            {
+              "keyName": "chat_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Parse Reply').item.json.chatId }}"
+            }
+          ]
+        }
+      },
+      "id": "8d67643b-1db7-4573-8572-498b1db834dc",
+      "name": "Fetch Upload Row",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        1536
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.miners-arms.com/api/gallery/public",
+        "options": {}
+      },
+      "id": "b1b4569c-f37e-45cd-b3f5-756cc722624c",
+      "name": "Fetch Gallery Images",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1568,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "let arr;\nconst first = $input.first().json;\nif (Array.isArray(first)) {\n  arr = first.filter(i => typeof i.src === \"string\" && i.src.startsWith(\"http\"));\n} else {\n  arr = $input.all().map(i => i.json).filter(i => typeof i.src === \"string\" && i.src.startsWith(\"http\"));\n}\nif (!arr.length) throw new Error(\"Gallery API returned no images\");\nconst idx = Math.floor(Math.random() * arr.length);\nconst picked = arr[idx];\nconst postRow = $(\"Fetch Post Row\").first().json;\nreturn [{ json: { ...postRow, galleryImageUrl: picked.src, galleryImageAlt: picked.alt } }];"
+      },
+      "id": "7408fb3d-e8af-4c0b-8c3b-10aec5adfd36",
+      "name": "Pick Random Gallery Image",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1792,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Build Image Prompt').item.json.galleryImageUrl }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "edc01c93-b48b-4e3c-a791-6c69e382424a",
+      "name": "Download Gallery Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2016,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const theme = $input.first().json.theme || 'Food spotlight';\nconst galleryImageUrl = $input.first().json.galleryImageUrl;\n\nconst themeScenes = {\n  'Food spotlight': 'Create a stunning editorial food photograph for The Miners Arms: beautifully presented Indian or pub food on a warm wooden table with candlelight and soft bokeh background. Apply a warm, rich colour grade. Elegant gold text about the food offering is naturally part of the composition.',\n  'Atmosphere / weekend vibe': 'Create a cinematic weekend dining scene for The Miners Arms: warm amber lighting, cosy wooden booths, soft glow of a lively pub evening. Apply a warm amber colour grade with gentle vignette. Gold text about weekend dining is woven naturally into the scene.',\n  'Bar & drinks': 'Create a sophisticated bar scene for The Miners Arms: perfectly poured pints of ale and vibrant cocktails on a polished dark bar top with warm backlighting. Apply a cool moody colour grade. Elegant text about drinks is integrated into the composition.',\n  'Community / local feel': 'Create a warm community gathering scene at The Miners Arms: friends and families sharing a meal, golden evening light, laughter and warmth. Apply a golden-hour colour grade. Friendly community text feels like part of the scene.',\n  'Three-kitchen heritage': 'Create a rich heritage spread for The Miners Arms: a beautiful arrangement of English, Indian and Chinese dishes on a warm heritage-style table. Apply a warm sepia-gold colour grade. Elegant heritage typography is naturally integrated.',\n  'Weekly special or event': 'Create an enticing weekly special image for The Miners Arms: a beautifully styled featured dish with dramatic lighting and editorial food styling. Apply a vivid appetising colour grade. Bold promotional text is a natural part of the editorial composition.'\n};\n\nconst scene = themeScenes[theme] || themeScenes['Food spotlight'];\n\nconst prompt = `You are a professional social media designer and food photographer for The Miners Arms pub in West Bromwich \u2014 a warm, upscale British pub celebrated for English, Indian, and Chinese cuisine.\n\n${scene}\n\nDesign rules:\n- Generate ONE unified, cohesive image \u2014 food, atmosphere, and text must all feel like part of a single professionally designed composition, never layered or composited on top of each other\n- Use artful lighting, colour grading, and natural shadows to create depth and warmth\n- Text should feel like it was always part of the scene \u2014 warm gold and cream tones, tasteful serif or elegant sans-serif typography\n- Mood: warm, welcoming, upscale but approachable, authentically British pub\n- Square 1:1 composition. No logos. No watermarks.\n- Final result should look like a stunning Instagram post from a top UK restaurant brand`;\n\nreturn [{ json: { prompt, theme, galleryImageUrl } }];"
+      },
+      "id": "826f61d1-56c9-4030-b660-e095e1a7f343",
+      "name": "Build Image Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2464,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-2.5-flash",
+          "cachedResultName": "gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Write an Instagram caption for The Miners Arms, an Indian and Indo-Chinese restaurant in West Bromwich.\n\nTheme: {{ $('Build Image Prompt').item.json.theme }}\n\nTone: warm, friendly, community-focused, appetising. Include 5-8 relevant hashtags (always include #MinersArms #WestBromwich #IndianFood). Maximum 100 words. Before returning, carefully proofread for any spelling mistakes, typos, or grammatical errors. Return only the corrected caption text, no explanation, no quotes."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "id": "034e141c-e890-4957-b400-de5d151f2887",
+      "name": "Generate Caption (Gen)",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        2688,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const parts = $input.first().json?.content?.parts ?? [];\nreturn [{ json: { caption: parts[0]?.text ?? '' } }];"
+      },
+      "id": "067c5592-fe83-4023-9bd4-4b3f25554442",
+      "name": "Extract Caption (Gen)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2976,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "binaryData": true,
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "\u2705 Approve & get caption",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q3:ok:\" + $('Parse Reply').item.json.sessionId }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "\ud83d\udd01 Try again",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q3:rg:\" + $('Parse Reply').item.json.sessionId }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "\u274c Cancel",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q3:cx:\" + $('Parse Reply').item.json.sessionId }}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {
+          "caption": "=\ud83d\uddbc Here's your <b>{{ $('Build Image Prompt').item.json.theme }}</b> image.\n\n\ud83d\udcdd Caption preview:\n{{ $('Extract Caption (Gen)').item.json.caption }}\n\nHappy with it?",
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "a0a0b9bc-9cd8-4e2c-862f-ae1fbd491c26",
+      "name": "Send Image for Approval",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3872,
+        960
+      ],
+      "webhookId": "2b7c969b-bf0c-4ea3-9882-281da5bba583"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "social_posts",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "awaiting_approval"
+            },
+            {
+              "fieldId": "media_type",
+              "fieldValue": "image"
+            },
+            {
+              "fieldId": "caption",
+              "fieldValue": "={{ $('Extract Caption (Gen)').item.json.caption }}"
+            }
+          ]
+        }
+      },
+      "id": "78212a29-83ef-4858-8350-2bf7f4585742",
+      "name": "State: awaiting_approval",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        4096,
+        960
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nif (!items.length) return [{ json: { noSession: 'true' } }];\nconst sorted = items.slice().sort((a, b) => new Date(b.json.created_at || 0) - new Date(a.json.created_at || 0));\nreturn [{ json: sorted[0].json }];"
+      },
+      "id": "31516f6c-aead-40a8-a400-89a6e266065f",
+      "name": "Pick Latest Session",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1568,
+        1536
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "session-check",
+              "leftValue": "={{ $json.noSession }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          }
+        },
+        "options": {}
+      },
+      "id": "bce0d20f-a8ee-4303-813e-d7831a00ab47",
+      "name": "Session Guard",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1792,
+        1536
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "text": "\u26a0\ufe0f No active session found \u2014 please wait for the next scheduled prompt or start fresh.",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "a3dbf21d-8042-4698-a5df-0fbcde4983e4",
+      "name": "Send Session Not Found",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2016,
+        1344
+      ],
+      "webhookId": "71436175-0613-453c-861c-14efd5d658f9"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.media_type }}",
+                    "rightValue": "video",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "video"
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.media_type }}",
+                    "rightValue": "image",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ]
+              },
+              "renameOutput": true,
+              "outputKey": "image"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f2bfd115-25a8-48f6-9ce3-82e6ee812276",
+      "name": "Image or Video?",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        2016,
+        1632
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $('Parse Reply').item.json.fileId }}",
+        "additionalFields": {}
+      },
+      "id": "55fcf3ef-09b3-4565-b554-88fcef7f3c14",
+      "name": "Download Photo (Video)",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2240,
+        1440
+      ],
+      "webhookId": "39b661c7-01fa-42a2-b09b-17ee1c2dda8f"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $('Parse Reply').item.json.fileId }}",
+        "additionalFields": {}
+      },
+      "id": "913d17f1-3718-4c25-8d45-89ca62975225",
+      "name": "Download Photo",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2240,
+        1728
+      ],
+      "webhookId": "65b5232b-b42a-4a2b-b923-32637183feb4"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-2.5-pro",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "text": "You are a professional video director for The Miners Arms, a British pub in West Bromwich. Analyse this image in exhaustive detail and return ONLY valid minified JSON in exactly this shape: {\"category\":\"food|drink|interior|exterior|staff|event\",\"subject_description\":\"exhaustive visual description of the main subject \u2014 include specific colours, textures, quantity, plating style, visible sauces, garnishes, steam, condensation, or liquid\",\"background_description\":\"detailed description of the background \u2014 table material and colour, objects visible, depth of field, any props or decorative elements\",\"lighting\":\"precise description \u2014 colour temperature, direction, intensity, any visible sources such as candles or overhead lights, shadows and highlights\",\"motion_elements\":\"3-4 specific physical elements visible in the image that could move in a video \u2014 be very specific, e.g. wisps of steam rising from the biryani, glistening sauce slowly spreading across the plate, condensation droplets on a cold glass\",\"camera_move\":\"one specific cinematic camera motion, e.g. slow push-in toward the dish, gentle orbital drift around the glass, subtle tilt-up from table to food\",\"mood\":\"one word: warm|lively|cosy|vibrant|elegant|rustic\"}",
+        "inputType": "binary",
+        "options": {}
+      },
+      "id": "15de6f1c-82c7-4cf8-9f7b-f01c64e9810c",
+      "name": "Analyze Photo (Video)",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        2464,
+        1440
+      ],
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "const a = $('Analyze Photo (Video)').first().json;\nlet raw = '';\ntry {\n  if (a && a.content && Array.isArray(a.content.parts)) { raw = a.content.parts.map(p => p.text || '').join(' '); }\n  else { raw = a.text ?? JSON.stringify(a); }\n} catch (e) { raw = ''; }\nlet parsed = {\n  category: 'food',\n  subject_description: 'a beautifully presented pub dish on a warm wooden table',\n  background_description: 'warm bokeh pub interior with amber lighting',\n  lighting: 'warm candlelight with a golden overhead glow',\n  motion_elements: 'gentle steam rising from the food, sauce glistening in the light',\n  camera_move: 'slow cinematic push-in',\n  mood: 'warm'\n};\ntry { const m = String(raw).match(/\\{[\\s\\S]*\\}/); if (m) { parsed = Object.assign(parsed, JSON.parse(m[0])); } } catch (e) {}\n\nconst videoPrompt = [\n  'Cinematic short video for The Miners Arms pub in West Bromwich.',\n  'Scene: ' + parsed.subject_description + '.',\n  'Background: ' + parsed.background_description + '.',\n  'Lighting: ' + parsed.lighting + '.',\n  'Camera: ' + parsed.camera_move + ' with subtle parallax depth.',\n  'Motion: Bring these specific elements to life with realistic natural movement \u2014 ' + parsed.motion_elements + '.',\n  'Mood: ' + parsed.mood + ', appetising, warm and inviting pub atmosphere.',\n  'Style: photorealistic, high-end food and drink cinematography. Every surface alive with gentle natural movement. The scene should feel alive and tactile.',\n  '9:16 vertical format. 5-8 seconds. No text overlays. No logos. No watermarks.'\n].join(' ');\n\nreturn [{ json: { videoPrompt, category: parsed.category, main_subject: parsed.subject_description, setting: parsed.background_description } }];"
+      },
+      "id": "bc437b6d-0c3a-42a6-91bf-0a8d072c6182",
+      "name": "Build Video Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2688,
+        1440
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-2.5-flash",
+          "cachedResultName": "gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Write an Instagram caption for a short video post for The Miners Arms, an Indian and Indo-Chinese restaurant in West Bromwich.\n\nThe video shows: {{ $('Build Video Prompt').item.json.category }} \u2014 {{ $('Build Video Prompt').item.json.main_subject }} in {{ $('Build Video Prompt').item.json.setting }}.\n\nTone: warm, lively, appetising, community-focused. Include 5-8 relevant hashtags (always include #MinersArms #WestBromwich #IndianFood). Maximum 100 words. Before returning, carefully proofread for any spelling mistakes, typos, or grammatical errors. Return only the corrected caption text, no explanation, no quotes."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "id": "34e41c3f-fb6a-476f-9148-3a461c39e98e",
+      "name": "Generate Video Caption",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        2912,
+        1440
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const parts = $input.first().json?.content?.parts ?? [];\nreturn [{ json: { caption: parts[0]?.text ?? '' } }];"
+      },
+      "id": "17b7e66d-860f-439f-802f-9e184c24c8af",
+      "name": "Extract Caption (Video)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3200,
+        1440
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/veo-3.0-generate-001",
+          "cachedResultName": "models/veo-3.0-generate-001"
+        },
+        "prompt": "={{ $('Build Video Prompt').item.json.videoPrompt }}",
+        "options": {
+          "durationSeconds": 8,
+          "aspectRatio": "9:16",
+          "binaryPropertyOutput": "data"
+        }
+      },
+      "id": "cd9204a9-9c47-4573-95e1-036e686057ac",
+      "name": "Generate Video",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        3424,
+        1440
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendVideo",
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "binaryData": true,
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "\u2705 Approve & get caption",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q3:ok:\" + $('Pick Latest Session').item.json.id }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "\ud83d\udd01 Try again",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q3:rv:\" + $('Pick Latest Session').item.json.id }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "\u274c Cancel",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q3:cx:\" + $('Pick Latest Session').item.json.id }}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {
+          "caption": "=\ud83c\udfac Here's your social media video!\n\n\ud83d\udcdd Caption preview:\n{{ $('Extract Caption (Video)').item.json.caption }}\n\nHappy with it?",
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "d23c04bf-cfa2-488e-a654-037734fa1e8b",
+      "name": "Send Video for Approval",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3648,
+        1440
+      ],
+      "webhookId": "5adebaa3-0831-49ec-ac32-42581dd8bf67"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "social_posts",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Pick Latest Session').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "awaiting_approval"
+            },
+            {
+              "fieldId": "media_type",
+              "fieldValue": "video"
+            },
+            {
+              "fieldId": "caption",
+              "fieldValue": "={{ $('Extract Caption (Video)').item.json.caption }}"
+            }
+          ]
+        }
+      },
+      "id": "064ed071-37ad-410d-bf8d-593690c90036",
+      "name": "State: awaiting_approval (video)",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3872,
+        1440
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-2.5-flash",
+          "cachedResultName": "gemini-2.5-flash"
+        },
+        "text": "You are a professional food and hospitality photographer's assistant working for The Miners Arms, a British pub in West Bromwich. Analyse this image carefully and return ONLY valid minified JSON, no commentary, no code fences, in exactly this shape: {\"category\":\"food|drink|interior|exterior|staff|event\",\"main_subject\":\"precise description of what is in the photo\",\"setting\":\"brief description of the background/environment\",\"composition\":\"how the subject is arranged/presented\",\"improvements\":[\"specific improvement 1\",\"specific improvement 2\"],\"social_ready\":true}. For improvements list up to 5 concrete visual enhancements such as lighting, steam, garnish, composition, colour saturation, or texture.",
+        "inputType": "binary",
+        "options": {}
+      },
+      "id": "910c6844-1539-4529-91ec-42cdf61c5b64",
+      "name": "Analyze Photo",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        2464,
+        1728
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-2.5-flash",
+          "cachedResultName": "gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Write an Instagram caption for The Miners Arms, an Indian and Indo-Chinese restaurant in West Bromwich.\n\nThe image shows: {{ $('Build Image Prompt (Upload)').item.json.category }} \u2014 {{ $('Build Image Prompt (Upload)').item.json.main_subject }} in {{ $('Build Image Prompt (Upload)').item.json.setting }}.\n\nTone: warm, friendly, appetising, community-focused. Include 5-8 relevant hashtags (always include #MinersArms #WestBromwich #IndianFood). Maximum 100 words. Before returning, carefully proofread for any spelling mistakes, typos, or grammatical errors. Return only the corrected caption text, no explanation, no quotes."
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "id": "c308d6fc-637e-42c6-8228-d3e8fc1c7689",
+      "name": "Generate Caption (Upload)",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        2912,
+        1728
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const parts = $input.first().json?.content?.parts ?? [];\nreturn [{ json: { caption: parts[0]?.text ?? '' } }];"
+      },
+      "id": "0eccb449-02c7-4747-acad-31dc8c9a15c1",
+      "name": "Extract Caption (Upload)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3264,
+        1728
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "binaryData": true,
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "\u2705 Approve & get caption",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q3:ok:\" + $('Pick Latest Session').item.json.id }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "\ud83d\udd01 Use a different photo",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q2b:own:\" + $('Pick Latest Session').item.json.id }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "\u274c Cancel",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q3:cx:\" + $('Pick Latest Session').item.json.id }}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {
+          "caption": "=\u2728 Here's your AI-polished photo.\n\n\ud83d\udcdd Caption preview:\n{{ $('Extract Caption (Upload)').item.json.caption }}\n\nHappy with it?",
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "80a278cc-4028-418a-bfb7-dd2022176a9e",
+      "name": "Send Polish Approval",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3712,
+        1728
+      ],
+      "webhookId": "c3aec491-9306-4df1-9b26-c6eb88204fc7"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "social_posts",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Pick Latest Session').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "awaiting_approval"
+            },
+            {
+              "fieldId": "media_type",
+              "fieldValue": "image"
+            },
+            {
+              "fieldId": "source_image_url",
+              "fieldValue": "={{ $('Parse Reply').item.json.fileId }}"
+            },
+            {
+              "fieldId": "caption",
+              "fieldValue": "={{ $('Extract Caption (Upload)').item.json.caption }}"
+            }
+          ]
+        }
+      },
+      "id": "a3eefce9-2cc3-41d2-9dc2-e787827a9779",
+      "name": "State: awaiting_approval (upload)",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3936,
+        1728
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "text": "\ud83e\udd14 Sorry, I didn't understand that. Please wait for the next scheduled prompt or tap a button to continue.",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "4fd5db1d-6dd2-49ca-9594-c0461f172a93",
+      "name": "Send Fallback Message",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        1952
+      ],
+      "webhookId": "cd2034d0-5517-4d03-8d95-6b52500300a3"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-2.5-flash-image",
+          "cachedResultName": "gemini-2.5-flash-image"
+        },
+        "prompt": "={{ $('Build Image Prompt').item.json.prompt }}",
+        "options": {
+          "binaryPropertyOutput": "data"
+        }
+      },
+      "id": "fa665596-5b5a-4939-8021-d2aed7a00088",
+      "name": "Generate Image (Edit)",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        3200,
+        960
+      ],
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "const a = $('Analyze Photo').first().json;\nlet raw = '';\ntry {\n  if (a && a.content && Array.isArray(a.content.parts)) { raw = a.content.parts.map(p => p.text || '').join(' '); }\n  else { raw = a.text ?? a.response ?? JSON.stringify(a); }\n} catch (e) { raw = ''; }\nlet parsed = { category: 'food', main_subject: 'a pub dish', setting: 'a pub table', improvements: [] };\ntry { const m = String(raw).match(/\\{[\\s\\S]*\\}/); if (m) { parsed = Object.assign(parsed, JSON.parse(m[0])); } } catch(e) {}\nconst category = parsed.category || 'food';\nconst subject = parsed.main_subject || 'a pub dish';\nconst setting = parsed.setting || 'a pub table';\nconst improvements = Array.isArray(parsed.improvements) ? parsed.improvements.join('. ') : '';\n\nconst sceneMap = {\n  food: `Create a stunning editorial food photograph for The Miners Arms: ${subject} beautifully styled with dramatic lighting, perfect plating, and warm pub atmosphere in the background. ${improvements ? 'Enhance visually with: ' + improvements + '.' : ''} Apply a warm rich colour grade. Elegant gold text about the dish is naturally part of the composition.`,\n  drink: `Create a sophisticated bar photograph for The Miners Arms featuring ${subject}: premium presentation on a polished bar top with warm backlighting. ${improvements ? 'Enhance visually with: ' + improvements + '.' : ''} Apply a cool moody colour grade. Elegant gold text about drinks is integrated into the composition.`,\n  interior: `Create a cinematic atmosphere photograph of ${setting} at The Miners Arms with beautiful natural light. ${improvements ? 'Enhance visually with: ' + improvements + '.' : ''} Apply a warm amber colour grade with soft vignette. Gold text about the dining experience is woven naturally into the scene.`,\n  exterior: `Create a welcoming exterior scene of The Miners Arms on a warm golden evening. ${improvements ? 'Enhance with: ' + improvements + '.' : ''} Apply a golden-hour colour grade. Community text is naturally part of the scene.`,\n  staff: `Create a warm hospitality photograph celebrating the team at The Miners Arms. ${improvements ? 'Enhance with: ' + improvements + '.' : ''} Apply a bright welcoming colour grade. Text honouring the team is naturally integrated.`,\n  event: `Create a vibrant event scene at The Miners Arms with energy and excitement. ${improvements ? 'Enhance with: ' + improvements + '.' : ''} Apply a vivid lively colour grade. Bold event text is a natural part of the composition.`\n};\n\nconst scene = sceneMap[category] || sceneMap['food'];\n\nconst prompt = `You are a professional social media designer and food photographer for The Miners Arms pub in West Bromwich \u2014 a warm, upscale British pub celebrated for English, Indian, and Chinese cuisine.\n\n${scene}\n\nDesign rules:\n- Generate ONE unified, cohesive image \u2014 subject, atmosphere, and text must all feel like part of a single professionally designed composition, never layered or composited on top of each other\n- Use artful lighting, colour grading, and natural shadows to create depth and warmth\n- Text should feel like it was always part of the scene \u2014 warm gold and cream tones, tasteful serif or elegant sans-serif typography\n- Mood: warm, welcoming, upscale but approachable, authentically British pub\n- Square 1:1 composition. No logos. No watermarks.\n- Final result should look like a stunning Instagram post from a top UK restaurant brand`;\n\nreturn [{ json: { prompt, category, main_subject: subject, setting } }];"
+      },
+      "id": "d76aef3d-e6eb-4bba-95de-fb62138f136f",
+      "name": "Build Image Prompt (Upload)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2688,
+        1728
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.miners-arms.com/api/gallery/public",
+        "options": {}
+      },
+      "id": "15c944f8-b1b8-4da5-b5c7-99ca5d8851cc",
+      "name": "Fetch Gallery Images (Upload)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2912,
+        1968
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "let arr;\nconst first = $input.first().json;\nif (Array.isArray(first)) {\n  arr = first.filter(i => typeof i.src === \"string\" && i.src.startsWith(\"http\"));\n} else {\n  arr = $input.all().map(i => i.json).filter(i => typeof i.src === \"string\" && i.src.startsWith(\"http\"));\n}\nif (!arr.length) throw new Error(\"Gallery API returned no images\");\nconst idx = Math.floor(Math.random() * arr.length);\nconst picked = arr[idx];\nconst promptData = $(\"Build Image Prompt (Upload)\").first().json;\nreturn [{ json: { ...promptData, galleryImageUrl: picked.src, galleryImageAlt: picked.alt } }];"
+      },
+      "id": "85c101fe-feef-4293-8338-f4b112561474",
+      "name": "Pick Random Gallery Image (Upload)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3136,
+        1968
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Pick Random Gallery Image (Upload)').item.json.galleryImageUrl }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "043113b1-88d6-4fcf-807f-9f5cf8e778a5",
+      "name": "Download Gallery Image (Upload)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3488,
+        1968
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "models/gemini-2.5-flash-image",
+          "cachedResultName": "gemini-2.5-flash-image"
+        },
+        "prompt": "={{ $('Build Image Prompt (Upload)').item.json.prompt }}",
+        "options": {
+          "binaryPropertyOutput": "data"
+        }
+      },
+      "id": "0256bb73-fee5-4ffd-a885-9faa4c7dd2a6",
+      "name": "Generate Image (Edit) (Upload)",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        3712,
+        1968
+      ],
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "aa377da2-08ce-448f-9894-56a83661001e",
+              "leftValue": "={{ $json.callbackQueryId }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7ddd7d79-1211-420e-9d98-f454d1fb88ea",
+      "name": "Is Callback Query?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        224,
+        768
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "theme_config",
+        "limit": 1,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "active",
+              "condition": "eq",
+              "keyValue": "true"
+            }
+          ]
+        }
+      },
+      "id": "afa612e8-f68b-40d5-8169-996d3173ea10",
+      "name": "Check Theme Override (Manual)",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        432,
+        1232
+      ],
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const themes = ['Food spotlight','Atmosphere / weekend vibe','Bar & drinks','Community / local feel','Three-kitchen heritage','Weekly special or event'];\nconst now = new Date();\nconst startOfYear = new Date(now.getFullYear(), 0, 1);\nconst week = Math.floor((now - startOfYear) / (7*24*60*60*1000));\nconst weekTheme = themes[week % 6];\n\nconst overrideItems = $('Check Theme Override (Manual)').all();\nconst firstItem = overrideItems.length > 0 ? overrideItems[0].json : {};\nconst theme = (firstItem && firstItem.custom_theme) ? firstItem.custom_theme : weekTheme;\n\nconst dayOfWeek = now.toLocaleDateString('en-GB', { weekday: 'long', timeZone: 'Europe/London' });\nconst chatIds = ['1342891001', '5765665250', '5930338959'];\nreturn chatIds.map(chatId => ({ json: { theme, dayOfWeek, chatId } }));"
+      },
+      "id": "89a3d9b2-8664-4997-8ec0-091138d285ae",
+      "name": "Build Context (Manual)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        656,
+        1232
+      ]
+    },
+    {
+      "parameters": {
+        "tableId": "social_posts",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "awaiting_yes_no"
+            },
+            {
+              "fieldId": "theme",
+              "fieldValue": "={{ $json.theme }}"
+            },
+            {
+              "fieldId": "day_of_week",
+              "fieldValue": "={{ $json.dayOfWeek }}"
+            },
+            {
+              "fieldId": "chat_id",
+              "fieldValue": "={{ $json.chatId }}"
+            }
+          ]
+        }
+      },
+      "id": "d248f9e7-aea8-4f90-9498-416afce47112",
+      "name": "Create Session Row (Manual)",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        880,
+        1232
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chat_id || '5930338959' }}",
+        "text": "=Good {{ $('Build Context (Manual)').item.json.dayOfWeek }}! \ud83d\udce3 Time for your social media post.\n\nToday's theme: <b>{{ $json.theme }}</b>\n\nWant to post today?",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "\u2705 Yes",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q1:y:\" + $json.id }}"
+                    }
+                  },
+                  {
+                    "text": "\u274c No",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q1:n:\" + $json.id }}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "id": "284220c0-d25a-4d25-a98e-3b6d63746228",
+      "name": "Ask Post Today (Manual)",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1104,
+        1232
+      ],
+      "webhookId": "6f92bbad-6ec6-4000-9353-c17b44d7d4a8",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const base64Item = $('Get Photo Base64').first().json;\nconst imageBase64 = base64Item.base64;\nconst mimeType = base64Item.mimeType || 'image/jpeg';\nconst videoPrompt = $('Build Video Prompt').first().json.videoPrompt;\n\nif (!imageBase64) {\n  throw new Error('Edge Function returned no base64. Response: ' + JSON.stringify(base64Item).substring(0, 300));\n}\n\nconst requestBody = {\n  instances: [{\n    prompt: videoPrompt,\n    image: {\n      bytesBase64Encoded: imageBase64,\n      mimeType: mimeType\n    }\n  }],\n  parameters: {\n    aspectRatio: '9:16',\n    sampleCount: 1,\n    durationSeconds: 8\n  }\n};\n\nreturn [{ json: { requestBody } }];"
+      },
+      "id": "a0bacd14-ead9-46c9-b8b9-160e8e656a01",
+      "name": "Prepare Image for Veo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2592,
+        2032
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/veo-3.0-generate-001:predictLongRunning",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.requestBody }}",
+        "options": {}
+      },
+      "id": "5dec4188-89dd-464e-874d-e4a09a970c14",
+      "name": "Submit Video Job",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3424,
+        1712
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst operationName = response.name;\nif (!operationName) {\n  throw new Error(\n    'Veo API did not return an operation name. Response: ' +\n    JSON.stringify(response).substring(0, 500)\n  );\n}\nreturn [{ json: { operationName } }];"
+      },
+      "id": "11e5f10c-f9e0-47bf-a828-95decd20522b",
+      "name": "Extract Operation ID",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3648,
+        1712
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 40
+      },
+      "id": "d73f5a77-c4e2-449e-85e3-79a785a7f80c",
+      "name": "Wait for Veo",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        3872,
+        1712
+      ],
+      "webhookId": "01191369-39d0-44f8-a6a8-bcfb698c75b2"
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://generativelanguage.googleapis.com/v1beta/' + $('Extract Operation ID').first().json.operationName }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "options": {}
+      },
+      "id": "b9d97328-2624-43a9-81a0-4fd4677be8d3",
+      "name": "Check Video Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4096,
+        1712
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "done-check",
+              "leftValue": "={{ $json.done }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          }
+        },
+        "options": {}
+      },
+      "id": "d1660591-a83b-44b3-ab5b-9104a4512094",
+      "name": "Video Ready?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        4320,
+        1712
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst genVideoResp = response.response?.generateVideoResponse;\nconst sample = genVideoResp?.generatedSamples?.[0];\nconst videoUri = sample?.video?.uri;\n\nif (!videoUri) {\n  throw new Error(\n    'No video URI in Veo response. generateVideoResponse: ' +\n    JSON.stringify(genVideoResp).substring(0, 500)\n  );\n}\n\nreturn [{ json: { videoUri } }];"
+      },
+      "id": "bf9133d6-8689-46bd-a203-698eb0a0c5f8",
+      "name": "Extract Video Binary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4544,
+        1712
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://fnwotwlbiexhcgnrhtcy.supabase.co/functions/v1/telegram-to-base64",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({file_path: $('Download Photo (Video)').first().json.result.file_path}) }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "6f271a55-f28b-4cd2-b418-34ddc9768be7",
+      "name": "Get Photo Base64",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3200,
+        1952
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.videoUri }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "bacbd24b-b9db-4b24-85b5-3f7c95336d93",
+      "name": "Download Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4768,
+        1712
+      ]
+    }
+  ],
+  "activeVersion": {
+    "nodes": [
+      {
+        "parameters": {
+          "updates": [
+            "message",
+            "callback_query"
+          ],
+          "additionalFields": {}
+        },
+        "id": "1beecacb-3886-4abd-ab1f-5f7a1cd3cc00",
+        "name": "On Telegram Reply",
+        "type": "n8n-nodes-base.telegramTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          0,
+          768
+        ],
+        "webhookId": "77eff69f-b0d8-4bb5-b084-35f18f114fe2"
+      },
+      {
+        "parameters": {
+          "jsCode": "const item = $input.first().json;\nconst ALLOWED = ['1342891001', '5765665250', '5930338959'];\nconst cb = item.callback_query;\nconst msg = item.message;\nconst incomingChatId = String(cb?.message?.chat?.id ?? msg?.chat?.id ?? '');\nif (!ALLOWED.includes(incomingChatId)) {\n  return [{ json: { route: 'unknown', sessionId: '', chatId: incomingChatId, callbackQueryId: '', messageId: 0, fileId: '' } }];\n}\nif (cb) {\n  const parts = (cb.data || '').split(':');\n  const route = (parts[0] || '') + ':' + (parts[1] || '');\n  const sessionId = parts[2] || '';\n  return [{ json: { route, sessionId, chatId: String(cb.message?.chat?.id ?? ''), callbackQueryId: cb.id, messageId: cb.message?.message_id ?? 0, fileId: '' } }];\n}\nif (msg && Array.isArray(msg.photo) && msg.photo.length) {\n  const largest = msg.photo[msg.photo.length - 1];\n  return [{ json: { route: 'msg:photo', sessionId: '', chatId: String(msg.chat?.id ?? ''), callbackQueryId: '', messageId: 0, fileId: largest.file_id } }];\n}\nif (msg && msg.text && msg.text.toLowerCase().trim() === 'post') {\n  return [{ json: { route: 'msg:post', sessionId: '', chatId: String(msg.chat?.id ?? ''), callbackQueryId: '', messageId: 0, fileId: '' } }];\n}\nreturn [{ json: { route: 'unknown', sessionId: '', chatId: String(msg?.chat?.id ?? ''), callbackQueryId: '', messageId: 0, fileId: '' } }];"
+        },
+        "id": "4908b750-33bf-41bb-9dd1-2e340dc917ec",
+        "name": "Parse Reply",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -16,
+          624
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "callback",
+          "queryId": "={{ $('Parse Reply').item.json.callbackQueryId }}",
+          "additionalFields": {}
+        },
+        "id": "dbf73143-8ee3-4bd3-9413-40b76c57a124",
+        "name": "Answer Callback Query",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          432,
+          672
+        ],
+        "webhookId": "bd2e123c-2eef-4b3a-8c86-2ef715e8a56b"
+      },
+      {
+        "parameters": {
+          "jsCode": "const pr = $('Parse Reply').item.json;\nconst ackMap = {'q1:y':'\u2705 Posting today!','q1:n':'\u274c Skipping today.','q2:pic':'\ud83d\uddbc Picture post selected.','q2:vid':'\ud83c\udfac Video post selected.','q2b:own':'\ud83d\udcf7 Upload your own photo.','q2b:gen':'\u2728 Generating an image.','q3:ok':'\u2705 Approved!','q3:rg':'\ud83d\udd01 Regenerating...','q3:cx':'\u274c Cancelled.','q3:rv':'\ud83d\udd01 Regenerating video...'};\nreturn [{ json: { ...pr, ackText: ackMap[pr.route] || '\u2713' } }];"
+        },
+        "id": "1721dcae-beda-4fb2-9068-d858406fcbe9",
+        "name": "Build Ack Text",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          672,
+          672
+        ]
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                      "rightValue": "q1:y",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "yes"
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                      "rightValue": "q1:n",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "no"
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                      "rightValue": "q2:pic",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "picture"
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                      "rightValue": "q2:vid",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "video"
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                      "rightValue": "q3:ok",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "approve"
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                      "rightValue": "q3:rg",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "regenerate"
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                      "rightValue": "q3:cx",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "cancel"
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                      "rightValue": "q2b:own",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "own_photo"
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                      "rightValue": "q2b:gen",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "generate"
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                      "rightValue": "msg:photo",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "uploaded_photo"
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                      "rightValue": "q3:rv",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "retry_video"
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Parse Reply').item.json.route }}",
+                      "rightValue": "msg:post",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "manual_post"
+              }
+            ]
+          },
+          "options": {
+            "fallbackOutput": "extra"
+          }
+        },
+        "id": "764c6cc6-9312-438f-aa18-2fe9c064e8f9",
+        "name": "Route Step",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          1120,
+          624
+        ]
+      },
+      {
+        "parameters": {
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "text": "Great! \ud83c\udf89 What type of post?",
+          "replyMarkup": "inlineKeyboard",
+          "inlineKeyboard": {
+            "rows": [
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "\ud83d\uddbc Picture",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q2:pic:\" + $('Parse Reply').item.json.sessionId }}"
+                      }
+                    },
+                    {
+                      "text": "\ud83c\udfac Video",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q2:vid:\" + $('Parse Reply').item.json.sessionId }}"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML"
+          }
+        },
+        "id": "9d53259b-1277-43f7-acec-6c31d7a922b5",
+        "name": "Ask Picture or Video",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          1344,
+          0
+        ],
+        "webhookId": "33f936c9-a43d-4fcc-ba49-4b525e3500eb"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "tableId": "social_posts",
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+              }
+            ]
+          },
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "awaiting_media_type"
+              }
+            ]
+          }
+        },
+        "id": "44e84433-764f-4b88-9197-18a9c4792ae1",
+        "name": "State: awaiting_media_type",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1568,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "text": "No worries \u2014 skipping today's post. See you next time! \ud83d\udc4b",
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML"
+          }
+        },
+        "id": "63715554-f35b-4c4d-88e2-902986afaa46",
+        "name": "Send Skip",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          1344,
+          192
+        ],
+        "webhookId": "fea5e9f9-ae01-428a-81c2-fb0e0708463f"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "tableId": "social_posts",
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+              }
+            ]
+          },
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "cancelled"
+              }
+            ]
+          }
+        },
+        "id": "08145ca5-e719-4109-82d8-2e3784124b72",
+        "name": "State: cancelled",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1568,
+          192
+        ]
+      },
+      {
+        "parameters": {
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "text": "\ud83d\uddbc Picture it is! How would you like the image?",
+          "replyMarkup": "inlineKeyboard",
+          "inlineKeyboard": {
+            "rows": [
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "\ud83d\udcf7 I'll send my own photo",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q2b:own:\" + $('Parse Reply').item.json.sessionId }}"
+                      }
+                    },
+                    {
+                      "text": "\u2728 Generate one for me",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q2b:gen:\" + $('Parse Reply').item.json.sessionId }}"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML"
+          }
+        },
+        "id": "2f39a6a2-e90e-4b17-aa0a-c99fccb4afd0",
+        "name": "Ask Upload or Generate",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          1344,
+          384
+        ],
+        "webhookId": "9156e65e-7579-46ed-8d81-e0397372b981"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "tableId": "social_posts",
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+              }
+            ]
+          },
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "awaiting_picture_choice"
+              },
+              {
+                "fieldId": "media_type",
+                "fieldValue": "image"
+              }
+            ]
+          }
+        },
+        "id": "09a40726-5f70-4bb4-9a74-d565c1d9ed61",
+        "name": "State: awaiting_picture_choice",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1568,
+          384
+        ]
+      },
+      {
+        "parameters": {
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "text": "\ud83c\udfac Got it \u2014 a video post!\n\n\ud83d\udcf7 Send me one photo of the dish or scene and I'll animate it into a short social video.\n\n<i>\u23f1 Generation takes about 60\u201390 seconds \u2014 I'll send it as soon as it's ready.</i>",
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML"
+          }
+        },
+        "id": "16680c69-abe3-4835-9945-e57615b0507b",
+        "name": "Send Video Stub",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          1344,
+          576
+        ],
+        "webhookId": "6c9715d8-60f1-4d1f-916a-15aa4af27d42"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "tableId": "social_posts",
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+              }
+            ]
+          },
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "awaiting_uploaded_photo"
+              },
+              {
+                "fieldId": "media_type",
+                "fieldValue": "video"
+              }
+            ]
+          }
+        },
+        "id": "7327376e-4789-44a3-ab5d-27ac2ff6b267",
+        "name": "State: awaiting_food_photo",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1568,
+          576
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "tableId": "social_posts",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+              }
+            ]
+          }
+        },
+        "id": "b564f240-c7a2-452e-86c0-b3fa9e4c66a9",
+        "name": "Fetch Approved Row",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1344,
+          768
+        ]
+      },
+      {
+        "parameters": {
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "text": "=\u2705 Post approved and saved!\n\n\ud83d\udcdd Your caption \u2014 copy this:\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n{{ $('Fetch Approved Row').item.json.caption }}\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\nPost the content above with this caption wherever you like. You're all set! \ud83d\ude80",
+          "additionalFields": {
+            "appendAttribution": false
+          }
+        },
+        "id": "7cb972fd-800b-4f3c-b81a-a92ee0184e26",
+        "name": "Send Approved",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          1568,
+          768
+        ],
+        "webhookId": "0534eea5-a48c-49ab-88dc-fbf9c83d4b43"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "tableId": "social_posts",
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+              }
+            ]
+          },
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "approved"
+              },
+              {
+                "fieldId": "caption_ig",
+                "fieldValue": "={{ $('Fetch Approved Row').item.json.caption }}"
+              },
+              {
+                "fieldId": "caption_fb",
+                "fieldValue": "={{ $('Fetch Approved Row').item.json.caption }}"
+              },
+              {
+                "fieldId": "caption_tt",
+                "fieldValue": "={{ $('Fetch Approved Row').item.json.caption }}"
+              }
+            ]
+          }
+        },
+        "id": "b64d58a6-d1fd-4656-bc3d-102409080e10",
+        "name": "State: approved",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1792,
+          768
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "tableId": "social_posts",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+              }
+            ]
+          }
+        },
+        "id": "1e06c019-9665-44c5-bc14-755b931c49b6",
+        "name": "Fetch Post Row",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1344,
+          960
+        ]
+      },
+      {
+        "parameters": {
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "text": "No problem \u2014 cancelled this post. Catch you next time! \ud83d\udc4b",
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML"
+          }
+        },
+        "id": "4a3c8bff-d519-4dd4-ac4e-a8207973f09b",
+        "name": "Send Cancelled",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          1344,
+          1152
+        ],
+        "webhookId": "164333b8-e808-4af7-9a53-af194fb9a37e"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "tableId": "social_posts",
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+              }
+            ]
+          },
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "cancelled"
+              }
+            ]
+          }
+        },
+        "id": "cb1190f8-8ccd-472c-8ef9-e891f25ba3a2",
+        "name": "State: cancelled (preview)",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1568,
+          1152
+        ]
+      },
+      {
+        "parameters": {
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "text": "\ud83d\udcf7 Great \u2014 send me the photo you'd like to post and I'll enhance it for you.",
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML"
+          }
+        },
+        "id": "3d2c20c0-2e22-4dc0-aa4b-7c60a9603e7c",
+        "name": "Send Send-Me-Photo",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          1344,
+          1344
+        ],
+        "webhookId": "0c9245c1-59e7-47da-a26c-7d4cbdfea57f"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "tableId": "social_posts",
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+              }
+            ]
+          },
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "awaiting_uploaded_photo"
+              },
+              {
+                "fieldId": "media_type",
+                "fieldValue": "image"
+              }
+            ]
+          }
+        },
+        "id": "b1d6699f-4080-42f3-b4e3-63d01becc0e1",
+        "name": "State: awaiting_uploaded_photo",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1568,
+          1344
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "getAll",
+          "tableId": "social_posts",
+          "returnAll": true,
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "status",
+                "condition": "eq",
+                "keyValue": "awaiting_uploaded_photo"
+              },
+              {
+                "keyName": "chat_id",
+                "condition": "eq",
+                "keyValue": "={{ $('Parse Reply').item.json.chatId }}"
+              }
+            ]
+          }
+        },
+        "id": "8d67643b-1db7-4573-8572-498b1db834dc",
+        "name": "Fetch Upload Row",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1344,
+          1536
+        ]
+      },
+      {
+        "parameters": {
+          "url": "https://www.miners-arms.com/api/gallery/public",
+          "options": {}
+        },
+        "id": "b1b4569c-f37e-45cd-b3f5-756cc722624c",
+        "name": "Fetch Gallery Images",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          1568,
+          960
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "let arr;\nconst first = $input.first().json;\nif (Array.isArray(first)) {\n  arr = first.filter(i => typeof i.src === \"string\" && i.src.startsWith(\"http\"));\n} else {\n  arr = $input.all().map(i => i.json).filter(i => typeof i.src === \"string\" && i.src.startsWith(\"http\"));\n}\nif (!arr.length) throw new Error(\"Gallery API returned no images\");\nconst idx = Math.floor(Math.random() * arr.length);\nconst picked = arr[idx];\nconst postRow = $(\"Fetch Post Row\").first().json;\nreturn [{ json: { ...postRow, galleryImageUrl: picked.src, galleryImageAlt: picked.alt } }];"
+        },
+        "id": "7408fb3d-e8af-4c0b-8c3b-10aec5adfd36",
+        "name": "Pick Random Gallery Image",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1792,
+          960
+        ]
+      },
+      {
+        "parameters": {
+          "url": "={{ $('Build Image Prompt').item.json.galleryImageUrl }}",
+          "options": {
+            "response": {
+              "response": {
+                "responseFormat": "file"
+              }
+            }
+          }
+        },
+        "id": "edc01c93-b48b-4e3c-a791-6c69e382424a",
+        "name": "Download Gallery Image",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          2016,
+          960
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "const theme = $input.first().json.theme || 'Food spotlight';\nconst galleryImageUrl = $input.first().json.galleryImageUrl;\n\nconst themeScenes = {\n  'Food spotlight': 'Create a stunning editorial food photograph for The Miners Arms: beautifully presented Indian or pub food on a warm wooden table with candlelight and soft bokeh background. Apply a warm, rich colour grade. Elegant gold text about the food offering is naturally part of the composition.',\n  'Atmosphere / weekend vibe': 'Create a cinematic weekend dining scene for The Miners Arms: warm amber lighting, cosy wooden booths, soft glow of a lively pub evening. Apply a warm amber colour grade with gentle vignette. Gold text about weekend dining is woven naturally into the scene.',\n  'Bar & drinks': 'Create a sophisticated bar scene for The Miners Arms: perfectly poured pints of ale and vibrant cocktails on a polished dark bar top with warm backlighting. Apply a cool moody colour grade. Elegant text about drinks is integrated into the composition.',\n  'Community / local feel': 'Create a warm community gathering scene at The Miners Arms: friends and families sharing a meal, golden evening light, laughter and warmth. Apply a golden-hour colour grade. Friendly community text feels like part of the scene.',\n  'Three-kitchen heritage': 'Create a rich heritage spread for The Miners Arms: a beautiful arrangement of English, Indian and Chinese dishes on a warm heritage-style table. Apply a warm sepia-gold colour grade. Elegant heritage typography is naturally integrated.',\n  'Weekly special or event': 'Create an enticing weekly special image for The Miners Arms: a beautifully styled featured dish with dramatic lighting and editorial food styling. Apply a vivid appetising colour grade. Bold promotional text is a natural part of the editorial composition.'\n};\n\nconst scene = themeScenes[theme] || themeScenes['Food spotlight'];\n\nconst prompt = `You are a professional social media designer and food photographer for The Miners Arms pub in West Bromwich \u2014 a warm, upscale British pub celebrated for English, Indian, and Chinese cuisine.\n\n${scene}\n\nDesign rules:\n- Generate ONE unified, cohesive image \u2014 food, atmosphere, and text must all feel like part of a single professionally designed composition, never layered or composited on top of each other\n- Use artful lighting, colour grading, and natural shadows to create depth and warmth\n- Text should feel like it was always part of the scene \u2014 warm gold and cream tones, tasteful serif or elegant sans-serif typography\n- Mood: warm, welcoming, upscale but approachable, authentically British pub\n- Square 1:1 composition. No logos. No watermarks.\n- Final result should look like a stunning Instagram post from a top UK restaurant brand`;\n\nreturn [{ json: { prompt, theme, galleryImageUrl } }];"
+        },
+        "id": "826f61d1-56c9-4030-b660-e095e1a7f343",
+        "name": "Build Image Prompt",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2464,
+          960
+        ]
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "mode": "list",
+            "value": "models/gemini-2.5-flash",
+            "cachedResultName": "gemini-2.5-flash"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "=Write an Instagram caption for The Miners Arms, an Indian and Indo-Chinese restaurant in West Bromwich.\n\nTheme: {{ $('Build Image Prompt').item.json.theme }}\n\nTone: warm, friendly, community-focused, appetising. Include 5-8 relevant hashtags (always include #MinersArms #WestBromwich #IndianFood). Maximum 100 words. Before returning, carefully proofread for any spelling mistakes, typos, or grammatical errors. Return only the corrected caption text, no explanation, no quotes."
+              }
+            ]
+          },
+          "builtInTools": {},
+          "options": {}
+        },
+        "id": "034e141c-e890-4957-b400-de5d151f2887",
+        "name": "Generate Caption (Gen)",
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1.2,
+        "position": [
+          2688,
+          960
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "const parts = $input.first().json?.content?.parts ?? [];\nreturn [{ json: { caption: parts[0]?.text ?? '' } }];"
+        },
+        "id": "067c5592-fe83-4023-9bd4-4b3f25554442",
+        "name": "Extract Caption (Gen)",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2976,
+          960
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "sendPhoto",
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "binaryData": true,
+          "replyMarkup": "inlineKeyboard",
+          "inlineKeyboard": {
+            "rows": [
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "\u2705 Approve & get caption",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q3:ok:\" + $('Parse Reply').item.json.sessionId }}"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "\ud83d\udd01 Try again",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q3:rg:\" + $('Parse Reply').item.json.sessionId }}"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "\u274c Cancel",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q3:cx:\" + $('Parse Reply').item.json.sessionId }}"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "additionalFields": {
+            "caption": "=\ud83d\uddbc Here's your <b>{{ $('Build Image Prompt').item.json.theme }}</b> image.\n\n\ud83d\udcdd Caption preview:\n{{ $('Extract Caption (Gen)').item.json.caption }}\n\nHappy with it?",
+            "parse_mode": "HTML"
+          }
+        },
+        "id": "a0a0b9bc-9cd8-4e2c-862f-ae1fbd491c26",
+        "name": "Send Image for Approval",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          3872,
+          960
+        ],
+        "webhookId": "2b7c969b-bf0c-4ea3-9882-281da5bba583"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "tableId": "social_posts",
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+              }
+            ]
+          },
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "awaiting_approval"
+              },
+              {
+                "fieldId": "media_type",
+                "fieldValue": "image"
+              },
+              {
+                "fieldId": "caption",
+                "fieldValue": "={{ $('Extract Caption (Gen)').item.json.caption }}"
+              }
+            ]
+          }
+        },
+        "id": "78212a29-83ef-4858-8350-2bf7f4585742",
+        "name": "State: awaiting_approval",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          4096,
+          960
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "const items = $input.all();\nif (!items.length) return [{ json: { noSession: 'true' } }];\nconst sorted = items.slice().sort((a, b) => new Date(b.json.created_at || 0) - new Date(a.json.created_at || 0));\nreturn [{ json: sorted[0].json }];"
+        },
+        "id": "31516f6c-aead-40a8-a400-89a6e266065f",
+        "name": "Pick Latest Session",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1568,
+          1536
+        ]
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "combinator": "and",
+            "conditions": [
+              {
+                "id": "session-check",
+                "leftValue": "={{ $json.noSession }}",
+                "rightValue": "true",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 1
+            }
+          },
+          "options": {}
+        },
+        "id": "bce0d20f-a8ee-4303-813e-d7831a00ab47",
+        "name": "Session Guard",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          1792,
+          1536
+        ]
+      },
+      {
+        "parameters": {
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "text": "\u26a0\ufe0f No active session found \u2014 please wait for the next scheduled prompt or start fresh.",
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML"
+          }
+        },
+        "id": "a3dbf21d-8042-4698-a5df-0fbcde4983e4",
+        "name": "Send Session Not Found",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          2016,
+          1344
+        ],
+        "webhookId": "71436175-0613-453c-861c-14efd5d658f9"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.media_type }}",
+                      "rightValue": "video",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "video"
+              },
+              {
+                "conditions": {
+                  "combinator": "and",
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.media_type }}",
+                      "rightValue": "image",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ]
+                },
+                "renameOutput": true,
+                "outputKey": "image"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "f2bfd115-25a8-48f6-9ce3-82e6ee812276",
+        "name": "Image or Video?",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          2016,
+          1632
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "file",
+          "fileId": "={{ $('Parse Reply').item.json.fileId }}",
+          "additionalFields": {}
+        },
+        "id": "55fcf3ef-09b3-4565-b554-88fcef7f3c14",
+        "name": "Download Photo (Video)",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          2240,
+          1440
+        ],
+        "webhookId": "39b661c7-01fa-42a2-b09b-17ee1c2dda8f"
+      },
+      {
+        "parameters": {
+          "resource": "file",
+          "fileId": "={{ $('Parse Reply').item.json.fileId }}",
+          "additionalFields": {}
+        },
+        "id": "913d17f1-3718-4c25-8d45-89ca62975225",
+        "name": "Download Photo",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          2240,
+          1728
+        ],
+        "webhookId": "65b5232b-b42a-4a2b-b923-32637183feb4"
+      },
+      {
+        "parameters": {
+          "resource": "image",
+          "operation": "analyze",
+          "modelId": {
+            "__rl": true,
+            "mode": "list",
+            "value": "models/gemini-2.5-pro",
+            "cachedResultName": "models/gemini-2.5-pro"
+          },
+          "text": "You are a professional video director for The Miners Arms, a British pub in West Bromwich. Analyse this image in exhaustive detail and return ONLY valid minified JSON in exactly this shape: {\"category\":\"food|drink|interior|exterior|staff|event\",\"subject_description\":\"exhaustive visual description of the main subject \u2014 include specific colours, textures, quantity, plating style, visible sauces, garnishes, steam, condensation, or liquid\",\"background_description\":\"detailed description of the background \u2014 table material and colour, objects visible, depth of field, any props or decorative elements\",\"lighting\":\"precise description \u2014 colour temperature, direction, intensity, any visible sources such as candles or overhead lights, shadows and highlights\",\"motion_elements\":\"3-4 specific physical elements visible in the image that could move in a video \u2014 be very specific, e.g. wisps of steam rising from the biryani, glistening sauce slowly spreading across the plate, condensation droplets on a cold glass\",\"camera_move\":\"one specific cinematic camera motion, e.g. slow push-in toward the dish, gentle orbital drift around the glass, subtle tilt-up from table to food\",\"mood\":\"one word: warm|lively|cosy|vibrant|elegant|rustic\"}",
+          "inputType": "binary",
+          "options": {}
+        },
+        "id": "15de6f1c-82c7-4cf8-9f7b-f01c64e9810c",
+        "name": "Analyze Photo (Video)",
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1.2,
+        "position": [
+          2464,
+          1440
+        ],
+        "retryOnFail": true,
+        "maxTries": 5,
+        "waitBetweenTries": 5000
+      },
+      {
+        "parameters": {
+          "jsCode": "const a = $('Analyze Photo (Video)').first().json;\nlet raw = '';\ntry {\n  if (a && a.content && Array.isArray(a.content.parts)) { raw = a.content.parts.map(p => p.text || '').join(' '); }\n  else { raw = a.text ?? JSON.stringify(a); }\n} catch (e) { raw = ''; }\nlet parsed = {\n  category: 'food',\n  subject_description: 'a beautifully presented pub dish on a warm wooden table',\n  background_description: 'warm bokeh pub interior with amber lighting',\n  lighting: 'warm candlelight with a golden overhead glow',\n  motion_elements: 'gentle steam rising from the food, sauce glistening in the light',\n  camera_move: 'slow cinematic push-in',\n  mood: 'warm'\n};\ntry { const m = String(raw).match(/\\{[\\s\\S]*\\}/); if (m) { parsed = Object.assign(parsed, JSON.parse(m[0])); } } catch (e) {}\n\nconst videoPrompt = [\n  'Cinematic short video for The Miners Arms pub in West Bromwich.',\n  'Scene: ' + parsed.subject_description + '.',\n  'Background: ' + parsed.background_description + '.',\n  'Lighting: ' + parsed.lighting + '.',\n  'Camera: ' + parsed.camera_move + ' with subtle parallax depth.',\n  'Motion: Bring these specific elements to life with realistic natural movement \u2014 ' + parsed.motion_elements + '.',\n  'Mood: ' + parsed.mood + ', appetising, warm and inviting pub atmosphere.',\n  'Style: photorealistic, high-end food and drink cinematography. Every surface alive with gentle natural movement. The scene should feel alive and tactile.',\n  '9:16 vertical format. 5-8 seconds. No text overlays. No logos. No watermarks.'\n].join(' ');\n\nreturn [{ json: { videoPrompt, category: parsed.category, main_subject: parsed.subject_description, setting: parsed.background_description } }];"
+        },
+        "id": "bc437b6d-0c3a-42a6-91bf-0a8d072c6182",
+        "name": "Build Video Prompt",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2688,
+          1440
+        ]
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "mode": "list",
+            "value": "models/gemini-2.5-flash",
+            "cachedResultName": "gemini-2.5-flash"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "=Write an Instagram caption for a short video post for The Miners Arms, an Indian and Indo-Chinese restaurant in West Bromwich.\n\nThe video shows: {{ $('Build Video Prompt').item.json.category }} \u2014 {{ $('Build Video Prompt').item.json.main_subject }} in {{ $('Build Video Prompt').item.json.setting }}.\n\nTone: warm, lively, appetising, community-focused. Include 5-8 relevant hashtags (always include #MinersArms #WestBromwich #IndianFood). Maximum 100 words. Before returning, carefully proofread for any spelling mistakes, typos, or grammatical errors. Return only the corrected caption text, no explanation, no quotes."
+              }
+            ]
+          },
+          "builtInTools": {},
+          "options": {}
+        },
+        "id": "34e41c3f-fb6a-476f-9148-3a461c39e98e",
+        "name": "Generate Video Caption",
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1.2,
+        "position": [
+          2912,
+          1440
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "const parts = $input.first().json?.content?.parts ?? [];\nreturn [{ json: { caption: parts[0]?.text ?? '' } }];"
+        },
+        "id": "17b7e66d-860f-439f-802f-9e184c24c8af",
+        "name": "Extract Caption (Video)",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3200,
+          1440
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "video",
+          "modelId": {
+            "__rl": true,
+            "mode": "list",
+            "value": "models/veo-3.0-generate-001",
+            "cachedResultName": "models/veo-3.0-generate-001"
+          },
+          "prompt": "={{ $('Build Video Prompt').item.json.videoPrompt }}",
+          "options": {
+            "durationSeconds": 8,
+            "aspectRatio": "9:16",
+            "binaryPropertyOutput": "data"
+          }
+        },
+        "id": "cd9204a9-9c47-4573-95e1-036e686057ac",
+        "name": "Generate Video",
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1.2,
+        "position": [
+          3424,
+          1440
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "sendVideo",
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "binaryData": true,
+          "replyMarkup": "inlineKeyboard",
+          "inlineKeyboard": {
+            "rows": [
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "\u2705 Approve & get caption",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q3:ok:\" + $('Pick Latest Session').item.json.id }}"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "\ud83d\udd01 Try again",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q3:rv:\" + $('Pick Latest Session').item.json.id }}"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "\u274c Cancel",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q3:cx:\" + $('Pick Latest Session').item.json.id }}"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "additionalFields": {
+            "caption": "=\ud83c\udfac Here's your social media video!\n\n\ud83d\udcdd Caption preview:\n{{ $('Extract Caption (Video)').item.json.caption }}\n\nHappy with it?",
+            "parse_mode": "HTML"
+          }
+        },
+        "id": "d23c04bf-cfa2-488e-a654-037734fa1e8b",
+        "name": "Send Video for Approval",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          3648,
+          1440
+        ],
+        "webhookId": "5adebaa3-0831-49ec-ac32-42581dd8bf67"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "tableId": "social_posts",
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $('Pick Latest Session').item.json.id }}"
+              }
+            ]
+          },
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "awaiting_approval"
+              },
+              {
+                "fieldId": "media_type",
+                "fieldValue": "video"
+              },
+              {
+                "fieldId": "caption",
+                "fieldValue": "={{ $('Extract Caption (Video)').item.json.caption }}"
+              }
+            ]
+          }
+        },
+        "id": "064ed071-37ad-410d-bf8d-593690c90036",
+        "name": "State: awaiting_approval (video)",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          3872,
+          1440
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "image",
+          "operation": "analyze",
+          "modelId": {
+            "__rl": true,
+            "mode": "list",
+            "value": "models/gemini-2.5-flash",
+            "cachedResultName": "gemini-2.5-flash"
+          },
+          "text": "You are a professional food and hospitality photographer's assistant working for The Miners Arms, a British pub in West Bromwich. Analyse this image carefully and return ONLY valid minified JSON, no commentary, no code fences, in exactly this shape: {\"category\":\"food|drink|interior|exterior|staff|event\",\"main_subject\":\"precise description of what is in the photo\",\"setting\":\"brief description of the background/environment\",\"composition\":\"how the subject is arranged/presented\",\"improvements\":[\"specific improvement 1\",\"specific improvement 2\"],\"social_ready\":true}. For improvements list up to 5 concrete visual enhancements such as lighting, steam, garnish, composition, colour saturation, or texture.",
+          "inputType": "binary",
+          "options": {}
+        },
+        "id": "910c6844-1539-4529-91ec-42cdf61c5b64",
+        "name": "Analyze Photo",
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1.2,
+        "position": [
+          2464,
+          1728
+        ]
+      },
+      {
+        "parameters": {
+          "modelId": {
+            "__rl": true,
+            "mode": "list",
+            "value": "models/gemini-2.5-flash",
+            "cachedResultName": "gemini-2.5-flash"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "=Write an Instagram caption for The Miners Arms, an Indian and Indo-Chinese restaurant in West Bromwich.\n\nThe image shows: {{ $('Build Image Prompt (Upload)').item.json.category }} \u2014 {{ $('Build Image Prompt (Upload)').item.json.main_subject }} in {{ $('Build Image Prompt (Upload)').item.json.setting }}.\n\nTone: warm, friendly, appetising, community-focused. Include 5-8 relevant hashtags (always include #MinersArms #WestBromwich #IndianFood). Maximum 100 words. Before returning, carefully proofread for any spelling mistakes, typos, or grammatical errors. Return only the corrected caption text, no explanation, no quotes."
+              }
+            ]
+          },
+          "builtInTools": {},
+          "options": {}
+        },
+        "id": "c308d6fc-637e-42c6-8228-d3e8fc1c7689",
+        "name": "Generate Caption (Upload)",
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1.2,
+        "position": [
+          2912,
+          1728
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "const parts = $input.first().json?.content?.parts ?? [];\nreturn [{ json: { caption: parts[0]?.text ?? '' } }];"
+        },
+        "id": "0eccb449-02c7-4747-acad-31dc8c9a15c1",
+        "name": "Extract Caption (Upload)",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3264,
+          1728
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "sendPhoto",
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "binaryData": true,
+          "replyMarkup": "inlineKeyboard",
+          "inlineKeyboard": {
+            "rows": [
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "\u2705 Approve & get caption",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q3:ok:\" + $('Pick Latest Session').item.json.id }}"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "\ud83d\udd01 Use a different photo",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q2b:own:\" + $('Pick Latest Session').item.json.id }}"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "\u274c Cancel",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q3:cx:\" + $('Pick Latest Session').item.json.id }}"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "additionalFields": {
+            "caption": "=\u2728 Here's your AI-polished photo.\n\n\ud83d\udcdd Caption preview:\n{{ $('Extract Caption (Upload)').item.json.caption }}\n\nHappy with it?",
+            "parse_mode": "HTML"
+          }
+        },
+        "id": "80a278cc-4028-418a-bfb7-dd2022176a9e",
+        "name": "Send Polish Approval",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          3712,
+          1728
+        ],
+        "webhookId": "c3aec491-9306-4df1-9b26-c6eb88204fc7"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "tableId": "social_posts",
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $('Pick Latest Session').item.json.id }}"
+              }
+            ]
+          },
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "awaiting_approval"
+              },
+              {
+                "fieldId": "media_type",
+                "fieldValue": "image"
+              },
+              {
+                "fieldId": "source_image_url",
+                "fieldValue": "={{ $('Parse Reply').item.json.fileId }}"
+              },
+              {
+                "fieldId": "caption",
+                "fieldValue": "={{ $('Extract Caption (Upload)').item.json.caption }}"
+              }
+            ]
+          }
+        },
+        "id": "a3eefce9-2cc3-41d2-9dc2-e787827a9779",
+        "name": "State: awaiting_approval (upload)",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          3936,
+          1728
+        ]
+      },
+      {
+        "parameters": {
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "text": "\ud83e\udd14 Sorry, I didn't understand that. Please wait for the next scheduled prompt or tap a button to continue.",
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML"
+          }
+        },
+        "id": "4fd5db1d-6dd2-49ca-9594-c0461f172a93",
+        "name": "Send Fallback Message",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          0,
+          1952
+        ],
+        "webhookId": "cd2034d0-5517-4d03-8d95-6b52500300a3"
+      },
+      {
+        "parameters": {
+          "resource": "image",
+          "modelId": {
+            "__rl": true,
+            "mode": "list",
+            "value": "models/gemini-2.5-flash-image",
+            "cachedResultName": "gemini-2.5-flash-image"
+          },
+          "prompt": "={{ $('Build Image Prompt').item.json.prompt }}",
+          "options": {
+            "binaryPropertyOutput": "data"
+          }
+        },
+        "id": "fa665596-5b5a-4939-8021-d2aed7a00088",
+        "name": "Generate Image (Edit)",
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1.2,
+        "position": [
+          3200,
+          960
+        ],
+        "retryOnFail": true,
+        "maxTries": 5,
+        "waitBetweenTries": 5000
+      },
+      {
+        "parameters": {
+          "jsCode": "const a = $('Analyze Photo').first().json;\nlet raw = '';\ntry {\n  if (a && a.content && Array.isArray(a.content.parts)) { raw = a.content.parts.map(p => p.text || '').join(' '); }\n  else { raw = a.text ?? a.response ?? JSON.stringify(a); }\n} catch (e) { raw = ''; }\nlet parsed = { category: 'food', main_subject: 'a pub dish', setting: 'a pub table', improvements: [] };\ntry { const m = String(raw).match(/\\{[\\s\\S]*\\}/); if (m) { parsed = Object.assign(parsed, JSON.parse(m[0])); } } catch(e) {}\nconst category = parsed.category || 'food';\nconst subject = parsed.main_subject || 'a pub dish';\nconst setting = parsed.setting || 'a pub table';\nconst improvements = Array.isArray(parsed.improvements) ? parsed.improvements.join('. ') : '';\n\nconst sceneMap = {\n  food: `Create a stunning editorial food photograph for The Miners Arms: ${subject} beautifully styled with dramatic lighting, perfect plating, and warm pub atmosphere in the background. ${improvements ? 'Enhance visually with: ' + improvements + '.' : ''} Apply a warm rich colour grade. Elegant gold text about the dish is naturally part of the composition.`,\n  drink: `Create a sophisticated bar photograph for The Miners Arms featuring ${subject}: premium presentation on a polished bar top with warm backlighting. ${improvements ? 'Enhance visually with: ' + improvements + '.' : ''} Apply a cool moody colour grade. Elegant gold text about drinks is integrated into the composition.`,\n  interior: `Create a cinematic atmosphere photograph of ${setting} at The Miners Arms with beautiful natural light. ${improvements ? 'Enhance visually with: ' + improvements + '.' : ''} Apply a warm amber colour grade with soft vignette. Gold text about the dining experience is woven naturally into the scene.`,\n  exterior: `Create a welcoming exterior scene of The Miners Arms on a warm golden evening. ${improvements ? 'Enhance with: ' + improvements + '.' : ''} Apply a golden-hour colour grade. Community text is naturally part of the scene.`,\n  staff: `Create a warm hospitality photograph celebrating the team at The Miners Arms. ${improvements ? 'Enhance with: ' + improvements + '.' : ''} Apply a bright welcoming colour grade. Text honouring the team is naturally integrated.`,\n  event: `Create a vibrant event scene at The Miners Arms with energy and excitement. ${improvements ? 'Enhance with: ' + improvements + '.' : ''} Apply a vivid lively colour grade. Bold event text is a natural part of the composition.`\n};\n\nconst scene = sceneMap[category] || sceneMap['food'];\n\nconst prompt = `You are a professional social media designer and food photographer for The Miners Arms pub in West Bromwich \u2014 a warm, upscale British pub celebrated for English, Indian, and Chinese cuisine.\n\n${scene}\n\nDesign rules:\n- Generate ONE unified, cohesive image \u2014 subject, atmosphere, and text must all feel like part of a single professionally designed composition, never layered or composited on top of each other\n- Use artful lighting, colour grading, and natural shadows to create depth and warmth\n- Text should feel like it was always part of the scene \u2014 warm gold and cream tones, tasteful serif or elegant sans-serif typography\n- Mood: warm, welcoming, upscale but approachable, authentically British pub\n- Square 1:1 composition. No logos. No watermarks.\n- Final result should look like a stunning Instagram post from a top UK restaurant brand`;\n\nreturn [{ json: { prompt, category, main_subject: subject, setting } }];"
+        },
+        "id": "d76aef3d-e6eb-4bba-95de-fb62138f136f",
+        "name": "Build Image Prompt (Upload)",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2688,
+          1728
+        ]
+      },
+      {
+        "parameters": {
+          "url": "https://www.miners-arms.com/api/gallery/public",
+          "options": {}
+        },
+        "id": "15c944f8-b1b8-4da5-b5c7-99ca5d8851cc",
+        "name": "Fetch Gallery Images (Upload)",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          2912,
+          1968
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "let arr;\nconst first = $input.first().json;\nif (Array.isArray(first)) {\n  arr = first.filter(i => typeof i.src === \"string\" && i.src.startsWith(\"http\"));\n} else {\n  arr = $input.all().map(i => i.json).filter(i => typeof i.src === \"string\" && i.src.startsWith(\"http\"));\n}\nif (!arr.length) throw new Error(\"Gallery API returned no images\");\nconst idx = Math.floor(Math.random() * arr.length);\nconst picked = arr[idx];\nconst promptData = $(\"Build Image Prompt (Upload)\").first().json;\nreturn [{ json: { ...promptData, galleryImageUrl: picked.src, galleryImageAlt: picked.alt } }];"
+        },
+        "id": "85c101fe-feef-4293-8338-f4b112561474",
+        "name": "Pick Random Gallery Image (Upload)",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3136,
+          1968
+        ]
+      },
+      {
+        "parameters": {
+          "url": "={{ $('Pick Random Gallery Image (Upload)').item.json.galleryImageUrl }}",
+          "options": {
+            "response": {
+              "response": {
+                "responseFormat": "file"
+              }
+            }
+          }
+        },
+        "id": "043113b1-88d6-4fcf-807f-9f5cf8e778a5",
+        "name": "Download Gallery Image (Upload)",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          3488,
+          1968
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "image",
+          "modelId": {
+            "__rl": true,
+            "mode": "list",
+            "value": "models/gemini-2.5-flash-image",
+            "cachedResultName": "gemini-2.5-flash-image"
+          },
+          "prompt": "={{ $('Build Image Prompt (Upload)').item.json.prompt }}",
+          "options": {
+            "binaryPropertyOutput": "data"
+          }
+        },
+        "id": "0256bb73-fee5-4ffd-a885-9faa4c7dd2a6",
+        "name": "Generate Image (Edit) (Upload)",
+        "type": "@n8n/n8n-nodes-langchain.googleGemini",
+        "typeVersion": 1.2,
+        "position": [
+          3712,
+          1968
+        ],
+        "retryOnFail": true,
+        "maxTries": 5,
+        "waitBetweenTries": 5000
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 1
+            },
+            "conditions": [
+              {
+                "id": "aa377da2-08ce-448f-9894-56a83661001e",
+                "leftValue": "={{ $json.callbackQueryId }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEquals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "id": "7ddd7d79-1211-420e-9d98-f454d1fb88ea",
+        "name": "Is Callback Query?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2,
+        "position": [
+          224,
+          768
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "getAll",
+          "tableId": "theme_config",
+          "limit": 1,
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "active",
+                "condition": "eq",
+                "keyValue": "true"
+              }
+            ]
+          }
+        },
+        "id": "afa612e8-f68b-40d5-8169-996d3173ea10",
+        "name": "Check Theme Override (Manual)",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          432,
+          1232
+        ],
+        "alwaysOutputData": true,
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "jsCode": "const themes = ['Food spotlight','Atmosphere / weekend vibe','Bar & drinks','Community / local feel','Three-kitchen heritage','Weekly special or event'];\nconst now = new Date();\nconst startOfYear = new Date(now.getFullYear(), 0, 1);\nconst week = Math.floor((now - startOfYear) / (7*24*60*60*1000));\nconst weekTheme = themes[week % 6];\n\nconst overrideItems = $('Check Theme Override (Manual)').all();\nconst firstItem = overrideItems.length > 0 ? overrideItems[0].json : {};\nconst theme = (firstItem && firstItem.custom_theme) ? firstItem.custom_theme : weekTheme;\n\nconst dayOfWeek = now.toLocaleDateString('en-GB', { weekday: 'long', timeZone: 'Europe/London' });\nconst chatIds = ['1342891001', '5765665250', '5930338959'];\nreturn chatIds.map(chatId => ({ json: { theme, dayOfWeek, chatId } }));"
+        },
+        "id": "89a3d9b2-8664-4997-8ec0-091138d285ae",
+        "name": "Build Context (Manual)",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          656,
+          1232
+        ]
+      },
+      {
+        "parameters": {
+          "tableId": "social_posts",
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "awaiting_yes_no"
+              },
+              {
+                "fieldId": "theme",
+                "fieldValue": "={{ $json.theme }}"
+              },
+              {
+                "fieldId": "day_of_week",
+                "fieldValue": "={{ $json.dayOfWeek }}"
+              },
+              {
+                "fieldId": "chat_id",
+                "fieldValue": "={{ $json.chatId }}"
+              }
+            ]
+          }
+        },
+        "id": "d248f9e7-aea8-4f90-9498-416afce47112",
+        "name": "Create Session Row (Manual)",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          880,
+          1232
+        ]
+      },
+      {
+        "parameters": {
+          "chatId": "={{ $json.chat_id || '5930338959' }}",
+          "text": "=Good {{ $('Build Context (Manual)').item.json.dayOfWeek }}! \ud83d\udce3 Time for your social media post.\n\nToday's theme: <b>{{ $json.theme }}</b>\n\nWant to post today?",
+          "replyMarkup": "inlineKeyboard",
+          "inlineKeyboard": {
+            "rows": [
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "\u2705 Yes",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q1:y:\" + $json.id }}"
+                      }
+                    },
+                    {
+                      "text": "\u274c No",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q1:n:\" + $json.id }}"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML"
+          }
+        },
+        "id": "284220c0-d25a-4d25-a98e-3b6d63746228",
+        "name": "Ask Post Today (Manual)",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          1104,
+          1232
+        ],
+        "webhookId": "6f92bbad-6ec6-4000-9353-c17b44d7d4a8",
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "jsCode": "const base64Item = $('Get Photo Base64').first().json;\nconst imageBase64 = base64Item.base64;\nconst mimeType = base64Item.mimeType || 'image/jpeg';\nconst videoPrompt = $('Build Video Prompt').first().json.videoPrompt;\n\nif (!imageBase64) {\n  throw new Error('Edge Function returned no base64. Response: ' + JSON.stringify(base64Item).substring(0, 300));\n}\n\nconst requestBody = {\n  instances: [{\n    prompt: videoPrompt,\n    image: {\n      bytesBase64Encoded: imageBase64,\n      mimeType: mimeType\n    }\n  }],\n  parameters: {\n    aspectRatio: '9:16',\n    sampleCount: 1,\n    durationSeconds: 8\n  }\n};\n\nreturn [{ json: { requestBody } }];"
+        },
+        "id": "a0bacd14-ead9-46c9-b8b9-160e8e656a01",
+        "name": "Prepare Image for Veo",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2592,
+          2032
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://generativelanguage.googleapis.com/v1beta/models/veo-3.0-generate-001:predictLongRunning",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "googlePalmApi",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ $json.requestBody }}",
+          "options": {}
+        },
+        "id": "5dec4188-89dd-464e-874d-e4a09a970c14",
+        "name": "Submit Video Job",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          3424,
+          1712
+        ],
+        "retryOnFail": true,
+        "maxTries": 3,
+        "waitBetweenTries": 5000
+      },
+      {
+        "parameters": {
+          "jsCode": "const response = $input.first().json;\nconst operationName = response.name;\nif (!operationName) {\n  throw new Error(\n    'Veo API did not return an operation name. Response: ' +\n    JSON.stringify(response).substring(0, 500)\n  );\n}\nreturn [{ json: { operationName } }];"
+        },
+        "id": "11e5f10c-f9e0-47bf-a828-95decd20522b",
+        "name": "Extract Operation ID",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3648,
+          1712
+        ]
+      },
+      {
+        "parameters": {
+          "amount": 40
+        },
+        "id": "d73f5a77-c4e2-449e-85e3-79a785a7f80c",
+        "name": "Wait for Veo",
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          3872,
+          1712
+        ],
+        "webhookId": "01191369-39d0-44f8-a6a8-bcfb698c75b2"
+      },
+      {
+        "parameters": {
+          "url": "={{ 'https://generativelanguage.googleapis.com/v1beta/' + $('Extract Operation ID').first().json.operationName }}",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "googlePalmApi",
+          "options": {}
+        },
+        "id": "b9d97328-2624-43a9-81a0-4fd4677be8d3",
+        "name": "Check Video Status",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          4096,
+          1712
+        ]
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "combinator": "and",
+            "conditions": [
+              {
+                "id": "done-check",
+                "leftValue": "={{ $json.done }}",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true"
+                }
+              }
+            ],
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 1
+            }
+          },
+          "options": {}
+        },
+        "id": "d1660591-a83b-44b3-ab5b-9104a4512094",
+        "name": "Video Ready?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          4320,
+          1712
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "const response = $input.first().json;\nconst genVideoResp = response.response?.generateVideoResponse;\nconst sample = genVideoResp?.generatedSamples?.[0];\nconst videoUri = sample?.video?.uri;\n\nif (!videoUri) {\n  throw new Error(\n    'No video URI in Veo response. generateVideoResponse: ' +\n    JSON.stringify(genVideoResp).substring(0, 500)\n  );\n}\n\nreturn [{ json: { videoUri } }];"
+        },
+        "id": "bf9133d6-8689-46bd-a203-698eb0a0c5f8",
+        "name": "Extract Video Binary",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          4544,
+          1712
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://fnwotwlbiexhcgnrhtcy.supabase.co/functions/v1/telegram-to-base64",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({file_path: $('Download Photo (Video)').first().json.result.file_path}) }}",
+          "options": {
+            "response": {
+              "response": {
+                "responseFormat": "json"
+              }
+            }
+          }
+        },
+        "id": "6f271a55-f28b-4cd2-b418-34ddc9768be7",
+        "name": "Get Photo Base64",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          3200,
+          1952
+        ]
+      },
+      {
+        "parameters": {
+          "url": "={{ $json.videoUri }}",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "googlePalmApi",
+          "options": {
+            "response": {
+              "response": {
+                "responseFormat": "file"
+              }
+            }
+          }
+        },
+        "id": "bacbd24b-b9db-4b24-85b5-3f7c95336d93",
+        "name": "Download Video",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          4768,
+          1712
+        ]
+      }
+    ],
+    "connections": {
+      "On Telegram Reply": {
+        "main": [
+          [
+            {
+              "node": "Parse Reply",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Parse Reply": {
+        "main": [
+          [
+            {
+              "node": "Is Callback Query?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Answer Callback Query": {
+        "main": [
+          [
+            {
+              "node": "Build Ack Text",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Build Ack Text": {
+        "main": [
+          [
+            {
+              "node": "Route Step",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Route Step": {
+        "main": [
+          [
+            {
+              "node": "Ask Picture or Video",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Send Skip",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Ask Upload or Generate",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Send Video Stub",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Fetch Approved Row",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Fetch Post Row",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Send Cancelled",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Send Send-Me-Photo",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Fetch Post Row",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Fetch Upload Row",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Fetch Upload Row",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Check Theme Override (Manual)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Ask Picture or Video": {
+        "main": [
+          [
+            {
+              "node": "State: awaiting_media_type",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send Skip": {
+        "main": [
+          [
+            {
+              "node": "State: cancelled",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Ask Upload or Generate": {
+        "main": [
+          [
+            {
+              "node": "State: awaiting_picture_choice",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send Video Stub": {
+        "main": [
+          [
+            {
+              "node": "State: awaiting_food_photo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Fetch Approved Row": {
+        "main": [
+          [
+            {
+              "node": "Send Approved",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send Approved": {
+        "main": [
+          [
+            {
+              "node": "State: approved",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Fetch Post Row": {
+        "main": [
+          [
+            {
+              "node": "Fetch Gallery Images",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send Cancelled": {
+        "main": [
+          [
+            {
+              "node": "State: cancelled (preview)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send Send-Me-Photo": {
+        "main": [
+          [
+            {
+              "node": "State: awaiting_uploaded_photo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Fetch Upload Row": {
+        "main": [
+          [
+            {
+              "node": "Pick Latest Session",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Fetch Gallery Images": {
+        "main": [
+          [
+            {
+              "node": "Pick Random Gallery Image",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Pick Random Gallery Image": {
+        "main": [
+          [
+            {
+              "node": "Build Image Prompt",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Build Image Prompt": {
+        "main": [
+          [
+            {
+              "node": "Generate Caption (Gen)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Generate Caption (Gen)": {
+        "main": [
+          [
+            {
+              "node": "Extract Caption (Gen)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send Image for Approval": {
+        "main": [
+          [
+            {
+              "node": "State: awaiting_approval",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Pick Latest Session": {
+        "main": [
+          [
+            {
+              "node": "Session Guard",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Session Guard": {
+        "main": [
+          [
+            {
+              "node": "Send Session Not Found",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Image or Video?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Image or Video?": {
+        "main": [
+          [
+            {
+              "node": "Download Photo (Video)",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Download Photo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Download Photo": {
+        "main": [
+          [
+            {
+              "node": "Analyze Photo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Analyze Photo (Video)": {
+        "main": [
+          [
+            {
+              "node": "Build Video Prompt",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Build Video Prompt": {
+        "main": [
+          [
+            {
+              "node": "Generate Video Caption",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Generate Video Caption": {
+        "main": [
+          [
+            {
+              "node": "Extract Caption (Video)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send Video for Approval": {
+        "main": [
+          [
+            {
+              "node": "State: awaiting_approval (video)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Analyze Photo": {
+        "main": [
+          [
+            {
+              "node": "Build Image Prompt (Upload)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Generate Caption (Upload)": {
+        "main": [
+          [
+            {
+              "node": "Extract Caption (Upload)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send Polish Approval": {
+        "main": [
+          [
+            {
+              "node": "State: awaiting_approval (upload)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Generate Image (Edit)": {
+        "main": [
+          [
+            {
+              "node": "Send Image for Approval",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Fetch Gallery Images (Upload)": {
+        "main": [
+          [
+            {
+              "node": "Pick Random Gallery Image (Upload)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Generate Image (Edit) (Upload)": {
+        "main": [
+          [
+            {
+              "node": "Send Polish Approval",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Is Callback Query?": {
+        "main": [
+          [
+            {
+              "node": "Answer Callback Query",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Route Step",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Check Theme Override (Manual)": {
+        "main": [
+          [
+            {
+              "node": "Build Context (Manual)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Build Context (Manual)": {
+        "main": [
+          [
+            {
+              "node": "Create Session Row (Manual)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Create Session Row (Manual)": {
+        "main": [
+          [
+            {
+              "node": "Ask Post Today (Manual)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extract Caption (Gen)": {
+        "main": [
+          [
+            {
+              "node": "Generate Image (Edit)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Build Image Prompt (Upload)": {
+        "main": [
+          [
+            {
+              "node": "Generate Caption (Upload)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extract Caption (Upload)": {
+        "main": [
+          [
+            {
+              "node": "Generate Image (Edit) (Upload)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Prepare Image for Veo": {
+        "main": [
+          [
+            {
+              "node": "Submit Video Job",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Submit Video Job": {
+        "main": [
+          [
+            {
+              "node": "Extract Operation ID",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extract Operation ID": {
+        "main": [
+          [
+            {
+              "node": "Wait for Veo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait for Veo": {
+        "main": [
+          [
+            {
+              "node": "Check Video Status",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Check Video Status": {
+        "main": [
+          [
+            {
+              "node": "Video Ready?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Video Ready?": {
+        "main": [
+          [
+            {
+              "node": "Extract Video Binary",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Wait for Veo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Download Photo (Video)": {
+        "main": [
+          [
+            {
+              "node": "Analyze Photo (Video)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extract Caption (Video)": {
+        "main": [
+          [
+            {
+              "node": "Get Photo Base64",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get Photo Base64": {
+        "main": [
+          [
+            {
+              "node": "Prepare Image for Veo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extract Video Binary": {
+        "main": [
+          [
+            {
+              "node": "Download Video",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Download Video": {
+        "main": [
+          [
+            {
+              "node": "Send Video for Approval",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "tags": [],
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  },
+  "parentFolderId": null,
+  "description": "Telegram-driven social posting bot for The Miners Arms. AI-generate path now fetches a random real gallery photo from the website and uses Gemini image editing to overlay branded social media graphics on it.",
+  "scopes": [
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true
+}
