@@ -19,9 +19,9 @@ const values = [
 ];
 
 const timeline = [
-  { year: "2026", title: "The doors open", text: "The Miners Arms begins serving the Hilltop community. A proper local with a kitchen that refused to pick just one cuisine." },
-  { year: "2018", title: "The café finds its rhythm", text: "Morning breakfasts and light bites become a daily ritual for West Brom regulars." },
-  { year: "2021", title: "The wok arrives", text: "Bao, dumplings, crispy duck and Vietnamese street food join the grill. The menu becomes truly three-in-one." },
+  { year: "2018", title: "The café finds its rhythm", text: "Morning breakfasts and light bites become a daily ritual for West Brom regulars. The building begins its life as a community anchor." },
+  { year: "2021", title: "The wok arrives", text: "Bao, dumplings, crispy duck and Vietnamese street food join the grill. The kitchen starts finding its three-in-one identity." },
+  { year: "2026", title: "The Miners Arms opens", text: "The full rebrand. A proper local with a kitchen that refused to pick just one cuisine — English, Indian and Chinese, all under one roof." },
   { year: "Today", title: "A neighbourhood institution", text: "From the full English at 7:30am to the family mixed grill at midnight, every plate is a taste of comfort and community." },
 ];
 
@@ -53,9 +53,9 @@ export default function AboutPage() {
               />
             </div>
             <div className="absolute -bottom-6 -right-6 hidden rounded-2xl border border-saffron-500/30 bg-ink-800/95 p-6 backdrop-blur sm:block">
-              <p className="font-display text-4xl text-saffron-400">10+</p>
+              <p className="font-display text-4xl text-saffron-400">Est.</p>
               <p className="text-xs uppercase tracking-luxe text-cream-200/60">
-                Years serving<br />West Bromwich
+                2026<br />West Bromwich
               </p>
             </div>
           </div>

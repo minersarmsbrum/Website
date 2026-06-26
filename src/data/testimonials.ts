@@ -2,26 +2,26 @@
 export const testimonials = [
   {
     quote:
-      "Three cuisines under one roof and every single plate was spot on. The mixed grill is unreal. We'll be back every week.",
+      "The Miners Mixed Grill for two is absolutely massive — lamb chops, tikka, ribs and more. We couldn't finish it and loved every bite. Best night out in Hilltop in years.",
     name: "Amara K.",
-    detail: "Family dinner",
+    detail: "Family dinner, West Bromwich",
   },
   {
     quote:
-      "Best full English in West Brom, then I came back at night for the crispy duck. Who does both this well?",
+      "Full English at half eight, then back the same evening for the Crispy Aromatic Duck. I live five minutes away and this place has already become my local.",
     name: "Daniel R.",
-    detail: "Regular",
+    detail: "Hilltop regular",
   },
   {
     quote:
-      "Generous portions, proper spice and the warmest welcome. It feels like a local that actually cares.",
+      "The Lamb Rogan Josh had proper depth — slow-cooked, rich, with those homemade naans. Then my kids demolished the bao buns. Three kitchens and not one of them cutting corners.",
     name: "Priya S.",
-    detail: "Saturday night",
+    detail: "Saturday night with family",
   },
   {
     quote:
-      "Booked a table for ten and they looked after us beautifully. The bao buns and lamb chops vanished in minutes.",
+      "Booked the back for my mum's birthday. Sixteen of us. They looked after every single person and the Char Siu Ribs were the talk of the table. We'll be back for Christmas.",
     name: "Marcus T.",
-    detail: "Birthday party",
+    detail: "Birthday celebration",
   },
 ];
