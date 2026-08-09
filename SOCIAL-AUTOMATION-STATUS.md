@@ -42,6 +42,30 @@ This resolves transient "high demand" 503 errors from the Gemini API (which can 
 `Fetch Upload Row` previously used `limit: 1` with no ordering and grabbed the OLDEST stale row.
 Fixed: `returnAll: true` + new `Pick Latest Session` Code node sorts by `created_at DESC`. This prevents old abandoned rows from hijacking the video or image path.
 
+### 2026-08-10 — Veo audio safety filter killed the video path (exec 4643)
+
+**Symptom:** owner sent a food photo, got nothing back — no video, no error, no way to recover. Only the admin chat got a stack trace.
+
+**Root cause:** Veo returns `done: true` even when its RAI filter blocks the clip — the response carries `raiMediaFilteredCount` and **no** `generatedSamples`. `Video Ready?` tested only `$json.done`, so a filtered result was treated as success, reached `Extract Video Binary`, and threw. That Code node stops the workflow, so the run died before any Telegram reply or Supabase write, leaving the session stuck at `awaiting_uploaded_photo`.
+
+**Can't we just turn audio off?** No — verified against the live API:
+- `parameters.generateAudio: false` → **HTTP 400**, `` `generateAudio` isn't supported by this model``. It's a **Vertex AI-only** option.
+- `veo-2.0-generate-001` (the silent model) → **HTTP 404**, retired.
+- Only `veo-3.1-generate-preview` / `-fast-` / `-lite-` are reachable, all always-on audio.
+
+So the audio is **steered, not disabled**. Fixes:
+- `Build Video Prompt` — added an explicit benign `Audio:` line (ambient room tone, no music/speech/voices). Resubmitting the exact prompt from 4643 with this line generated fine.
+- **`Video Produced?`** (new IF) — requires a real `generatedSamples[0].video.uri` before extracting.
+- **`Retry Video?`** (new IF) — resubmits up to 3 attempts total; the filter is non-deterministic and filtered attempts aren't charged.
+- **`Send Video Failed` → `State: video failed`** (new) — tells the owner in plain English and parks the session at `awaiting_uploaded_photo` so they can recover.
+- `Check Video Status` — now resolves the operation via `$json.operationName || $json.name` so the poll loop follows retries instead of a stale `.first()` operation.
+
+### 2026-08-10 — "🔁 Try again" on video approvals never worked
+
+`q3:rv` routed to `Fetch Upload Row`, which filters `status = 'awaiting_uploaded_photo'` — but by approval time the row is `awaiting_approval`, so it always fell through to "session not found". Even on a match, `Download Photo (Video)` read `fileId` from `Parse Reply`, which is empty on a button tap.
+
+Fixed by copying the image path's existing pattern: `State: awaiting_approval (video)` now persists the Telegram file_id into `source_image_url`, a new **`Fetch Retry Row`** looks the session up by id (the callback data carries it), and both `Download Photo` nodes fall back to `$('Pick Latest Session').item.json.source_image_url`.
+
 ---
 
 ## ⏸ What's next
@@ -68,14 +92,14 @@ Fixed: `returnAll: true` + new `Pick Latest Session` Code node sorts by `created
 
 **n8n workflows** (in Prakhar's n8n instance — `n8n.srv1206791.hstgr.cloud`):
 - `MINERS-Social-Initiation` — id `K1YQ3T7gAlXlSwYV` — schedule → "post today?"
-- `MINERS-Social-Responder` — id `MLsWZFRXpBisluWN` — handles button taps, photo uploads, video generation, approval flow (56 nodes, published `f1c1d5ef`)
+- `MINERS-Social-Responder` — id `MLsWZFRXpBisluWN` — handles button taps, photo uploads, video generation, approval flow (92 nodes as of 2026-08-10)
 
 **Infrastructure:**
 - Supabase project `fnwotwlbiexhcgnrhtcy`, table `social_posts` (holds live conversation state + post history; RLS on, service-role-only)
 - Telegram bot **@masocialsbot** (separate from the booking bot), owner chat ID `5930338959`
 - n8n credentials (names only): `Miners Arms Social` (Telegram), `Miners Arms Supabase` (database), `Miners Arms Google AI` (Gemini / Veo)
 
-**Photo routing logic:** `msg:photo` from Telegram always hits `Fetch Upload Row` → `Pick Latest Session` → `Image or Video?`. The `media_type` column on the newest Supabase row determines which path runs (`image` for enhance, `video` for Veo generation).
+**Photo routing logic:** `msg:photo` from Telegram always hits `Fetch Upload Row` → `Pick Latest Session` → `Image or Video?`. The `media_type` column on the newest Supabase row determines which path runs (`image` for enhance, `video` for Veo generation). The `q3:rv` retry route instead hits `Fetch Retry Row`, which looks the session up by id from the callback data.
 
 **Video pipeline (Phase 3) — Veo 3 via HTTP:**
 `Prepare Image for Veo` (Code — base64-encodes photo, builds Gemini API request body) →

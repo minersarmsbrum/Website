@@ -3,11 +3,11 @@
   "name": "MINERS-Social-Responder",
   "active": true,
   "isArchived": false,
-  "versionId": "f223e2e4-2935-4dd7-8bbe-596a897aa3f3",
-  "activeVersionId": "f223e2e4-2935-4dd7-8bbe-596a897aa3f3",
+  "versionId": "690b14f2-9c76-40e5-a978-a73115f2217b",
+  "activeVersionId": "690b14f2-9c76-40e5-a978-a73115f2217b",
   "triggerCount": 1,
   "createdAt": "2026-06-19T16:51:41.958Z",
-  "updatedAt": "2026-07-03T10:37:21.232Z",
+  "updatedAt": "2026-08-09T21:12:44.183Z",
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": true,
@@ -136,7 +136,7 @@
         ],
         [
           {
-            "node": "Fetch Upload Row",
+            "node": "Fetch Retry Row",
             "type": "main",
             "index": 0
           }
@@ -605,7 +605,7 @@
       "main": [
         [
           {
-            "node": "Extract Video Binary",
+            "node": "Video Produced?",
             "type": "main",
             "index": 0
           }
@@ -827,6 +827,64 @@
           }
         ]
       ]
+    },
+    "Video Produced?": {
+      "main": [
+        [
+          {
+            "node": "Extract Video Binary",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Retry Video?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retry Video?": {
+      "main": [
+        [
+          {
+            "node": "Prepare Image for Veo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Video Failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Video Failed": {
+      "main": [
+        [
+          {
+            "node": "State: video failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Retry Row": {
+      "main": [
+        [
+          {
+            "node": "Pick Latest Session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "nodes": [
@@ -843,8 +901,8 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.3,
       "position": [
-        -64,
-        864
+        -576,
+        976
       ],
       "webhookId": "77eff69f-b0d8-4bb5-b084-35f18f114fe2"
     },
@@ -857,8 +915,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        160,
-        864
+        -352,
+        976
       ]
     },
     {
@@ -872,8 +930,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        608,
-        800
+        96,
+        912
       ],
       "webhookId": "bd2e123c-2eef-4b3a-8c86-2ef715e8a56b"
     },
@@ -886,8 +944,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        832,
-        800
+        320,
+        912
       ]
     },
     {
@@ -1181,8 +1239,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        1056,
-        688
+        624,
+        816
       ]
     },
     {
@@ -1223,7 +1281,7 @@
       "typeVersion": 1.2,
       "position": [
         1280,
-        0
+        -272
       ],
       "webhookId": "33f936c9-a43d-4fcc-ba49-4b525e3500eb"
     },
@@ -1256,7 +1314,7 @@
       "typeVersion": 1,
       "position": [
         1504,
-        0
+        -272
       ]
     },
     {
@@ -1274,7 +1332,7 @@
       "typeVersion": 1.2,
       "position": [
         1280,
-        192
+        -80
       ],
       "webhookId": "fea5e9f9-ae01-428a-81c2-fb0e0708463f"
     },
@@ -1307,7 +1365,7 @@
       "typeVersion": 1,
       "position": [
         1504,
-        192
+        -80
       ]
     },
     {
@@ -1348,7 +1406,7 @@
       "typeVersion": 1.2,
       "position": [
         1280,
-        384
+        112
       ],
       "webhookId": "9156e65e-7579-46ed-8d81-e0397372b981"
     },
@@ -1385,7 +1443,7 @@
       "typeVersion": 1,
       "position": [
         1504,
-        384
+        112
       ]
     },
     {
@@ -1403,7 +1461,7 @@
       "typeVersion": 1.2,
       "position": [
         1280,
-        576
+        304
       ],
       "webhookId": "6c9715d8-60f1-4d1f-916a-15aa4af27d42"
     },
@@ -1440,7 +1498,7 @@
       "typeVersion": 1,
       "position": [
         1504,
-        576
+        304
       ]
     },
     {
@@ -1563,8 +1621,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1280,
-        1152
+        1344,
+        1408
       ],
       "webhookId": "164333b8-e808-4af7-9a53-af194fb9a37e"
     },
@@ -1596,8 +1654,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1504,
-        1152
+        1568,
+        1408
       ]
     },
     {
@@ -1614,8 +1672,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1280,
-        1536
+        1312,
+        2128
       ],
       "webhookId": "0c9245c1-59e7-47da-a26c-7d4cbdfea57f"
     },
@@ -1651,8 +1709,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1504,
-        1536
+        1536,
+        2128
       ]
     },
     {
@@ -1681,8 +1739,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1280,
-        1728
+        1360,
+        2672
       ]
     },
     {
@@ -1895,8 +1953,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1504,
-        1728
+        1584,
+        2672
       ]
     },
     {
@@ -1928,8 +1986,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1728,
-        1728
+        1808,
+        2672
       ]
     },
     {
@@ -1946,8 +2004,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1952,
-        1632
+        2032,
+        2576
       ],
       "webhookId": "71436175-0613-453c-861c-14efd5d658f9"
     },
@@ -2010,14 +2068,14 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        1952,
-        1824
+        2032,
+        2768
       ]
     },
     {
       "parameters": {
         "resource": "file",
-        "fileId": "={{ $('Parse Reply').item.json.fileId }}",
+        "fileId": "={{ $('Parse Reply').item.json.fileId || $('Pick Latest Session').item.json.source_image_url }}",
         "additionalFields": {}
       },
       "id": "55fcf3ef-09b3-4565-b554-88fcef7f3c14",
@@ -2025,15 +2083,15 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        2240,
-        1632
+        2896,
+        1680
       ],
       "webhookId": "39b661c7-01fa-42a2-b09b-17ee1c2dda8f"
     },
     {
       "parameters": {
         "resource": "file",
-        "fileId": "={{ $('Parse Reply').item.json.fileId }}",
+        "fileId": "={{ $('Parse Reply').item.json.fileId || $('Pick Latest Session').item.json.source_image_url }}",
         "additionalFields": {}
       },
       "id": "913d17f1-3718-4c25-8d45-89ca62975225",
@@ -2041,8 +2099,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        2240,
-        1968
+        2768,
+        2432
       ],
       "webhookId": "65b5232b-b42a-4a2b-b923-32637183feb4"
     },
@@ -2065,8 +2123,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1.2,
       "position": [
-        2528,
-        1632
+        3184,
+        1680
       ],
       "retryOnFail": true,
       "maxTries": 5,
@@ -2074,15 +2132,15 @@
     },
     {
       "parameters": {
-        "jsCode": "const a = $('Analyze Photo (Video)').first().json;\nlet raw = '';\ntry {\n  if (a && a.content && Array.isArray(a.content.parts)) { raw = a.content.parts.map(p => p.text || '').join(' '); }\n  else { raw = a.text ?? JSON.stringify(a); }\n} catch (e) { raw = ''; }\nlet parsed = {\n  category: 'food',\n  subject_description: 'a beautifully presented pub dish on a warm wooden table',\n  background_description: 'warm bokeh pub interior with amber lighting',\n  lighting: 'warm candlelight with a golden overhead glow',\n  motion_elements: 'gentle steam rising from the food, sauce glistening in the light',\n  camera_move: 'slow cinematic push-in',\n  mood: 'warm'\n};\ntry { const m = String(raw).match(/\\{[\\s\\S]*\\}/); if (m) { parsed = Object.assign(parsed, JSON.parse(m[0])); } } catch (e) {}\n\nconst videoPrompt = [\n  'Cinematic short video for The Miners Arms pub in West Bromwich.',\n  'Scene: ' + parsed.subject_description + '.',\n  'Background: ' + parsed.background_description + '.',\n  'Lighting: ' + parsed.lighting + '.',\n  'Camera: ' + parsed.camera_move + ' with subtle parallax depth.',\n  'Motion: Bring these specific elements to life with realistic natural movement — ' + parsed.motion_elements + '.',\n  'Mood: ' + parsed.mood + ', appetising, warm and inviting pub atmosphere.',\n  'Style: photorealistic, high-end food and drink cinematography. Every surface alive with gentle natural movement. The scene should feel alive and tactile.',\n  '9:16 vertical format. 5-8 seconds. No text overlays. No logos. No watermarks.'\n].join(' ');\n\nreturn [{ json: { videoPrompt, category: parsed.category, main_subject: parsed.subject_description, setting: parsed.background_description } }];"
+        "jsCode": "const a = $('Analyze Photo (Video)').first().json;\nlet raw = '';\ntry {\n  if (a && a.content && Array.isArray(a.content.parts)) { raw = a.content.parts.map(p => p.text || '').join(' '); }\n  else { raw = a.text ?? JSON.stringify(a); }\n} catch (e) { raw = ''; }\nlet parsed = {\n  category: 'food',\n  subject_description: 'a beautifully presented pub dish on a warm wooden table',\n  background_description: 'warm bokeh pub interior with amber lighting',\n  lighting: 'warm candlelight with a golden overhead glow',\n  motion_elements: 'gentle steam rising from the food, sauce glistening in the light',\n  camera_move: 'slow cinematic push-in',\n  mood: 'warm'\n};\ntry { const m = String(raw).match(/\\{[\\s\\S]*\\}/); if (m) { parsed = Object.assign(parsed, JSON.parse(m[0])); } } catch (e) {}\n\nconst videoPrompt = [\n  'Cinematic short video for The Miners Arms pub in West Bromwich.',\n  'Scene: ' + parsed.subject_description + '.',\n  'Background: ' + parsed.background_description + '.',\n  'Lighting: ' + parsed.lighting + '.',\n  'Camera: ' + parsed.camera_move + ' with subtle parallax depth.',\n  'Motion: Bring these specific elements to life with realistic natural movement — ' + parsed.motion_elements + '.',\n  'Mood: ' + parsed.mood + ', appetising, warm and inviting pub atmosphere.',\n  'Style: photorealistic, high-end food and drink cinematography. Every surface alive with gentle natural movement. The scene should feel alive and tactile.',\n  'Audio: quiet ambient room tone only — a soft low background hum. No music, no speech, no dialogue, no singing, no voices, no lyrics.',\n  '9:16 vertical format. 5-8 seconds. No text overlays. No logos. No watermarks.'\n].join(' ');\n\nreturn [{ json: { videoPrompt, category: parsed.category, main_subject: parsed.subject_description, setting: parsed.background_description } }];"
       },
       "id": "bc437b6d-0c3a-42a6-91bf-0a8d072c6182",
       "name": "Build Video Prompt",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2752,
-        1632
+        3408,
+        1680
       ]
     },
     {
@@ -2108,8 +2166,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1.2,
       "position": [
-        2976,
-        1632
+        3632,
+        1680
       ]
     },
     {
@@ -2121,8 +2179,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        3392,
-        1632
+        4048,
+        1680
       ]
     },
     {
@@ -2181,8 +2239,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        5696,
-        1632
+        6352,
+        1680
       ],
       "webhookId": "5adebaa3-0831-49ec-ac32-42581dd8bf67"
     },
@@ -2213,6 +2271,10 @@
             {
               "fieldId": "caption",
               "fieldValue": "={{ $('Extract Caption (Video)').item.json.caption }}"
+            },
+            {
+              "fieldId": "source_image_url",
+              "fieldValue": "={{ $('Parse Reply').item.json.fileId || $('Pick Latest Session').item.json.source_image_url }}"
             }
           ]
         }
@@ -2222,8 +2284,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        5920,
-        1632
+        6576,
+        1680
       ]
     },
     {
@@ -2245,8 +2307,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1.2,
       "position": [
-        2528,
-        1968
+        3056,
+        2432
       ],
       "retryOnFail": true,
       "maxTries": 5,
@@ -2275,8 +2337,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1.2,
       "position": [
-        3328,
-        1872
+        3856,
+        2336
       ]
     },
     {
@@ -2288,8 +2350,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        3680,
-        1872
+        4208,
+        2336
       ]
     },
     {
@@ -2348,8 +2410,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        5920,
-        1968
+        6448,
+        2432
       ],
       "webhookId": "c3aec491-9306-4df1-9b26-c6eb88204fc7"
     },
@@ -2393,8 +2455,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        5472,
-        1968
+        6672,
+        2432
       ]
     },
     {
@@ -2411,8 +2473,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -64,
-        2512
+        1328,
+        3312
       ],
       "webhookId": "cd2034d0-5517-4d03-8d95-6b52500300a3"
     },
@@ -2457,8 +2519,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2752,
-        1968
+        3280,
+        2432
       ]
     },
     {
@@ -2471,8 +2533,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        3040,
-        2064
+        3568,
+        2528
       ]
     },
     {
@@ -2484,8 +2546,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        3392,
-        2064
+        3920,
+        2528
       ]
     },
     {
@@ -2504,8 +2566,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        3680,
-        2064
+        4208,
+        2528
       ]
     },
     {
@@ -2537,8 +2599,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        384,
-        864
+        -128,
+        976
       ]
     },
     {
@@ -2562,8 +2624,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1280,
-        1344
+        1312,
+        1936
       ],
       "alwaysOutputData": true,
       "onError": "continueRegularOutput"
@@ -2577,8 +2639,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1504,
-        1344
+        1536,
+        1936
       ]
     },
     {
@@ -2610,8 +2672,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1728,
-        1344
+        1760,
+        1936
       ]
     },
     {
@@ -2651,8 +2713,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1952,
-        1344
+        2032,
+        1424
       ],
       "webhookId": "6f92bbad-6ec6-4000-9353-c17b44d7d4a8",
       "onError": "continueRegularOutput"
@@ -2666,8 +2728,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        3904,
-        1632
+        4560,
+        1680
       ]
     },
     {
@@ -2686,8 +2748,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        4128,
-        1632
+        4784,
+        1680
       ],
       "retryOnFail": true,
       "maxTries": 3,
@@ -2702,8 +2764,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        4352,
-        1632
+        5008,
+        1680
       ]
     },
     {
@@ -2715,14 +2777,14 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        4576,
-        1632
+        5232,
+        1680
       ],
       "webhookId": "01191369-39d0-44f8-a6a8-bcfb698c75b2"
     },
     {
       "parameters": {
-        "url": "={{ 'https://generativelanguage.googleapis.com/v1beta/' + $('Extract Operation ID').first().json.operationName }}",
+        "url": "={{ 'https://generativelanguage.googleapis.com/v1beta/' + ($json.operationName || $json.name) }}",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "googlePalmApi",
         "options": {}
@@ -2732,8 +2794,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        4800,
-        1568
+        5456,
+        1616
       ]
     },
     {
@@ -2764,8 +2826,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        5024,
-        1632
+        5680,
+        1680
       ]
     },
     {
@@ -2777,8 +2839,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        5248,
-        1632
+        5904,
+        1680
       ]
     },
     {
@@ -2801,8 +2863,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        3680,
-        1632
+        4336,
+        1680
       ]
     },
     {
@@ -2823,8 +2885,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        5472,
-        1632
+        6128,
+        1680
       ]
     },
     {
@@ -2838,8 +2900,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3,
       "position": [
-        3904,
-        1968
+        4432,
+        2432
       ]
     },
     {
@@ -2851,8 +2913,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        4128,
-        1968
+        4656,
+        2432
       ]
     },
     {
@@ -2893,8 +2955,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        4352,
-        1968
+        4880,
+        2432
       ],
       "retryOnFail": true,
       "maxTries": 3,
@@ -2917,8 +2979,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        5472,
-        1968
+        6000,
+        2432
       ],
       "retryOnFail": true,
       "maxTries": 3,
@@ -2933,8 +2995,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        5696,
-        1968
+        6224,
+        2432
       ]
     },
     {
@@ -2966,8 +3028,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        4576,
-        1968
+        5104,
+        2432
       ],
       "retryOnFail": true,
       "maxTries": 3,
@@ -2982,8 +3044,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        4800,
-        1968
+        5328,
+        2432
       ]
     },
     {
@@ -3015,8 +3077,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        5024,
-        1968
+        5552,
+        2432
       ],
       "retryOnFail": true,
       "maxTries": 3,
@@ -3031,11 +3093,397 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        5248,
-        1968
+        5776,
+        2432
       ]
+    },
+    {
+      "parameters": {
+        "content": "### Read me first\nOwner-in-the-loop social poster for The Miners Arms. Every Telegram reply/photo from the 3 owner chat IDs lands here and gets routed by a `route` code. Companion to `MINERS-Social-Initiation` (which starts the conversation) — this workflow carries it through to a finished, approved asset. Delivery ends at Telegram; auto-posting to FB/IG/TikTok was cancelled by Prakhar, posting is manual.",
+        "height": 480,
+        "width": 520
+      },
+      "id": "728ae97d-e22d-4a1d-bdff-b8f7df1c6ee0",
+      "name": "Sticky: Read Me First",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -720,
+        -352
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Entry — parse & route every Telegram update\nEvery Telegram update (button tap or photo/text message) from the 3 allow-listed owner chat IDs lands here. `Parse Reply` extracts the `route` + `sessionId` from callback data, or detects `msg:photo` / `msg:post`. Callback taps get acknowledged (stop the spinner) + a short ack text. `Route Step` is the master switch — 12 routes + a fallback.",
+        "height": 764,
+        "width": 1720,
+        "color": 4
+      },
+      "id": "22d60e0f-0963-4211-891a-de0916a49fb9",
+      "name": "Sticky: Entry & Routing",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -864,
+        576
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Conversation branches — Yes/No → Picture/Video → Upload/Generate\nHandles the early yes/no and picture-or-video choices. `q1:y` asks picture-or-video; `q1:n` records cancelled. `q2:pic` asks upload-your-own vs AI-generate; `q2:vid` skips straight to requesting a food photo (video always needs one to animate).",
+        "height": 1128,
+        "width": 664,
+        "color": 4
+      },
+      "id": "33ca5731-0856-429d-9403-37250a0d1b4d",
+      "name": "Sticky: Conversation Branches",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1104,
+        -560
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Request the food photo (own-photo path)\n`q2b:own` — owner chose to upload their own food photo instead of AI-generating one from the gallery. Sends the request and sets state to `awaiting_uploaded_photo`.",
+        "height": 700,
+        "width": 664,
+        "color": 4
+      },
+      "id": "685bcd32-4868-4721-bbda-13e06747d66d",
+      "name": "Sticky: Request Food Photo",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1248,
+        1680
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Final review — approve / cancel / regenerate\nHandles the owner's verdict on a generated draft. `q3:ok` marks it approved (delivery ends here — posting is manual, not automated). `q3:cx` cancels. `q3:rg`/`q3:rv` loop back into the generate or video pipelines to try again.",
+        "height": 764,
+        "width": 888,
+        "color": 4
+      },
+      "id": "789bb9ce-6d74-43fb-91ba-503c9a7ae0c5",
+      "name": "Sticky: Final Review",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        352
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### AI-generate path — gallery photo + Gemini edit (Phase 2a)\n`q2b:gen` (and the `q3:rg` regenerate loop) land here. Fetches a random real gallery photo from the website, has Gemini write a caption, then Gemini image-edit overlays branded social graphics directly onto the gallery photo. Sends the result for approve/regenerate/cancel.",
+        "height": 380,
+        "width": 2840,
+        "color": 3
+      },
+      "id": "47857207-a05e-4595-b248-ead0334ebfe2",
+      "name": "Sticky: AI-Generate Path (Phase 2a)",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1104,
+        736
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Photo received — session lookup & type dispatch\nHandles any incoming Telegram photo (`msg:photo`) or a video retry (`q3:rv`). `Pick Latest Session` sorts by `created_at DESC` to find the newest in-flight session — this fixes a real bug where an old abandoned row could hijack the flow, don't reintroduce a bare `limit:1`. `Session Guard` bails out gracefully if nothing is open. `Image or Video?` then dispatches on the session's `media_type`.",
+        "height": 502,
+        "width": 992,
+        "color": 4
+      },
+      "id": "3c031580-493f-4cbb-8f08-3af8d6468454",
+      "name": "Sticky: Session Lookup & Dispatch",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1248,
+        2432
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Manual test shortcut\nTyping \"post\" directly to the bot (`msg:post`) re-runs the same kickoff logic as the scheduled `MINERS-Social-Initiation` workflow, for testing without waiting for Mon/Wed/Fri 10am.",
+        "height": 438,
+        "width": 992,
+        "color": 2
+      },
+      "id": "e216bf12-a0ba-4af5-8ffb-3c1123495509",
+      "name": "Sticky: Manual Test Shortcut",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1248,
+        1152
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Fallback — unrecognized input\nCatches any `route` that doesn't match a known code (stale button after a workflow update, unauthorized chat ID, etc.) and tells the user their input wasn't understood.",
+        "height": 350,
+        "width": 500,
+        "color": 2
+      },
+      "id": "5112ae83-bee0-4808-88c9-cfb4457871d8",
+      "name": "Sticky: Fallback",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1248,
+        3120
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### ⚠️ Video pipeline (Veo 3.1) — FROZEN, do not modify without explicit request\nTurns the owner's food photo into an 8s vertical video via Gemini's Veo 3.1 `predictLongRunning` API (base64 image-to-video), polling every 40s until done. Confirmed working 2026-07-03. It broke once already when Google retired `veo-3.0-generate-001` — if it 404s again, re-probe available models with `explore_node_resources` (`videoGenerationModelSearch`) and bump the model ID; don't redesign the architecture.\n\n**2026-08-10 — RAI audio-filter guard added (exec 4643).**\nVeo returns `done: true` even when its safety filter blocks the clip (`raiMediaFilteredCount`, no `generatedSamples`). `Video Ready?` only checks `done`, so a filtered result used to reach `Extract Video Binary` and throw, killing the run silently. Now:\n- **`Video Produced?`** checks a real `generatedSamples[0].video.uri` before extracting.\n- **`Retry Video?`** resubmits (3 attempts total) — the filter is non-deterministic and filtered attempts aren't charged.\n- **`Send Video Failed` → `State: video failed`** tells the owner and parks the session at `awaiting_uploaded_photo` so they can recover.\n- `Build Video Prompt` now sets an explicit benign **Audio:** line. Veo 3.1 audio is always on — `generateAudio:false` is **Vertex-only** (Gemini API returns 400) and silent `veo-2.0` is retired (404), so audio must be steered, not disabled.\n- `Check Video Status` resolves the op via `$json.operationName || $json.name` so the poll loop follows retries instead of a stale `.first()` operation.",
+        "height": 444,
+        "width": 4120,
+        "color": 6
+      },
+      "id": "0a94a2b5-8f0d-43ef-9634-392810dc16f3",
+      "name": "Sticky: Video Pipeline FROZEN",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2720,
+        1392
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Own-photo composite pipeline (Phase 2b) — remove.bg + Gemini Files API\nComposites the owner's uploaded food photo onto a real gallery background: remove.bg cuts out the food, both images are uploaded via Gemini Files API HTTP calls (not inline base64 — n8n Code nodes in this version can't read binary data), then Gemini 3.1 Flash Image composites them with a prompt that keeps the dish itself untouched.",
+        "height": 572,
+        "width": 4060,
+        "color": 3
+      },
+      "id": "022344f2-86ed-443d-88e5-2b08c6f4ee9c",
+      "name": "Sticky: Composite Pipeline (Phase 2b)",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2736,
+        2112
+      ]
+    },
+    {
+      "id": "94385aff-d14b-4728-8497-5b64eef9fa6c",
+      "name": "Video Produced?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        5830,
+        1900
+      ],
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "has-video-uri",
+              "leftValue": "={{ !!$json.response?.generateVideoResponse?.generatedSamples?.[0]?.video?.uri }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          }
+        },
+        "options": {}
+      },
+      "notes": "Veo sets done:true even when the RAI safety filter blocks the clip. Only a generatedSamples[0].video.uri means a real video exists."
+    },
+    {
+      "id": "6d330f14-928e-480a-a068-6d267f61789b",
+      "name": "Retry Video?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        6054,
+        1900
+      ],
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "attempts-left",
+              "leftValue": "={{ $runIndex }}",
+              "rightValue": 2,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          }
+        },
+        "options": {}
+      },
+      "notes": "Veo's audio filter is non-deterministic and filtered attempts are not charged, so resubmit. $runIndex < 2 gives 3 total submissions."
+    },
+    {
+      "id": "647fe36d-840a-47cf-b834-8e0fc96a74fa",
+      "name": "Send Video Failed",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        6278,
+        1900
+      ],
+      "parameters": {
+        "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+        "text": "=⚠️ Sorry — I couldn't make that video.\n\nGoogle's Veo safety filter blocked the soundtrack it generated for your photo. This happens at random and isn't anything you did wrong. I already tried 3 times.\n\nTap 🔁 Try again, or just send me the photo again.",
+        "replyMarkup": "inlineKeyboard",
+        "inlineKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "🔁 Try again",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q3:rv:\" + $('Pick Latest Session').item.json.id }}"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "❌ Cancel",
+                    "additionalFields": {
+                      "callback_data": "={{ \"q3:cx:\" + $('Pick Latest Session').item.json.id }}"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "HTML"
+        }
+      },
+      "notes": "Tells the owner the video was blocked instead of leaving the chat silent.",
+      "webhookId": "9e988989-4de7-4986-8c88-ecdcc9d17bdb"
+    },
+    {
+      "id": "872d17ec-7665-4397-9e68-9e05795a47c9",
+      "name": "State: video failed",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        6502,
+        1900
+      ],
+      "parameters": {
+        "operation": "update",
+        "tableId": "social_posts",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Pick Latest Session').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "awaiting_uploaded_photo"
+            },
+            {
+              "fieldId": "media_type",
+              "fieldValue": "video"
+            },
+            {
+              "fieldId": "source_image_url",
+              "fieldValue": "={{ $('Parse Reply').item.json.fileId || $('Pick Latest Session').item.json.source_image_url }}"
+            }
+          ]
+        }
+      },
+      "notes": "Parks the session back at awaiting_uploaded_photo and keeps the file_id so both recovery routes work."
+    },
+    {
+      "id": "e4fc03e4-71d9-462b-b0f0-d53b3027bc17",
+      "name": "Fetch Retry Row",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        2880
+      ],
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "social_posts",
+        "returnAll": true,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+            }
+          ]
+        }
+      },
+      "notes": "retry_video callbacks carry the session id, so look the row up by id rather than by status."
     }
   ],
+  "description": "Telegram-driven social posting bot for The Miners Arms. AI-generate path now fetches a random real gallery photo from the website and uses Gemini image editing to overlay branded social media graphics on it.",
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp",
+    "templateCredsSetupCompleted": true
+  },
+  "tags": [],
+  "scopes": [
+    "execution:reveal",
+    "workflow:create",
+    "workflow:delete",
+    "workflow:disableRedaction",
+    "workflow:enableRedaction",
+    "workflow:execute",
+    "workflow:execute-chat",
+    "workflow:export",
+    "workflow:import",
+    "workflow:list",
+    "workflow:move",
+    "workflow:publish",
+    "workflow:read",
+    "workflow:share",
+    "workflow:unpublish",
+    "workflow:unshare",
+    "workflow:update"
+  ],
+  "canExecute": true,
+  "parentFolderId": null,
   "activeVersion": {
     "nodes": [
       {
@@ -3051,8 +3499,8 @@
         "type": "n8n-nodes-base.telegramTrigger",
         "typeVersion": 1.3,
         "position": [
-          -64,
-          864
+          -576,
+          976
         ],
         "webhookId": "77eff69f-b0d8-4bb5-b084-35f18f114fe2"
       },
@@ -3065,8 +3513,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          160,
-          864
+          -352,
+          976
         ]
       },
       {
@@ -3080,8 +3528,8 @@
         "type": "n8n-nodes-base.telegram",
         "typeVersion": 1.2,
         "position": [
-          608,
-          800
+          96,
+          912
         ],
         "webhookId": "bd2e123c-2eef-4b3a-8c86-2ef715e8a56b"
       },
@@ -3094,8 +3542,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          832,
-          800
+          320,
+          912
         ]
       },
       {
@@ -3389,8 +3837,8 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          1056,
-          688
+          624,
+          816
         ]
       },
       {
@@ -3431,7 +3879,7 @@
         "typeVersion": 1.2,
         "position": [
           1280,
-          0
+          -272
         ],
         "webhookId": "33f936c9-a43d-4fcc-ba49-4b525e3500eb"
       },
@@ -3464,7 +3912,7 @@
         "typeVersion": 1,
         "position": [
           1504,
-          0
+          -272
         ]
       },
       {
@@ -3482,7 +3930,7 @@
         "typeVersion": 1.2,
         "position": [
           1280,
-          192
+          -80
         ],
         "webhookId": "fea5e9f9-ae01-428a-81c2-fb0e0708463f"
       },
@@ -3515,7 +3963,7 @@
         "typeVersion": 1,
         "position": [
           1504,
-          192
+          -80
         ]
       },
       {
@@ -3556,7 +4004,7 @@
         "typeVersion": 1.2,
         "position": [
           1280,
-          384
+          112
         ],
         "webhookId": "9156e65e-7579-46ed-8d81-e0397372b981"
       },
@@ -3593,7 +4041,7 @@
         "typeVersion": 1,
         "position": [
           1504,
-          384
+          112
         ]
       },
       {
@@ -3611,7 +4059,7 @@
         "typeVersion": 1.2,
         "position": [
           1280,
-          576
+          304
         ],
         "webhookId": "6c9715d8-60f1-4d1f-916a-15aa4af27d42"
       },
@@ -3648,7 +4096,7 @@
         "typeVersion": 1,
         "position": [
           1504,
-          576
+          304
         ]
       },
       {
@@ -3771,8 +4219,8 @@
         "type": "n8n-nodes-base.telegram",
         "typeVersion": 1.2,
         "position": [
-          1280,
-          1152
+          1344,
+          1408
         ],
         "webhookId": "164333b8-e808-4af7-9a53-af194fb9a37e"
       },
@@ -3804,8 +4252,8 @@
         "type": "n8n-nodes-base.supabase",
         "typeVersion": 1,
         "position": [
-          1504,
-          1152
+          1568,
+          1408
         ]
       },
       {
@@ -3822,8 +4270,8 @@
         "type": "n8n-nodes-base.telegram",
         "typeVersion": 1.2,
         "position": [
-          1280,
-          1536
+          1312,
+          2128
         ],
         "webhookId": "0c9245c1-59e7-47da-a26c-7d4cbdfea57f"
       },
@@ -3859,8 +4307,8 @@
         "type": "n8n-nodes-base.supabase",
         "typeVersion": 1,
         "position": [
-          1504,
-          1536
+          1536,
+          2128
         ]
       },
       {
@@ -3889,8 +4337,8 @@
         "type": "n8n-nodes-base.supabase",
         "typeVersion": 1,
         "position": [
-          1280,
-          1728
+          1360,
+          2672
         ]
       },
       {
@@ -4103,8 +4551,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          1504,
-          1728
+          1584,
+          2672
         ]
       },
       {
@@ -4136,8 +4584,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          1728,
-          1728
+          1808,
+          2672
         ]
       },
       {
@@ -4154,8 +4602,8 @@
         "type": "n8n-nodes-base.telegram",
         "typeVersion": 1.2,
         "position": [
-          1952,
-          1632
+          2032,
+          2576
         ],
         "webhookId": "71436175-0613-453c-861c-14efd5d658f9"
       },
@@ -4218,14 +4666,14 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          1952,
-          1824
+          2032,
+          2768
         ]
       },
       {
         "parameters": {
           "resource": "file",
-          "fileId": "={{ $('Parse Reply').item.json.fileId }}",
+          "fileId": "={{ $('Parse Reply').item.json.fileId || $('Pick Latest Session').item.json.source_image_url }}",
           "additionalFields": {}
         },
         "id": "55fcf3ef-09b3-4565-b554-88fcef7f3c14",
@@ -4233,15 +4681,15 @@
         "type": "n8n-nodes-base.telegram",
         "typeVersion": 1.2,
         "position": [
-          2240,
-          1632
+          2896,
+          1680
         ],
         "webhookId": "39b661c7-01fa-42a2-b09b-17ee1c2dda8f"
       },
       {
         "parameters": {
           "resource": "file",
-          "fileId": "={{ $('Parse Reply').item.json.fileId }}",
+          "fileId": "={{ $('Parse Reply').item.json.fileId || $('Pick Latest Session').item.json.source_image_url }}",
           "additionalFields": {}
         },
         "id": "913d17f1-3718-4c25-8d45-89ca62975225",
@@ -4249,8 +4697,8 @@
         "type": "n8n-nodes-base.telegram",
         "typeVersion": 1.2,
         "position": [
-          2240,
-          1968
+          2768,
+          2432
         ],
         "webhookId": "65b5232b-b42a-4a2b-b923-32637183feb4"
       },
@@ -4273,8 +4721,8 @@
         "type": "@n8n/n8n-nodes-langchain.googleGemini",
         "typeVersion": 1.2,
         "position": [
-          2528,
-          1632
+          3184,
+          1680
         ],
         "retryOnFail": true,
         "maxTries": 5,
@@ -4282,15 +4730,15 @@
       },
       {
         "parameters": {
-          "jsCode": "const a = $('Analyze Photo (Video)').first().json;\nlet raw = '';\ntry {\n  if (a && a.content && Array.isArray(a.content.parts)) { raw = a.content.parts.map(p => p.text || '').join(' '); }\n  else { raw = a.text ?? JSON.stringify(a); }\n} catch (e) { raw = ''; }\nlet parsed = {\n  category: 'food',\n  subject_description: 'a beautifully presented pub dish on a warm wooden table',\n  background_description: 'warm bokeh pub interior with amber lighting',\n  lighting: 'warm candlelight with a golden overhead glow',\n  motion_elements: 'gentle steam rising from the food, sauce glistening in the light',\n  camera_move: 'slow cinematic push-in',\n  mood: 'warm'\n};\ntry { const m = String(raw).match(/\\{[\\s\\S]*\\}/); if (m) { parsed = Object.assign(parsed, JSON.parse(m[0])); } } catch (e) {}\n\nconst videoPrompt = [\n  'Cinematic short video for The Miners Arms pub in West Bromwich.',\n  'Scene: ' + parsed.subject_description + '.',\n  'Background: ' + parsed.background_description + '.',\n  'Lighting: ' + parsed.lighting + '.',\n  'Camera: ' + parsed.camera_move + ' with subtle parallax depth.',\n  'Motion: Bring these specific elements to life with realistic natural movement — ' + parsed.motion_elements + '.',\n  'Mood: ' + parsed.mood + ', appetising, warm and inviting pub atmosphere.',\n  'Style: photorealistic, high-end food and drink cinematography. Every surface alive with gentle natural movement. The scene should feel alive and tactile.',\n  '9:16 vertical format. 5-8 seconds. No text overlays. No logos. No watermarks.'\n].join(' ');\n\nreturn [{ json: { videoPrompt, category: parsed.category, main_subject: parsed.subject_description, setting: parsed.background_description } }];"
+          "jsCode": "const a = $('Analyze Photo (Video)').first().json;\nlet raw = '';\ntry {\n  if (a && a.content && Array.isArray(a.content.parts)) { raw = a.content.parts.map(p => p.text || '').join(' '); }\n  else { raw = a.text ?? JSON.stringify(a); }\n} catch (e) { raw = ''; }\nlet parsed = {\n  category: 'food',\n  subject_description: 'a beautifully presented pub dish on a warm wooden table',\n  background_description: 'warm bokeh pub interior with amber lighting',\n  lighting: 'warm candlelight with a golden overhead glow',\n  motion_elements: 'gentle steam rising from the food, sauce glistening in the light',\n  camera_move: 'slow cinematic push-in',\n  mood: 'warm'\n};\ntry { const m = String(raw).match(/\\{[\\s\\S]*\\}/); if (m) { parsed = Object.assign(parsed, JSON.parse(m[0])); } } catch (e) {}\n\nconst videoPrompt = [\n  'Cinematic short video for The Miners Arms pub in West Bromwich.',\n  'Scene: ' + parsed.subject_description + '.',\n  'Background: ' + parsed.background_description + '.',\n  'Lighting: ' + parsed.lighting + '.',\n  'Camera: ' + parsed.camera_move + ' with subtle parallax depth.',\n  'Motion: Bring these specific elements to life with realistic natural movement — ' + parsed.motion_elements + '.',\n  'Mood: ' + parsed.mood + ', appetising, warm and inviting pub atmosphere.',\n  'Style: photorealistic, high-end food and drink cinematography. Every surface alive with gentle natural movement. The scene should feel alive and tactile.',\n  'Audio: quiet ambient room tone only — a soft low background hum. No music, no speech, no dialogue, no singing, no voices, no lyrics.',\n  '9:16 vertical format. 5-8 seconds. No text overlays. No logos. No watermarks.'\n].join(' ');\n\nreturn [{ json: { videoPrompt, category: parsed.category, main_subject: parsed.subject_description, setting: parsed.background_description } }];"
         },
         "id": "bc437b6d-0c3a-42a6-91bf-0a8d072c6182",
         "name": "Build Video Prompt",
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          2752,
-          1632
+          3408,
+          1680
         ]
       },
       {
@@ -4316,8 +4764,8 @@
         "type": "@n8n/n8n-nodes-langchain.googleGemini",
         "typeVersion": 1.2,
         "position": [
-          2976,
-          1632
+          3632,
+          1680
         ]
       },
       {
@@ -4329,8 +4777,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          3392,
-          1632
+          4048,
+          1680
         ]
       },
       {
@@ -4389,8 +4837,8 @@
         "type": "n8n-nodes-base.telegram",
         "typeVersion": 1.2,
         "position": [
-          5696,
-          1632
+          6352,
+          1680
         ],
         "webhookId": "5adebaa3-0831-49ec-ac32-42581dd8bf67"
       },
@@ -4421,6 +4869,10 @@
               {
                 "fieldId": "caption",
                 "fieldValue": "={{ $('Extract Caption (Video)').item.json.caption }}"
+              },
+              {
+                "fieldId": "source_image_url",
+                "fieldValue": "={{ $('Parse Reply').item.json.fileId || $('Pick Latest Session').item.json.source_image_url }}"
               }
             ]
           }
@@ -4430,8 +4882,8 @@
         "type": "n8n-nodes-base.supabase",
         "typeVersion": 1,
         "position": [
-          5920,
-          1632
+          6576,
+          1680
         ]
       },
       {
@@ -4453,8 +4905,8 @@
         "type": "@n8n/n8n-nodes-langchain.googleGemini",
         "typeVersion": 1.2,
         "position": [
-          2528,
-          1968
+          3056,
+          2432
         ],
         "retryOnFail": true,
         "maxTries": 5,
@@ -4483,8 +4935,8 @@
         "type": "@n8n/n8n-nodes-langchain.googleGemini",
         "typeVersion": 1.2,
         "position": [
-          3328,
-          1872
+          3856,
+          2336
         ]
       },
       {
@@ -4496,8 +4948,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          3680,
-          1872
+          4208,
+          2336
         ]
       },
       {
@@ -4556,8 +5008,8 @@
         "type": "n8n-nodes-base.telegram",
         "typeVersion": 1.2,
         "position": [
-          5920,
-          1968
+          6448,
+          2432
         ],
         "webhookId": "c3aec491-9306-4df1-9b26-c6eb88204fc7"
       },
@@ -4601,8 +5053,8 @@
         "type": "n8n-nodes-base.supabase",
         "typeVersion": 1,
         "position": [
-          5472,
-          1968
+          6672,
+          2432
         ]
       },
       {
@@ -4619,8 +5071,8 @@
         "type": "n8n-nodes-base.telegram",
         "typeVersion": 1.2,
         "position": [
-          -64,
-          2512
+          1328,
+          3312
         ],
         "webhookId": "cd2034d0-5517-4d03-8d95-6b52500300a3"
       },
@@ -4665,8 +5117,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          2752,
-          1968
+          3280,
+          2432
         ]
       },
       {
@@ -4679,8 +5131,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          3040,
-          2064
+          3568,
+          2528
         ]
       },
       {
@@ -4692,8 +5144,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          3392,
-          2064
+          3920,
+          2528
         ]
       },
       {
@@ -4712,8 +5164,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          3680,
-          2064
+          4208,
+          2528
         ]
       },
       {
@@ -4745,8 +5197,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2,
         "position": [
-          384,
-          864
+          -128,
+          976
         ]
       },
       {
@@ -4770,8 +5222,8 @@
         "type": "n8n-nodes-base.supabase",
         "typeVersion": 1,
         "position": [
-          1280,
-          1344
+          1312,
+          1936
         ],
         "alwaysOutputData": true,
         "onError": "continueRegularOutput"
@@ -4785,8 +5237,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          1504,
-          1344
+          1536,
+          1936
         ]
       },
       {
@@ -4818,8 +5270,8 @@
         "type": "n8n-nodes-base.supabase",
         "typeVersion": 1,
         "position": [
-          1728,
-          1344
+          1760,
+          1936
         ]
       },
       {
@@ -4859,8 +5311,8 @@
         "type": "n8n-nodes-base.telegram",
         "typeVersion": 1.2,
         "position": [
-          1952,
-          1344
+          2032,
+          1424
         ],
         "webhookId": "6f92bbad-6ec6-4000-9353-c17b44d7d4a8",
         "onError": "continueRegularOutput"
@@ -4874,8 +5326,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          3904,
-          1632
+          4560,
+          1680
         ]
       },
       {
@@ -4894,8 +5346,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          4128,
-          1632
+          4784,
+          1680
         ],
         "retryOnFail": true,
         "maxTries": 3,
@@ -4910,8 +5362,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          4352,
-          1632
+          5008,
+          1680
         ]
       },
       {
@@ -4923,14 +5375,14 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          4576,
-          1632
+          5232,
+          1680
         ],
         "webhookId": "01191369-39d0-44f8-a6a8-bcfb698c75b2"
       },
       {
         "parameters": {
-          "url": "={{ 'https://generativelanguage.googleapis.com/v1beta/' + $('Extract Operation ID').first().json.operationName }}",
+          "url": "={{ 'https://generativelanguage.googleapis.com/v1beta/' + ($json.operationName || $json.name) }}",
           "authentication": "predefinedCredentialType",
           "nodeCredentialType": "googlePalmApi",
           "options": {}
@@ -4940,8 +5392,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          4800,
-          1568
+          5456,
+          1616
         ]
       },
       {
@@ -4972,8 +5424,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          5024,
-          1632
+          5680,
+          1680
         ]
       },
       {
@@ -4985,8 +5437,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          5248,
-          1632
+          5904,
+          1680
         ]
       },
       {
@@ -5009,8 +5461,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          3680,
-          1632
+          4336,
+          1680
         ]
       },
       {
@@ -5031,8 +5483,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          5472,
-          1632
+          6128,
+          1680
         ]
       },
       {
@@ -5046,8 +5498,8 @@
         "type": "n8n-nodes-base.merge",
         "typeVersion": 3,
         "position": [
-          3904,
-          1968
+          4432,
+          2432
         ]
       },
       {
@@ -5059,8 +5511,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          4128,
-          1968
+          4656,
+          2432
         ]
       },
       {
@@ -5101,8 +5553,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          4352,
-          1968
+          4880,
+          2432
         ],
         "retryOnFail": true,
         "maxTries": 3,
@@ -5125,8 +5577,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          5472,
-          1968
+          6000,
+          2432
         ],
         "retryOnFail": true,
         "maxTries": 3,
@@ -5141,8 +5593,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          5696,
-          1968
+          6224,
+          2432
         ]
       },
       {
@@ -5174,8 +5626,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          4576,
-          1968
+          5104,
+          2432
         ],
         "retryOnFail": true,
         "maxTries": 3,
@@ -5190,8 +5642,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          4800,
-          1968
+          5328,
+          2432
         ]
       },
       {
@@ -5223,8 +5675,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          5024,
-          1968
+          5552,
+          2432
         ],
         "retryOnFail": true,
         "maxTries": 3,
@@ -5239,9 +5691,367 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          5248,
-          1968
+          5776,
+          2432
         ]
+      },
+      {
+        "parameters": {
+          "content": "### Read me first\nOwner-in-the-loop social poster for The Miners Arms. Every Telegram reply/photo from the 3 owner chat IDs lands here and gets routed by a `route` code. Companion to `MINERS-Social-Initiation` (which starts the conversation) — this workflow carries it through to a finished, approved asset. Delivery ends at Telegram; auto-posting to FB/IG/TikTok was cancelled by Prakhar, posting is manual.",
+          "height": 480,
+          "width": 520
+        },
+        "id": "728ae97d-e22d-4a1d-bdff-b8f7df1c6ee0",
+        "name": "Sticky: Read Me First",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -720,
+          -352
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Entry — parse & route every Telegram update\nEvery Telegram update (button tap or photo/text message) from the 3 allow-listed owner chat IDs lands here. `Parse Reply` extracts the `route` + `sessionId` from callback data, or detects `msg:photo` / `msg:post`. Callback taps get acknowledged (stop the spinner) + a short ack text. `Route Step` is the master switch — 12 routes + a fallback.",
+          "height": 764,
+          "width": 1720,
+          "color": 4
+        },
+        "id": "22d60e0f-0963-4211-891a-de0916a49fb9",
+        "name": "Sticky: Entry & Routing",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -864,
+          576
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Conversation branches — Yes/No → Picture/Video → Upload/Generate\nHandles the early yes/no and picture-or-video choices. `q1:y` asks picture-or-video; `q1:n` records cancelled. `q2:pic` asks upload-your-own vs AI-generate; `q2:vid` skips straight to requesting a food photo (video always needs one to animate).",
+          "height": 1128,
+          "width": 664,
+          "color": 4
+        },
+        "id": "33ca5731-0856-429d-9403-37250a0d1b4d",
+        "name": "Sticky: Conversation Branches",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1104,
+          -560
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Request the food photo (own-photo path)\n`q2b:own` — owner chose to upload their own food photo instead of AI-generating one from the gallery. Sends the request and sets state to `awaiting_uploaded_photo`.",
+          "height": 700,
+          "width": 664,
+          "color": 4
+        },
+        "id": "685bcd32-4868-4721-bbda-13e06747d66d",
+        "name": "Sticky: Request Food Photo",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1248,
+          1680
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Final review — approve / cancel / regenerate\nHandles the owner's verdict on a generated draft. `q3:ok` marks it approved (delivery ends here — posting is manual, not automated). `q3:cx` cancels. `q3:rg`/`q3:rv` loop back into the generate or video pipelines to try again.",
+          "height": 764,
+          "width": 888,
+          "color": 4
+        },
+        "id": "789bb9ce-6d74-43fb-91ba-503c9a7ae0c5",
+        "name": "Sticky: Final Review",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1840,
+          352
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### AI-generate path — gallery photo + Gemini edit (Phase 2a)\n`q2b:gen` (and the `q3:rg` regenerate loop) land here. Fetches a random real gallery photo from the website, has Gemini write a caption, then Gemini image-edit overlays branded social graphics directly onto the gallery photo. Sends the result for approve/regenerate/cancel.",
+          "height": 380,
+          "width": 2840,
+          "color": 3
+        },
+        "id": "47857207-a05e-4595-b248-ead0334ebfe2",
+        "name": "Sticky: AI-Generate Path (Phase 2a)",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1104,
+          736
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Photo received — session lookup & type dispatch\nHandles any incoming Telegram photo (`msg:photo`) or a video retry (`q3:rv`). `Pick Latest Session` sorts by `created_at DESC` to find the newest in-flight session — this fixes a real bug where an old abandoned row could hijack the flow, don't reintroduce a bare `limit:1`. `Session Guard` bails out gracefully if nothing is open. `Image or Video?` then dispatches on the session's `media_type`.",
+          "height": 502,
+          "width": 992,
+          "color": 4
+        },
+        "id": "3c031580-493f-4cbb-8f08-3af8d6468454",
+        "name": "Sticky: Session Lookup & Dispatch",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1248,
+          2432
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Manual test shortcut\nTyping \"post\" directly to the bot (`msg:post`) re-runs the same kickoff logic as the scheduled `MINERS-Social-Initiation` workflow, for testing without waiting for Mon/Wed/Fri 10am.",
+          "height": 438,
+          "width": 992,
+          "color": 2
+        },
+        "id": "e216bf12-a0ba-4af5-8ffb-3c1123495509",
+        "name": "Sticky: Manual Test Shortcut",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1248,
+          1152
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Fallback — unrecognized input\nCatches any `route` that doesn't match a known code (stale button after a workflow update, unauthorized chat ID, etc.) and tells the user their input wasn't understood.",
+          "height": 350,
+          "width": 500,
+          "color": 2
+        },
+        "id": "5112ae83-bee0-4808-88c9-cfb4457871d8",
+        "name": "Sticky: Fallback",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1248,
+          3120
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### ⚠️ Video pipeline (Veo 3.1) — FROZEN, do not modify without explicit request\nTurns the owner's food photo into an 8s vertical video via Gemini's Veo 3.1 `predictLongRunning` API (base64 image-to-video), polling every 40s until done. Confirmed working 2026-07-03. It broke once already when Google retired `veo-3.0-generate-001` — if it 404s again, re-probe available models with `explore_node_resources` (`videoGenerationModelSearch`) and bump the model ID; don't redesign the architecture.\n\n**2026-08-10 — RAI audio-filter guard added (exec 4643).**\nVeo returns `done: true` even when its safety filter blocks the clip (`raiMediaFilteredCount`, no `generatedSamples`). `Video Ready?` only checks `done`, so a filtered result used to reach `Extract Video Binary` and throw, killing the run silently. Now:\n- **`Video Produced?`** checks a real `generatedSamples[0].video.uri` before extracting.\n- **`Retry Video?`** resubmits (3 attempts total) — the filter is non-deterministic and filtered attempts aren't charged.\n- **`Send Video Failed` → `State: video failed`** tells the owner and parks the session at `awaiting_uploaded_photo` so they can recover.\n- `Build Video Prompt` now sets an explicit benign **Audio:** line. Veo 3.1 audio is always on — `generateAudio:false` is **Vertex-only** (Gemini API returns 400) and silent `veo-2.0` is retired (404), so audio must be steered, not disabled.\n- `Check Video Status` resolves the op via `$json.operationName || $json.name` so the poll loop follows retries instead of a stale `.first()` operation.",
+          "height": 444,
+          "width": 4120,
+          "color": 6
+        },
+        "id": "0a94a2b5-8f0d-43ef-9634-392810dc16f3",
+        "name": "Sticky: Video Pipeline FROZEN",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          2720,
+          1392
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Own-photo composite pipeline (Phase 2b) — remove.bg + Gemini Files API\nComposites the owner's uploaded food photo onto a real gallery background: remove.bg cuts out the food, both images are uploaded via Gemini Files API HTTP calls (not inline base64 — n8n Code nodes in this version can't read binary data), then Gemini 3.1 Flash Image composites them with a prompt that keeps the dish itself untouched.",
+          "height": 572,
+          "width": 4060,
+          "color": 3
+        },
+        "id": "022344f2-86ed-443d-88e5-2b08c6f4ee9c",
+        "name": "Sticky: Composite Pipeline (Phase 2b)",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          2736,
+          2112
+        ]
+      },
+      {
+        "id": "94385aff-d14b-4728-8497-5b64eef9fa6c",
+        "name": "Video Produced?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          5830,
+          1900
+        ],
+        "parameters": {
+          "conditions": {
+            "combinator": "and",
+            "conditions": [
+              {
+                "id": "has-video-uri",
+                "leftValue": "={{ !!$json.response?.generateVideoResponse?.generatedSamples?.[0]?.video?.uri }}",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true"
+                }
+              }
+            ],
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 1
+            }
+          },
+          "options": {}
+        },
+        "notes": "Veo sets done:true even when the RAI safety filter blocks the clip. Only a generatedSamples[0].video.uri means a real video exists."
+      },
+      {
+        "id": "6d330f14-928e-480a-a068-6d267f61789b",
+        "name": "Retry Video?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          6054,
+          1900
+        ],
+        "parameters": {
+          "conditions": {
+            "combinator": "and",
+            "conditions": [
+              {
+                "id": "attempts-left",
+                "leftValue": "={{ $runIndex }}",
+                "rightValue": 2,
+                "operator": {
+                  "type": "number",
+                  "operation": "lt"
+                }
+              }
+            ],
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 1
+            }
+          },
+          "options": {}
+        },
+        "notes": "Veo's audio filter is non-deterministic and filtered attempts are not charged, so resubmit. $runIndex < 2 gives 3 total submissions."
+      },
+      {
+        "id": "647fe36d-840a-47cf-b834-8e0fc96a74fa",
+        "name": "Send Video Failed",
+        "type": "n8n-nodes-base.telegram",
+        "typeVersion": 1.2,
+        "position": [
+          6278,
+          1900
+        ],
+        "parameters": {
+          "chatId": "={{ $('Parse Reply').item.json.chatId }}",
+          "text": "=⚠️ Sorry — I couldn't make that video.\n\nGoogle's Veo safety filter blocked the soundtrack it generated for your photo. This happens at random and isn't anything you did wrong. I already tried 3 times.\n\nTap 🔁 Try again, or just send me the photo again.",
+          "replyMarkup": "inlineKeyboard",
+          "inlineKeyboard": {
+            "rows": [
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "🔁 Try again",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q3:rv:\" + $('Pick Latest Session').item.json.id }}"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "row": {
+                  "buttons": [
+                    {
+                      "text": "❌ Cancel",
+                      "additionalFields": {
+                        "callback_data": "={{ \"q3:cx:\" + $('Pick Latest Session').item.json.id }}"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "additionalFields": {
+            "appendAttribution": false,
+            "parse_mode": "HTML"
+          }
+        },
+        "notes": "Tells the owner the video was blocked instead of leaving the chat silent.",
+        "webhookId": "9e988989-4de7-4986-8c88-ecdcc9d17bdb"
+      },
+      {
+        "id": "872d17ec-7665-4397-9e68-9e05795a47c9",
+        "name": "State: video failed",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          6502,
+          1900
+        ],
+        "parameters": {
+          "operation": "update",
+          "tableId": "social_posts",
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $('Pick Latest Session').item.json.id }}"
+              }
+            ]
+          },
+          "fieldsUi": {
+            "fieldValues": [
+              {
+                "fieldId": "status",
+                "fieldValue": "awaiting_uploaded_photo"
+              },
+              {
+                "fieldId": "media_type",
+                "fieldValue": "video"
+              },
+              {
+                "fieldId": "source_image_url",
+                "fieldValue": "={{ $('Parse Reply').item.json.fileId || $('Pick Latest Session').item.json.source_image_url }}"
+              }
+            ]
+          }
+        },
+        "notes": "Parks the session back at awaiting_uploaded_photo and keeps the file_id so both recovery routes work."
+      },
+      {
+        "id": "e4fc03e4-71d9-462b-b0f0-d53b3027bc17",
+        "name": "Fetch Retry Row",
+        "type": "n8n-nodes-base.supabase",
+        "typeVersion": 1,
+        "position": [
+          1360,
+          2880
+        ],
+        "parameters": {
+          "operation": "getAll",
+          "tableId": "social_posts",
+          "returnAll": true,
+          "matchType": "allFilters",
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id",
+                "condition": "eq",
+                "keyValue": "={{ $('Parse Reply').item.json.sessionId }}"
+              }
+            ]
+          }
+        },
+        "notes": "retry_video callbacks carry the session id, so look the row up by id rather than by status."
       }
     ],
     "connections": {
@@ -5363,7 +6173,7 @@
           ],
           [
             {
-              "node": "Fetch Upload Row",
+              "node": "Fetch Retry Row",
               "type": "main",
               "index": 0
             }
@@ -5832,7 +6642,7 @@
         "main": [
           [
             {
-              "node": "Extract Video Binary",
+              "node": "Video Produced?",
               "type": "main",
               "index": 0
             }
@@ -6054,35 +6864,65 @@
             }
           ]
         ]
+      },
+      "Video Produced?": {
+        "main": [
+          [
+            {
+              "node": "Extract Video Binary",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Retry Video?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Retry Video?": {
+        "main": [
+          [
+            {
+              "node": "Prepare Image for Veo",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Send Video Failed",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send Video Failed": {
+        "main": [
+          [
+            {
+              "node": "State: video failed",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Fetch Retry Row": {
+        "main": [
+          [
+            {
+              "node": "Pick Latest Session",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     }
-  },
-  "tags": [],
-  "meta": {
-    "aiBuilderAssisted": true,
-    "builderVariant": "mcp",
-    "templateCredsSetupCompleted": true
-  },
-  "parentFolderId": null,
-  "description": "Telegram-driven social posting bot for The Miners Arms. AI-generate path now fetches a random real gallery photo from the website and uses Gemini image editing to overlay branded social media graphics on it.",
-  "scopes": [
-    "execution:reveal",
-    "workflow:create",
-    "workflow:delete",
-    "workflow:disableRedaction",
-    "workflow:enableRedaction",
-    "workflow:execute",
-    "workflow:execute-chat",
-    "workflow:export",
-    "workflow:import",
-    "workflow:list",
-    "workflow:move",
-    "workflow:publish",
-    "workflow:read",
-    "workflow:share",
-    "workflow:unpublish",
-    "workflow:unshare",
-    "workflow:update"
-  ],
-  "canExecute": true
+  }
 }
